@@ -5,7 +5,7 @@
 [![Forks][forks-shield]][forks-url]
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
-[![MS-PL License][license-shield]][license-url]
+[![MIT License][license-shield]][license-url]
 [![LinkedIn][linkedin-shield]][linkedin-url]
 
 
@@ -17,7 +17,7 @@
     <img src="https://lisp-stat.dev/images/stats-image.svg" alt="Logo" width="80" height="80">
   </a>
 
-  <h3 align="center">Data Frame</h3>
+  <h3 align="center">Array Operations</h3>
 
   <p align="center">
   A collection of functions and macros for manipulating Lisp-Stat data-frames and CL arrays
@@ -25,9 +25,9 @@
     <a href="https://lisp-stat.dev/docs/tasks/array-operations/"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/lisp-stat/array-operations/issues">Report Bug</a>
+    <a href="https://github.com/bendudson/array-operations/issues">Report Bug</a>
     ·
-    <a href="https://github.com/lisp-stat/array-operations/issues">Request Feature</a>
+    <a href="https://github.com/bendudson/array-operations/issues">Request Feature</a>
     ·
     <a href="https://lisp-stat.github.io/array-operations/">Reference Manual</a>
   </p>
@@ -66,7 +66,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About the Project
 
-The `array-operations` system contains a collection of functions and
+The `array-operations` system is a collection of functions and
 macros for manipulating Common Lisp arrays and performing numerical
 calculations with them.
 
@@ -139,31 +139,34 @@ in linear ranges:
 
 or generated using a function, optionally given index position
 
-`(generate #'identity '(2 3) :position) ; => #2A((0 1 2) (3 4 5))`
+`(generate #'identity '(2 3) :position) ; => #2A((0 1 2)
+	                                             (3 4 5))`
 
-For more examples, please refer to the [Documentation](https://lisp-stat.dev/docs/tasks/array-operations).
+For more examples, please refer to the [manual](https://lisp-stat.dev/docs/tasks/array-operations).
 
 
 <!-- ROADMAP -->
 ## Roadmap
 
-See the [open issues](https://github.com/lisp-stat/array-operations/issues) for a list of proposed features (and known issues).
+See the [open issues](https://github.com/bendudson/array-operations/issues) for a list of proposed features (and known issues).
 
 ## Resources
 
-This system is part of the [Lisp-Stat](https://lisp-stat.dev/) project; that should be your first stop for information. Also see the <!-- [resources](https://lisp-stat.dev/resources) and -->
+This system is part of the [Lisp-Stat](https://lisp-stat.dev/)
+project; that should be your first stop for information.  Also see the
+[resources](https://lisp-stat.dev/resources) and
 [community](https://lisp-stat.dev/community) page for more
 information.
 
 <!-- CONTRIBUTING -->
 ## Contributing
 
-Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are greatly appreciated.  Please see [CONTRIBUTING.md](CONTRIBUTING.md) for details on the code of conduct, and the process for submitting pull requests.
+Contributions are what make the open source community such an amazing place to be learn, inspire, and create.  Any contributions you make are greatly appreciated.  Please see [CONTRIBUTING.md](CONTRIBUTING.md) for details on the code of conduct, and the process for submitting pull requests.
 
 <!-- LICENSE -->
 ## License
 
-Distributed under the MS-PL License. See [LICENSE](LICENSE) for more information.
+Distributed under the MIT License. See [LICENSE](LICENSE.md) for more information.
 
 
 
@@ -178,12 +181,12 @@ Project Link: [https://github.com/lisp-stat/array-operations](https://github.com
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 [contributors-shield]: https://img.shields.io/github/contributors/lisp-stat/array-operations.svg?style=for-the-badge
 [contributors-url]: https://github.com/lisp-stat/array-operations/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/lisp-stat/array-operations.svg?style=for-the-badge
-[forks-url]: https://github.com/lisp-stat/array-operations/network/members
-[stars-shield]: https://img.shields.io/github/stars/lisp-stat/array-operations.svg?style=for-the-badge
-[stars-url]: https://github.com/lisp-stat/array-operations/stargazers
-[issues-shield]: https://img.shields.io/github/issues/lisp-stat/array-operations.svg?style=for-the-badge
-[issues-url]: https://github.com/lisp-stat/array-operations/issues
+[forks-shield]: https://img.shields.io/github/forks/bendudson/array-operations.svg?style=for-the-badge
+[forks-url]: https://github.com/bendudson/array-operations/network/members
+[stars-shield]: https://img.shields.io/github/stars/bendudson/array-operations.svg?style=for-the-badge
+[stars-url]: https://github.com/bendudson/array-operations/stargazers
+[issues-shield]: https://img.shields.io/github/issues/bendudson/array-operations.svg?style=for-the-badge
+[issues-url]: https://github.com/bendudson/array-operations/issues
 [license-shield]: https://img.shields.io/github/license/lisp-stat/array-operations.svg?style=for-the-badge
 [license-url]: https://github.com/lisp-stat/array-operations/blob/master/LICENSE
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
