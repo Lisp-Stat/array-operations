@@ -154,7 +154,7 @@ See the [open issues](https://github.com/bendudson/array-operations/issues) for 
 
 This system is part of the [Lisp-Stat](https://lisp-stat.dev/)
 project; that should be your first stop for information.  Also see the
-[resources](https://lisp-stat.dev/resources) and
+[resources](https://lisp-stat.dev/docs/resources) and
 [community](https://lisp-stat.dev/community) page for more
 information.
 
