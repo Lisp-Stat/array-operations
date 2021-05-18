@@ -141,6 +141,7 @@ Array element type is preserved."
 
 ;;; each
 
+;;; This function does not seem to work
 (defun each* (element-type function array &rest other-arrays)
   "Apply function to the array arguments elementwise, and return the result as
 an array with the given ELEMENT-TYPE.  Arguments are checked for dimension

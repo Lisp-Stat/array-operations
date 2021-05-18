@@ -172,6 +172,7 @@ Returns ARRAY."
   "Fill an array with evenly spaced numbers over an interval.
    The first element is equal to START and last element STOP,
    with constant difference between consecutive elements in ROW-MAJOR-INDEX."
+  (assert (> stop start) (start stop) "Stop must be greater than start.")
   (let* ((size (array-total-size array))
          (element-type (array-element-type array))
          (delta (/ (- stop start) (- size 1)))) ; Difference between values
