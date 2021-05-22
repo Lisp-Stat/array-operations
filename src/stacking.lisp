@@ -1,11 +1,11 @@
-;;;; Functions for composing arrays into new arrays, by "stacking".
-;;;;
-;;;; One may think of stacking blocks as the guiding metaphor.
-;;;;
-;;;; For example, stack two row vectors to yield a 2x2 matrix:
-;;;;
-;;;; (stack-rows #(1 2) #(3 4)) -> #2A((1 2)
-;;;;                                   (3 4))
+;;; Functions for composing arrays into new arrays, by "stacking".
+;;;
+;;; One may think of stacking blocks as the guiding metaphor.
+;;;
+;;; For example, stack two row vectors to yield a 2x2 matrix:
+;;;
+;;; (stack-rows #(1 2) #(3 4)) -> #2A((1 2)
+;;;                                   (3 4))
 
 (defpackage :array-operations/stacking
   (:use :cl :array-operations/generic
@@ -43,9 +43,9 @@ This function should be used to implement copying of contiguous row-major blocks
 (defgeneric stack-rows-copy (source destination element-type start-row)
   (:documentation "Method used to implement the copying of objects in STACK-ROW*, by copying the elements of SOURCE to DESTINATION, starting with the row index START-ROW in the latter.  Elements are coerced to ELEMENT-TYPE.
 
-This method is only called when (DIMS SOURCE) was non-nil.  It is assumed that it onlychanges elements in DESTINATION which are supposed to be copies of SOURCE.  DESTINATION is always a matrix with element-type upgraded from ELEMENT-TYPE, and its NCOL should match the relevant dimension of SOURCE.
+This method is only called when (DIMS SOURCE) was non-nil.  It is assumed that it only changes elements in DESTINATION which are supposed to be copies of SOURCE.  DESTINATION is always a matrix with element-type upgraded from ELEMENT-TYPE, and its NCOL should match the relevant dimension of SOURCE.
 
-All objects have a fallback method, defined using AS-ARRAY.  The only reason for definining a method is efficiency.")
+All objects have a fallback method, defined using AS-ARRAY.  The only reason for defining a method is efficiency.")
   (:method (source destination element-type start-row)
     (stack-rows-copy (as-array source) destination element-type start-row))
   (:method ((source array) destination element-type start-row)
@@ -103,7 +103,7 @@ When applicable, compatibility of dimensions is checked, and the result is used 
 
 This method is only called when (DIMS SOURCE) was non-nil.  It is assumed that it only changes elements in DESTINATION which are supposed to be copies of SOURCE.  DESTINATION is always a matrix with element-type upgraded from ELEMENT-TYPE, and its NROW should match the relevant dimension of SOURCE.
 
-All objects have a fallback method, defined using AS-ARRAY.  The only reason for definining a method is efficiency.")
+All objects have a fallback method, defined using AS-ARRAY.  The only reason for defining a method is efficiency.")
   (:method (source destination element-type start-col)
     (stack-cols-copy (as-array source) destination element-type start-col))
   (:method ((source array) destination element-type start-col)
@@ -179,7 +179,7 @@ When applicable, compatibility of dimensions is checked, and the result is used 
                          (let ((dimensions (array-dimensions array)))
                            (unless (eq array array-first)
                              (assert (equal dim-rest (cdr dimensions)) ()
-                                     "Array ~A has incomplatible dimensions"
+                                     "Array ~A has incompatible dimensions"
                                      array))
                            (first dimensions))))))
     (let ((result (make-array (cons sum-first dim-rest) :element-type element-type)))
