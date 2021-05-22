@@ -56,7 +56,7 @@
     <li><a href="#roadmap">Roadmap</a></li>
 	<li><a href="#resources">Resources</a></li>
     <li><a href="#contributing">Contributing</a></li>
-    <li><a href="#license">License.md</a></li>
+    <li><a href="#license.md">License</a></li>
     <li><a href="#contact">Contact</a></li>
   </ol>
 </details>
@@ -188,7 +188,7 @@ Project Link: [https://github.com/lisp-stat/array-operations](https://github.com
 [issues-shield]: https://img.shields.io/github/issues/bendudson/array-operations.svg?style=for-the-badge
 [issues-url]: https://github.com/bendudson/array-operations/issues
 [license-shield]: https://img.shields.io/github/license/lisp-stat/array-operations.svg?style=for-the-badge
-[license-url]: https://github.com/lisp-stat/array-operations/blob/master/LICENSE
+[license-url]: https://github.com/lisp-stat/array-operations/blob/master/LICENSE.md
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://www.linkedin.com/company/symbolics/
 
