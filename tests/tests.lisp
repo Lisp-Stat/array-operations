@@ -1,4 +1,4 @@
-(cl:defpackage :array-operations/tests
+(defpackage :array-operations/tests
   (:use :cl :alexandria :clunit)
   (:export :run))
 
@@ -173,12 +173,12 @@
     (assert-equalp #2A((0 1)
                        (2 3)
                        (4 5))
-                   a)
+      a)
     (assert-equalp #2A(((0 0) (0 1) (0 2))
                        ((1 0) (1 1) (1 2)))
-                   b)
+      b)
     (assert-equalp #2A(((0 0 0) (1 0 1)))
-                   (aops:generate #'cons '(1 2) :position-and-subscripts))))
+      (aops:generate #'cons '(1 2) :position-and-subscripts))))
 
 ;;; utilities
 
@@ -206,7 +206,7 @@
                      (1 2))
         (reverse result)))
 
-  ; Test dimensions of local scope variable (no eval)
+					; Test dimensions of local scope variable (no eval)
   (let ((a #(1 2 3 4))
         result)
     (array-operations/utilities::nested-loop (i) (array-dimensions a)
@@ -365,9 +365,9 @@
                        ((26 39 65) (34 51 85)))
       (aops:outer #'* c a))
     (assert-equalp (aops:combine (aops:each (lambda (v)
-                                          (aops:each (curry #'* v) c))
-                                        a))
-      (aops:outer #'* a c))))
+                                              (aops:each (curry #'* v) c))
+                                            a))
+	(aops:outer #'* a c))))
 
 
 (deftest vectorize! (transformations)
@@ -377,9 +377,9 @@
       (aops:vectorize! b (a) (+ a 1))
       "vectorize! return value")
     (assert-equalp #2A((2 3) (4 5)) b
-                   "vectorize! modified first arg")
+      "vectorize! modified first arg")
     (assert-equalp #2A((1 2) (3 4)) a
-                   "vectorize! didn't modify operand"))
+      "vectorize! didn't modify operand"))
 
   (let ((a #2A((1 2) (3 4)))
         (b (make-array 4)))
@@ -391,14 +391,14 @@
         (b #(4 5 6)))
     (let ((c (make-array 3 :element-type 'integer)))
       (assert-equalp #(9 12 15)
-                     (aops:vectorize! c (a b) (+ a (* b 2)))
-                     "vectorize! return value")
+          (aops:vectorize! c (a b) (+ a (* b 2)))
+        "vectorize! return value")
       (assert-equalp #(9 12 15) c
-                     "vectorize! modified first arg"))
+        "vectorize! modified first arg"))
     (let ((c (make-array 4 :element-type 'integer)))
       (assert-condition error
           (aops:vectorize! c (a b) (+ a (* b 2)))
-          "Wrong result array shape")))
+        "Wrong result array shape")))
 
   ;; Check that an expression can be passed as first argument
   ;; without being evaluated multiple times
@@ -419,21 +419,27 @@
   (let ((a #2A((1 2) (3 4)))
         (b (make-array '(2 2))))
     (assert-equalp #2A((2 3) (4 5))
-                   (aops:vectorize* 'integer (a) (+ a 1))))
+      (aops:vectorize* 'integer (a) (+ a 1))))
   (let ((a #(1 2 3))
         (b #(4 5 6)))
     (assert-equalp #(9.0 12.0 15.0)
-                   (aops:vectorize* 'single-float (a b) (+ a (* b 2))))))
+        (aops:vectorize* 'single-float (a b) (+ a (* b 2))))))
 
 (deftest vectorize (transformations)
   (let ((a #2A((1 2) (3 4)))
         (b (make-array '(2 2))))
     (assert-equalp #2A((2 3) (4 5))
-                   (aops:vectorize (a) (+ a 1))))
+      (aops:vectorize (a) (+ a 1))))
   (let ((a #(1 2 3))
         (b #(4 5 6)))
     (assert-equalp #(9 12 15)
-                   (aops:vectorize (a b) (+ a (* b 2))))))
+        (aops:vectorize (a b) (+ a (* b 2))))))
+
+(deftest map-array (transformations)
+  (let ((a #2A((1 2) (3 4))))
+    (assert-equalp #2A((2 3) (4 5))
+      (aops:map-array a #'1+))))
+
 
 ;;; reductions
 
@@ -441,7 +447,7 @@
   (let ((a #2A((1 2) (3 4)))
         (b #2A((1 3) (5 4))))
     (assert-equalp 2
-                   (aops:vectorize-reduce #'max (a b) (abs (- a b))))))
+        (aops:vectorize-reduce #'max (a b) (abs (- a b))))))
 
 ;;; indexing
 
@@ -452,7 +458,7 @@
     ;; Transpose
     (assert-equalp
         #2A((1 4) (2 5) (3 6))
-        (aops:each-index (i j) (aref a j i)))
+      (aops:each-index (i j) (aref a j i)))
 
     ;; Diagonal
     (assert-equalp
@@ -480,12 +486,12 @@
   ;; Indexing with ELT and SVREF
   (let ((a #(1 2 3)))
     (assert-equalp
-     #(1 2 3)
-     (aops:each-index i (elt a i)))
+	#(1 2 3)
+	(aops:each-index i (elt a i)))
 
     (assert-equalp
-     #(1 2 3)
-     (aops:each-index i (svref a i)))))
+	#(1 2 3)
+	(aops:each-index i (svref a i)))))
 
 (deftest each-index* (indexing)
   (let ((a #(1 2 3))
@@ -507,12 +513,12 @@
 
     ;; Returns the result
     (assert-equalp
-     #2A((0 1 2) (-1 0 1))
-     (aops:each-index! a (i j) (- j i)))
+	#2A((0 1 2) (-1 0 1))
+      (aops:each-index! a (i j) (- j i)))
 
     ;; Also modifies A
     (assert-equalp
-     #2A((0 1 2) (-1 0 1))
+	#2A((0 1 2) (-1 0 1))
       a))
 
   ;; First argument is evaluated only once
@@ -625,9 +631,9 @@
                      (2 3)
                      (5 7))
     (aops:stack 0
-              #2A((0 1)
-                  (2 3))
-              #2A((5 7))))
+		#2A((0 1)
+                    (2 3))
+		#2A((5 7))))
   (assert-condition error (aops:stack 0 #(0 1) #2A((0 1 2 3))))
   (assert-condition error (aops:stack 0 #2A((1)) #2A((0 1)))))
 
@@ -635,6 +641,6 @@
   (assert-equalp #2A((0 1 5)
                      (2 3 9))
     (aops:stack 1
-              #2A((0 1)
-                  (2 3))
-              #2A((5) (9)))))
+		#2A((0 1)
+                    (2 3))
+		#2A((5) (9)))))

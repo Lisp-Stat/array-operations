@@ -1,4 +1,4 @@
-;;;; Functions for transforming arrays in various ways.
+;;; Functions for transforming arrays in various ways.
 
 (defpackage :array-operations/transforming
   (:use :cl :array-operations/generic
@@ -22,7 +22,8 @@
            :permutation-repeated-index
            :permutation-incompatible-rank
            :permute
-           :recycle))
+           :recycle
+           :map-array))
 
 (in-package :array-operations/transforming)
 
@@ -50,8 +51,7 @@
   ())
 
 (defun permutation-flags (permutation &optional (rank (length permutation)))
-  "Make a bit vector of flags with indexes from PERMUTATION, signalling errors
-for invalid and repeated indices.  NOT EXPORTED."
+  "Make a bit vector of flags with indexes from PERMUTATION, signaling errors for invalid and repeated indices.  NOT EXPORTED."
   (let ((result (make-array rank :element-type 'bit :initial-element 0)))
     (map nil (lambda (p)
                (assert (and (integerp p) (< -1 p rank)) ()
@@ -64,8 +64,7 @@ for invalid and repeated indices.  NOT EXPORTED."
 
 (defun check-permutation (permutation
                           &optional (rank (length permutation) rank-supplied-p))
-  "Check if PERMUTATION is a valid permutation (of the given RANK), and signal
-an error if necessary."
+  "Check if PERMUTATION is a valid permutation (of the given RANK), and signal an error if necessary."
   (when rank-supplied-p
     (assert (= rank (length permutation)) ()
             'permutation-incompatible-rank ))
@@ -73,9 +72,7 @@ an error if necessary."
           'permutation-incompatible-rank))
 
 (defun complement-permutation (permutation rank)
-  "Return a list of increasing indices that complement PERMUTATION, ie form a
-permutation when appended.  Atoms are accepted and treated as lists of a
-single element."
+  "Return a list of increasing indices that complement PERMUTATION, i.e. form a permutation when appended.  Atoms are accepted and treated as lists of a single element."
   (loop for f across (permutation-flags (ensure-list permutation) rank)
         for index from 0
         when (zerop f)
@@ -100,9 +97,7 @@ single element."
 
 (defun identity-permutation-p (permutation
                                &optional (rank (length permutation)))
-  "Test if PERMUTATION is the identity permutation, ie a sequence of
-consecutive integers starting at 0.  Note that permutation is otherwise not
-checked, ie it may not be a permutation."
+  "Test if PERMUTATION is the identity permutation, i.e. a sequence of consecutive integers starting at 0.  Note that permutation is otherwise not checked, i.e. it may not be a permutation."
   (let ((index 0))
     (and
      (every
@@ -116,8 +111,7 @@ checked, ie it may not be a permutation."
 (setf (fdefinition 'identity-permutation?) #'identity-permutation-p)
 
 (defun permute (permutation array)
-  "Return ARRAY with the axes permuted by PERMUTATION, which is a sequence of
-indexes.  Specifically, an array A is transformed to B, where
+  "Return ARRAY with the axes permuted by PERMUTATION, which is a sequence of indexes.  Specifically, an array A is transformed to B, where
 
   B[b_1,...,b_n] = A[a_1,...,a_n] with b_i=a_{P[i]}
 
@@ -141,11 +135,9 @@ Array element type is preserved."
 
 ;;; each
 
-;;; This function does not seem to work
+;;; This function does not seem to work with specialised elements
 (defun each* (element-type function array &rest other-arrays)
-  "Apply function to the array arguments elementwise, and return the result as
-an array with the given ELEMENT-TYPE.  Arguments are checked for dimension
-compatibility."
+  "Apply function to the array arguments elementwise, and return the result as an array with the given ELEMENT-TYPE.  Arguments are checked for dimension compatibility."
   (assert (apply #'same-dimensions-p array other-arrays))
   (let ((result (make-array (array-dimensions array)
                             :element-type element-type)))
@@ -162,9 +154,7 @@ compatibility."
 (defun margin* (element-type function array inner
                 &optional (outer (complement-permutation inner
                                                          (array-rank array))))
-  "PERMUTE ARRAY with `(,@OUTER ,@INNER), split the inner subarrays, apply
-FUNCTION to each, return the results in an array of dimensions OUTER, with the
-given ELEMENT-TYPE."
+  "PERMUTE ARRAY with `(,@OUTER ,@INNER), split the inner subarrays, apply FUNCTION to each, return the results in an array of dimensions OUTER, with the given ELEMENT-TYPE."
   (let ((outer (ensure-list outer)))
     (each* element-type function
            (split (permute (append outer (ensure-list inner)) array)
@@ -182,10 +172,7 @@ given ELEMENT-TYPE."
                             (element-type (if (arrayp object)
                                               (array-element-type object)
                                               t)))
-  "Recycle elements of OBJECT, extending the dimensions by outer (repeating
-OBJECT) and inner (repeating each element of OBJECT).  When both INNER and
-OUTER are nil, the OBJECT is returned as is.  Non-array OBJECTs are intepreted
-as rank 0 arrays, following the usual semantics."
+  "Recycle elements of OBJECT, extending the dimensions by outer (repeating OBJECT) and inner (repeating each element of OBJECT).  When both INNER and OUTER are nil, the OBJECT is returned as is.  Non-array OBJECTs are interpreted as rank 0 arrays, following the usual semantics."
   (if (or inner outer)
       (let ((inner (ensure-dimensions inner))
             (outer (ensure-dimensions outer)))
@@ -233,13 +220,9 @@ as rank 0 arrays, following the usual semantics."
 ;;; vectorize calls vectorize*, specifying element type T
 
 (defmacro vectorize! (result variables &body body)
-  "Fills an array RESULT with the result of
-   an array expression. All input and outputs have the same
-   shape, and BODY is evaluated for each index
+  "Fills an array RESULT with the result of an array expression. All input and outputs have the same shape, and BODY is evaluated for each index
 
-   VARIABLES must be a list of symbols bound to arrays.
-   Each array must have the same dimensions. These are
-   checked at compile and run-time respectively.
+   VARIABLES must be a list of symbols bound to arrays.  Each array must have the same dimensions. These are checked at compile and run-time respectively.
 
        (let ((a #2A((1 2) (3 4)))
              (b (make-array '(2 2))))
@@ -285,9 +268,7 @@ as rank 0 arrays, following the usual semantics."
        ,result-tmp)))
 
 (defmacro vectorize* (element-type variables &body body)
-  "Makes a new array of type ELEMENT-TYPE, containing the result of
-   an array expression. All input and outputs have the same
-   shape, and BODY is evaluated for each index
+  "Makes a new array of type ELEMENT-TYPE, containing the result of an array expression. All input and outputs have the same shape, and BODY is evaluated for each index
 
    VARIABLES must be a list of symbols bound to arrays.
    Each array must have the same dimensions. These are
@@ -309,9 +290,7 @@ as rank 0 arrays, following the usual semantics."
        (vectorize! ,result ,variables ,@body))))
 
 (defmacro vectorize (variables &body body)
-    "Makes a new array of type ELEMENT-TYPE, containing the result of
-   an array expression. All input and outputs have the same
-   shape, and BODY is evaluated for each index
+  "Makes a new array of type ELEMENT-TYPE, containing the result of an array expression. All input and outputs have the same shape, and BODY is evaluated for each index
 
    VARIABLES must be a list of symbols bound to arrays.
    Each array must have the same dimensions. These are
@@ -327,3 +306,13 @@ as rank 0 arrays, following the usual semantics."
        -> #(9 12 15)
    "
     `(vectorize* t ,variables ,@body))
+
+
+;;; map
+(defun map-array (array function
+                  &optional (retval (make-array (array-dimensions array))))
+  "Apply FUNCTION to each element of ARRAY
+Return a new array, or write into the optional 3rd argument."
+  (dotimes (i (array-total-size array) retval)
+    (setf (row-major-aref retval i)
+          (funcall function (row-major-aref array i)))))
