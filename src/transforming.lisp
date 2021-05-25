@@ -306,13 +306,3 @@ Array element type is preserved."
        -> #(9 12 15)
    "
     `(vectorize* t ,variables ,@body))
-
-
-;;; map
-(defun map-array (array function
-                  &optional (retval (make-array (array-dimensions array))))
-  "Apply FUNCTION to each element of ARRAY
-Return a new array, or write into the optional 3rd argument."
-  (dotimes (i (array-total-size array) retval)
-    (setf (row-major-aref retval i)
-          (funcall function (row-major-aref array i)))))
