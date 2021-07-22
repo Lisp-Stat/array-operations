@@ -22,8 +22,7 @@
            :permutation-repeated-index
            :permutation-incompatible-rank
            :permute
-           :recycle
-           :map-array))
+           :recycle))
 
 (in-package :array-operations/transforming)
 
