@@ -22,7 +22,8 @@
            :permutation-repeated-index
            :permutation-incompatible-rank
            :permute
-           :recycle))
+           :recycle
+           :turn))
 
 (in-package :array-operations/transforming)
 
@@ -326,3 +327,56 @@ as rank 0 arrays, following the usual semantics."
        -> #(9 12 15)
    "
     `(vectorize* t ,variables ,@body))
+
+;;; turning
+
+;; https://groups.google.com/g/comp.lang.lisp/c/CM3MQkyOTHk/m/Pl4KPUqfobwJ
+(defun array-index-row-major (array rmi)
+  (do ((subs (list rmi) (cons q (rplaca subs r)))
+       (dims (reverse (cdr (array-dimensions array))) (cdr dims))
+       q r)
+      ((null dims) subs)
+    (setf (values q r)
+          (truncate (car subs) (car dims)))))
+
+(defun turn (array nturns &optional (rank-1 0) (rank-2 1))
+  "Turns an array by a specified number of clockwise 90° rotations. The axis of
+rotation is specified by RANK-1 (defaulting to 0) and RANK-2 (defaulting to 1)."
+  (check-type array array)
+  (check-type nturns integer)
+  (check-type rank-1 (integer 0 (#.array-rank-limit)))
+  (check-type rank-2 (integer 0 (#.array-rank-limit)))
+  (setf nturns (mod nturns 4))
+  (when (< rank-2 rank-1)
+    (rotatef rank-1 rank-2))
+  (when (= nturns 0) (return-from turn array))
+  (when (= rank-1 rank-2) (error "Must provide different ranks."))
+  (let ((array-rank (array-rank array)))
+    (when (< array-rank 2) (error "Array must be of rank 2 or greater."))
+    (when (or (<= array-rank rank-1) (<= array-rank rank-2))
+      (error "The array rank is too small for the requested turning axis.")))
+  (flet ((flip (list)
+           (let* ((list (copy-list list)))
+             (rotatef (nth rank-1 list) (nth rank-2 list))
+             list)))
+    (let* ((dimensions (array-dimensions array))
+           (new-dimensions (if (evenp nturns) dimensions (flip dimensions)))
+           (result (make-array new-dimensions
+                               :element-type (array-element-type array))))
+      (dotimes (i (array-total-size array) result)
+        (let* ((row-major-source (array-index-row-major array i))
+               (row-major-result (if (evenp nturns)
+                                     (copy-list row-major-source)
+                                     (flip row-major-source))))
+          (when (< nturns 3)
+            (setf (nth rank-2 row-major-result)
+                  (- (nth rank-2 new-dimensions)
+                     (nth rank-2 row-major-result)
+                     1)))
+          (when (> nturns 1)
+            (setf (nth rank-1 row-major-result)
+                  (- (nth rank-1 new-dimensions)
+                     (nth rank-1 row-major-result)
+                     1)))
+          (setf (apply #'aref result row-major-result)
+                (apply #'aref array row-major-source)))))))
