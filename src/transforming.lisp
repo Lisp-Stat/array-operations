@@ -331,26 +331,47 @@ as rank 0 arrays, following the usual semantics."
 ;;; turning
 
 ;; https://groups.google.com/g/comp.lang.lisp/c/CM3MQkyOTHk/m/Pl4KPUqfobwJ
-(defun array-index-row-major (array rmi)
-  (do ((subs (list rmi) (cons q (rplaca subs r)))
-       (dims (reverse (cdr (array-dimensions array))) (cdr dims))
-       q r)
-      ((null dims) subs)
-    (setf (values q r)
-          (truncate (car subs) (car dims)))))
+;; Modified into a destructive, non-consing version. RESULT, if provided,
+;; must be a list of length equal to the rank of the array; it is modified to
+;; contain the result of the function. This way, the result list can be
+;; allocated only once and additionally be DX for zero consing. If RESULT is
+;; not provided, then it is consed and then returned.
+(declaim (inline array-index-row-major))
+(defun array-index-row-major (array rmi &optional result)
+  (declare (optimize speed))
+  (let* ((rank (array-rank array))
+         (dimensions (make-list rank)))
+    (declare (dynamic-extent dimensions))
+    (unless result (setf result (make-list rank)))
+    (locally (declare #+sbcl (sb-ext:muffle-conditions sb-ext:compiler-note))
+      (loop for dim from (1- rank) downto 0
+            for cons on dimensions
+            do (setf (car cons) (array-dimension array dim))))
+    (setf result (nreverse result))
+    (let ((index rmi)
+          (cons result))
+      (dolist (dimension dimensions (nreverse result))
+        (declare (type alexandria:array-index index dimension))
+        (multiple-value-bind (quotient remainder) (truncate index dimension)
+          (setf index quotient
+                (car cons) remainder
+                cons (cdr cons)))))))
+
+(deftype array-rank-element () `(integer 0 (,array-rank-limit)))
 
 (defun turn (array nturns &optional (rank-1 0) (rank-2 1))
   "Turns an array by a specified number of clockwise 90° rotations. The axis of
 rotation is specified by RANK-1 (defaulting to 0) and RANK-2 (defaulting to 1)."
+  (declare (optimize speed))
   (check-type array array)
   (check-type nturns integer)
-  (check-type rank-1 (integer 0 (#.array-rank-limit)))
-  (check-type rank-2 (integer 0 (#.array-rank-limit)))
-  (setf nturns (mod nturns 4))
-  (when (< rank-2 rank-1)
-    (rotatef rank-1 rank-2))
+  (check-type rank-1 array-rank-element)
+  (check-type rank-2 array-rank-element)
+  (setf nturns (ldb (byte 2 0) nturns))
+  (when (< rank-2 rank-1) (rotatef rank-1 rank-2))
   (when (= nturns 0) (return-from turn array))
-  (when (= rank-1 rank-2) (error "Must provide different ranks."))
+  (when (= (the array-rank-element rank-1) (the array-rank-element rank-2))
+    (error "Must provide different ranks."))
   (let ((array-rank (array-rank array)))
     (when (< array-rank 2) (error "Array must be of rank 2 or greater."))
     (when (or (<= array-rank rank-1) (<= array-rank rank-2))
@@ -361,22 +382,30 @@ rotation is specified by RANK-1 (defaulting to 0) and RANK-2 (defaulting to 1)."
              list)))
     (let* ((dimensions (array-dimensions array))
            (new-dimensions (if (evenp nturns) dimensions (flip dimensions)))
-           (result (make-array new-dimensions
-                               :element-type (array-element-type array))))
-      (dotimes (i (array-total-size array) result)
-        (let* ((row-major-source (array-index-row-major array i))
-               (row-major-result (if (evenp nturns)
-                                     (copy-list row-major-source)
-                                     (flip row-major-source))))
-          (when (< nturns 3)
-            (setf (nth rank-2 row-major-result)
-                  (- (nth rank-2 new-dimensions)
-                     (nth rank-2 row-major-result)
-                     1)))
-          (when (> nturns 1)
-            (setf (nth rank-1 row-major-result)
-                  (- (nth rank-1 new-dimensions)
-                     (nth rank-1 row-major-result)
-                     1)))
-          (setf (apply #'aref result row-major-result)
-                (apply #'aref array row-major-source)))))))
+           (row-major-result (make-list (array-rank array)))
+           (result (locally (declare #+sbcl (sb-ext:muffle-conditions
+                                             sb-ext:compiler-note))
+                     (make-array new-dimensions
+                                 :element-type (array-element-type array)))))
+      (declare (dynamic-extent row-major-result))
+      (dotimes (i (locally (declare #+sbcl (sb-ext:muffle-conditions
+                                            sb-ext:compiler-note))
+                    (array-total-size array))
+                  result)
+        (setf row-major-result (array-index-row-major array i row-major-result))
+        (when (oddp nturns)
+          (rotatef (nth rank-1 row-major-result) (nth rank-2 row-major-result)))
+        (when (< nturns 3)
+          (setf (nth rank-2 row-major-result)
+                (- (the array-rank-element (nth rank-2 new-dimensions))
+                   (the array-rank-element (nth rank-2 row-major-result))
+                   1)))
+        (when (> nturns 1)
+          (setf (nth rank-1 row-major-result)
+                (- (the array-rank-element (nth rank-1 new-dimensions))
+                   (the array-rank-element (nth rank-1 row-major-result))
+                   1)))
+        (setf (apply #'aref result row-major-result)
+              (locally (declare #+sbcl (sb-ext:muffle-conditions
+                                        sb-ext:compiler-note))
+                (row-major-aref array i)))))))
