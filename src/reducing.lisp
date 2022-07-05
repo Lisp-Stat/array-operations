@@ -1,4 +1,7 @@
-;;;; Functions for reducing arrays.
+;;; -*- Mode: LISP; Base: 10; Syntax: ANSI-Common-lisp; Package: ARRAY-OPERATIONS/REDUCING -*-
+;;; Copyright (c) 2012-2018 by Tamas Papp. All rights reserved.
+;;; Copyright (c) 2018-2022 by Ben Dudson. All rights reserved.
+;;; Copyright (c) 2021-2022 by Symbolics Pte. Ltd. All rights reserved.
 
 (defpackage :array-operations/reducing
   (:use :cl)
@@ -6,12 +9,13 @@
            :best
            :argmax
            :argmin
-           :vectorize-reduce))
+           :vectorize-reduce)
+  (:documentation "Functions for reducing arrays, or performing reducing like operations over the elements of an array."))
 
 (in-package :array-operations/reducing)
 
 (defun most (fn array)
-  "Finds the element of ARRAY which maximises FN applied to the array value.
+  "Finds the element of ARRAY that returns the value closest to positive infinity when FN is applied to the array value.
    Returns the row-major-aref index, and the winning value.
 
    Example: The maximum of an array is
@@ -24,7 +28,7 @@
         0
         -1
 
-   This function was adapted from P.Graham's On Lisp
+   This function was adapted from Paul Graham's On Lisp
   "
   (let* ((wins 0)
          (max (funcall fn (row-major-aref array wins))))
@@ -45,7 +49,7 @@
     3   ; row-major index
     4   ; value
 
-   This function was adapted from P.Graham's On Lisp
+   This function was adapted from Paul Graham's On Lisp
   "
   (let ((wins 0)
         (score (row-major-aref array 0)))

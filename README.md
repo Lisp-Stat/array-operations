@@ -25,9 +25,9 @@
     <a href="https://lisp-stat.dev/docs/tasks/array-operations/"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/bendudson/array-operations/issues">Report Bug</a>
+    <a href="https://github.com/lisp-stat/array-operations/issues">Report Bug</a>
     ·
-    <a href="https://github.com/bendudson/array-operations/issues">Request Feature</a>
+    <a href="https://github.com/lisp-stat/array-operations/issues">Request Feature</a>
     ·
     <a href="https://lisp-stat.github.io/array-operations/">Reference Manual</a>
   </p>
@@ -77,17 +77,10 @@ data frames using the `df:matrix-df` function, and a data-frame to an
 array using `df:as-array`.  This make it convenient to work with the
 data sets using either system.
 
-This repository tracks the [canonical upstream
-repo](https://github.com/bendudson/array-operations), with minor
-modifications and additional documentation for Lisp-Stat.
-
-
 
 ### Built With
 
-* [alexandria](https://gitlab.common-lisp.net/alexandria/alexandria)
-* [array-operations (upstream)](https://github.com/bendudson/array-operations)
-
+* [let-plus](https://github.com/sharplispers/let-plus)
 
 <!-- GETTING STARTED -->
 ## Getting Started
@@ -97,8 +90,7 @@ To get a local copy up and running follow these steps:
 ### Prerequisites
 
 An ANSI Common Lisp implementation. Developed and tested with
-[SBCL](https://www.sbcl.org/) and
-[CCL](https://github.com/Clozure/ccl).
+[SBCL](https://www.sbcl.org/).
 
 ### Quicklisp Installation
 
@@ -148,7 +140,7 @@ For more examples, please refer to the [manual](https://lisp-stat.dev/docs/tasks
 <!-- ROADMAP -->
 ## Roadmap
 
-See the [open issues](https://github.com/bendudson/array-operations/issues) for a list of proposed features (and known issues).
+See the [open issues](https://github.com/lisp-stat/array-operations/issues) for a list of proposed features (and known issues).
 
 ## Resources
 
@@ -166,9 +158,11 @@ Contributions are what make the open source community such an amazing place to b
 <!-- LICENSE -->
 ## License
 
-Distributed under the MIT License. See [LICENSE](LICENSE.md) for more information.
+Distributed under the MS-PL License. See [LICENSE](LICENSE.md) for more information.
 
+## Notes
 
+Expect spurious warnings from SBCL related to 'deleting unreachable code' when running the tests.  The tests it's warning about _do_ run and we haven't had the time to debug SBCL's warnings.
 
 <!-- CONTACT -->
 ## Contact
@@ -181,12 +175,12 @@ Project Link: [https://github.com/lisp-stat/array-operations](https://github.com
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 [contributors-shield]: https://img.shields.io/github/contributors/lisp-stat/array-operations.svg?style=for-the-badge
 [contributors-url]: https://github.com/lisp-stat/array-operations/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/bendudson/array-operations.svg?style=for-the-badge
-[forks-url]: https://github.com/bendudson/array-operations/network/members
-[stars-shield]: https://img.shields.io/github/stars/bendudson/array-operations.svg?style=for-the-badge
-[stars-url]: https://github.com/bendudson/array-operations/stargazers
-[issues-shield]: https://img.shields.io/github/issues/bendudson/array-operations.svg?style=for-the-badge
-[issues-url]: https://github.com/bendudson/array-operations/issues
+[forks-shield]: https://img.shields.io/github/forks/lisp-stat/array-operations.svg?style=for-the-badge
+[forks-url]: https://github.com/lisp-stat/array-operations/network/members
+[stars-shield]: https://img.shields.io/github/stars/lisp-stat/array-operations.svg?style=for-the-badge
+[stars-url]: https://github.com/lisp-stat/array-operations/stargazers
+[issues-shield]: https://img.shields.io/github/issues/lisp-stat/array-operations.svg?style=for-the-badge
+[issues-url]: https://github.com/lisp-stat/array-operations/issues
 [license-shield]: https://img.shields.io/github/license/lisp-stat/array-operations.svg?style=for-the-badge
 [license-url]: https://github.com/lisp-stat/array-operations/blob/master/LICENSE
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555

@@ -1,7 +1,7 @@
-;;;; Generic functions for elementary array operations, with methods on 'array.
-;;;;
-;;;; Used abundantly in this library.
-;;;; Invites new methods to enable treating other data structures as arrays.
+;;; -*- Mode: LISP; Base: 10; Syntax: ANSI-Common-lisp; Package: ARRAY-OPERATIONS/GENERIC -*-
+;;; Copyright (c) 2012-2018 by Tamas Papp. All rights reserved.
+;;; Copyright (c) 2018-2022 by Ben Dudson. All rights reserved.
+;;; Copyright (c) 2021-2022 by Symbolics Pte. Ltd. All rights reserved.
 
 (defpackage :array-operations/generic
   (:use :cl :let-plus)
@@ -13,7 +13,8 @@
            :dim
            :&dims  ;; For let+
            :nrow
-           :ncol))
+           :ncol)
+  (:documentation "Generic functions for elementary array operations, with methods on 'array.  Enables new methods to be defined to enable treating other data structures as arrays."))
 
 (in-package :array-operations/generic)
 

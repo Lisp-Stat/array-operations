@@ -1,4 +1,7 @@
-;;;; Functions that return arrays displaced in various ways from another array.
+;;; -*- Mode: LISP; Base: 10; Syntax: ANSI-Common-lisp; Package: ARRAY-OPERATIONS/DISPLACING -*-
+;;; Copyright (c) 2012-2018 by Tamas Papp. All rights reserved.
+;;; Copyright (c) 2018-2022 by Ben Dudson. All rights reserved.
+;;; Copyright (c) 2021-2022 by Symbolics Pte. Ltd. All rights reserved.
 
 (defpackage :array-operations/displacing
   (:use :cl :array-operations/generic
@@ -15,7 +18,8 @@
            :subvec
            :reshape
            :reshape-col :reshape-row
-           :fill-in-dimensions))
+   :fill-in-dimensions)
+  (:documentation "Functions that return arrays displaced in various ways from another array."))
 
 (in-package :array-operations/displacing)
 
@@ -33,8 +37,7 @@
 ;;; subarrays
 
 (defun split (array rank)
-  "Return an array of subarrays, split off at RANK.  All subarrays are
-displaced and share structure."
+  "Return an array of subarrays, split off at RANK.  All subarrays are displaced and share structure."
   (let ((array-rank (array-rank array)))
     (cond
       ((or (zerop rank) (= rank array-rank))
@@ -51,9 +54,7 @@ displaced and share structure."
       (t (error "Rank ~A outside [0,~A]." rank array-rank)))))
 
 (defun sub-location% (dimensions subscripts)
-  "Return (values OFFSET REMAINING-DIMENSIONS) that can be used to displace a
-row-major subarray starting at SUBSCRIPTS in an array with the given
-DIMENSIONS.  NOT EXPORTED."
+  "Return (values OFFSET REMAINING-DIMENSIONS) that can be used to displace a row-major subarray starting at SUBSCRIPTS in an array with the given DIMENSIONS.  NOT EXPORTED."
   (let* (rev-dimensions
          rev-subscripts
          (tail (do ((dimensions dimensions (cdr dimensions))
@@ -79,10 +80,9 @@ DIMENSIONS.  NOT EXPORTED."
     (values sum tail)))
 
 (defun sub (array &rest subscripts)
-  "Given a partial list of subscripts, return the subarray that starts there,
-with all the other subscripts set to 0, dimensions inferred from the original.
-If no subscripts are given, the original array is returned.  Implemented by
-displacing, may share structure."
+  "Given a partial list of subscripts, return the subarray that starts there, with all the other subscripts set to 0, dimensions inferred from the original.
+
+If no subscripts are given, the original array is returned.  Implemented by displacing, may share structure."
   (if subscripts
       (multiple-value-bind (offset dimensions)
           (sub-location% (array-dimensions array) subscripts)
@@ -92,9 +92,8 @@ displacing, may share structure."
       array))
 
 (defun copy-into (target source)
-  "Copy SOURCE into TARGET, for array arguments of compatible
-dimensions (checked).  Return TARGET, making the implementation of the
-semantics of SETF easy."
+  "Copy SOURCE into TARGET, for array arguments of compatible dimensions (checked).
+Return TARGET, making the implementation of the semantics of SETF easy."
   (assert (same-dimensions-p target source))
   (replace (flatten target) (flatten source))
   target)
@@ -119,9 +118,8 @@ semantics of SETF easy."
   (copy-into (partition array start end) value))
 
 (defun combine (array &optional element-type)
-  "The opposite of SUBARRAYS.  If ELEMENT-TYPE is not given, it is inferred
-from the first element of array, which also determines the dimensions.  If
-that element is not an array, the original ARRAY is returned as it is."
+  "The opposite of SUBARRAYS.
+If ELEMENT-TYPE is not given, it is inferred from the first element of array, which also determines the dimensions.  If that element is not an array, the original ARRAY is returned as it is."
   (unless (arrayp array)
     (return-from combine array))
   (let ((first (row-major-aref array 0)))
@@ -153,10 +151,8 @@ that element is not an array, the original ARRAY is returned as it is."
 
 ;;; reshaping
 (defun fill-in-dimensions (dimensions size)
-  "If one of the dimensions is missing (indicated with T), replace it with a
-dimension so that the total product equals SIZE.  If that's not possible,
-signal an error.  If there are no missing dimensions, just check that the
-product equals size.  Also accepts other dimension specifications (integer,
+  "If one of the dimensions is missing (indicated with T), replace it with a dimension so that the total product equals SIZE.  If that's not possible,
+signal an error.  If there are no missing dimensions, just check that the product equals size.  Also accepts other dimension specifications (integer,
 array)."
   (let ((it dimensions))
     (etypecase it
@@ -187,9 +183,8 @@ array)."
                       dimensions))))))))
 
 (defun reshape (array dimensions &optional (offset 0))
-  "Reshape ARRAY using DIMENSIONS (which can also be dimension
-specifications).  If DIMENSIONS is a list, it may contain a single element T
-which will be calculated to match the total size of the resulting array."
+  "Reshape ARRAY using DIMENSIONS (which can also be dimension specifications).
+If DIMENSIONS is a list, it may contain a single element T which will be calculated to match the total size of the resulting array."
   (let* ((size (array-total-size array))
          (dimensions (fill-in-dimensions dimensions (- size offset))))
     (displace array dimensions offset)))

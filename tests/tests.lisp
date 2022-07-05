@@ -1,3 +1,8 @@
+;;; -*- Mode: LISP; Base: 10; Syntax: ANSI-Common-lisp; Package: ASDF -*-
+;;; Copyright (c) 2012-2018 by Tamas Papp. All rights reserved.
+;;; Copyright (c) 2018-2022 by Ben Dudson. All rights reserved.
+;;; Copyright (c) 2021-2022 by Symbolics Pte. Ltd. All rights reserved.
+
 (defpackage :array-operations/tests
   (:use :cl :alexandria :clunit)
   (:export :run))
@@ -324,8 +329,7 @@
     (assert-condition aops:permutation-invalid-index (aops:permute '(2 0) a))
     (assert-condition aops:permutation-incompatible-rank (aops:permute '(0) a)))
   (let ((p (alexandria:shuffle (list 0 1 2 3 4)))
-        (a (aops:generate (lambda () (random 100)) '(2 3 4 5 6)))
-        (*lift-equality-test* #'equalp))
+        (a (aops:generate (lambda () (random 100)) '(2 3 4 5 6))))
     (assert-equalp p (aops:invert-permutation (aops:invert-permutation p)))
     (assert-equalp a (aops:permute (aops:invert-permutation p) (aops:permute p a))))
   (let ((a (aops:generate #'identity '(2 2 2) :position)))
@@ -416,8 +420,8 @@
 
 
 (deftest vectorize* (transformations)
-  (let ((a #2A((1 2) (3 4)))
-        (b (make-array '(2 2))))
+  (let ((a #2A((1 2) (3 4))))
+        ;; (b (make-array '(2 2)))) ;TODO SN: Remove on next pass through tests
     (assert-equalp #2A((2 3) (4 5))
       (aops:vectorize* 'integer (a) (+ a 1))))
   (let ((a #(1 2 3))
@@ -426,8 +430,8 @@
         (aops:vectorize* 'single-float (a b) (+ a (* b 2))))))
 
 (deftest vectorize (transformations)
-  (let ((a #2A((1 2) (3 4)))
-        (b (make-array '(2 2))))
+  (let ((a #2A((1 2) (3 4))))
+        ;; (b (make-array '(2 2)))) ;TODO SN: Remove on next pass through tests
     (assert-equalp #2A((2 3) (4 5))
       (aops:vectorize (a) (+ a 1))))
   (let ((a #(1 2 3))

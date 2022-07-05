@@ -1,4 +1,7 @@
-;;;; Macros for operating over indexes of arrays
+;;; -*- Mode: LISP; Base: 10; Syntax: ANSI-Common-lisp; Package: ARRAY-OPERATIONS/INDEXING -*-
+;;; Copyright (c) 2012-2018 by Tamas Papp. All rights reserved.
+;;; Copyright (c) 2018-2022 by Ben Dudson. All rights reserved.
+;;; Copyright (c) 2021-2022 by Symbolics Pte. Ltd. All rights reserved.
 
 (defpackage :array-operations/indexing
   (:use :cl :array-operations/generic
@@ -7,7 +10,8 @@
            :each-index*
            :each-index!
            :sum-index
-           :reduce-index))
+           :reduce-index)
+  (:documentation "Macros for operating over indexes of arrays."))
 
 (in-package :array-operations/indexing)
 
@@ -20,9 +24,7 @@
    Example:
      (find-array-dimensions '(+ (aref a i) (* 2 (aref b j k))))
 
-   -> ((I ARRAY-DIMENSION A 0) (K ARRAY-DIMENSION B 1) (J ARRAY-DIMENSION B 0))
-
-  "
+   -> ((I ARRAY-DIMENSION A 0) (K ARRAY-DIMENSION B 1) (J ARRAY-DIMENSION B 0))"
   (cond
     ;; If EXPR is not a list, nothing to return
     ((not (listp expr)) nil)
@@ -140,9 +142,7 @@
 ;;;
 
 (defmacro each-index* (element-type index &body body)
-  "Given one or more symbols INDEX, creates an array
-   with ELEMENT-TYPE, then iterates over the index ranges
-   with the innermost loop using the last index.
+  "Given one or more symbols INDEX, creates an array with ELEMENT-TYPE, then iterates over the index ranges  with the innermost loop using the last index.
    Each iteration evaluates BODY, and sets the array element.
 
    To find the range of the indices, walks the BODY expression
@@ -222,8 +222,7 @@
 
 
 (defmacro each-index! (array index &body body)
-  "Sets elements of the given ARRAY to values of the BODY,
-   evaluated at array indices INDEX
+  "Sets elements of the given ARRAY to values of the BODY, evaluated at array indices INDEX
 
   Note: This has the same semantics as each-index and each-index*,
   but the INDEX ranges are taken from the ARRAY dimensions, not
@@ -243,9 +242,7 @@
 
 
 (defmacro each-index (index &body body)
-  "Given one or more symbols INDEX, walks the BODY expression
-   to determine the index ranges by looking for
-   AREF and ROW-MAJOR-AREF calls.
+  "Given one or more symbols INDEX, walks the BODY expression to determine the index ranges by looking for AREF and ROW-MAJOR-AREF calls.
 
   Transpose of 2D array A
 

@@ -1,0 +1,3 @@
+The array-operations system is a collection of functions and macros for manipulating Common Lisp arrays and performing numerical calculations with them.
+
+Array-operations is a 'generic' way of operating on array like data structures using a syntax that is natural for Common Lisp.  Several aops functions have been implemented for data-frame.  For those that haven't, you can transform arrays to data frames using the df:matrix-df function, and a data-frame to an array using df:as-array.  This make it convenient to work with the data sets using either system.

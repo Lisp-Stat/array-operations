@@ -1,4 +1,7 @@
-;;; Functions for transforming arrays in various ways.
+;;; -*- Mode: LISP; Base: 10; Syntax: ANSI-Common-lisp; Package: ARRAY-OPERATIONS/TRANSFORMING -*-
+;;; Copyright (c) 2012-2018 by Tamas Papp. All rights reserved.
+;;; Copyright (c) 2018-2022 by Ben Dudson. All rights reserved.
+;;; Copyright (c) 2021-2022 by Symbolics Pte. Ltd. All rights reserved.
 
 (defpackage :array-operations/transforming
   (:use :cl :array-operations/generic
@@ -14,6 +17,7 @@
            :outer*     :outer
            :vectorize* :vectorize :vectorize!
            :invert-permutation
+	   :check-permutation
            :complete-permutation
            :complement-permutation
            :identity-permutation-p
@@ -23,7 +27,8 @@
            :permutation-incompatible-rank
            :permute
            :recycle
-           :turn))
+           :turn)
+  (:documentation "Functions for transforming arrays in various ways."))
 
 (in-package :array-operations/transforming)
 

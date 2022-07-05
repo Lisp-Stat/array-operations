@@ -1,11 +1,7 @@
-;;; Functions for composing arrays into new arrays, by "stacking".
-;;;
-;;; One may think of stacking blocks as the guiding metaphor.
-;;;
-;;; For example, stack two row vectors to yield a 2x2 matrix:
-;;;
-;;; (stack-rows #(1 2) #(3 4)) -> #2A((1 2)
-;;;                                   (3 4))
+;;; -*- Mode: LISP; Base: 10; Syntax: ANSI-Common-lisp; Package: ARRAY-OPERATIONS/STACKING -*-
+;;; Copyright (c) 2012-2018 by Tamas Papp. All rights reserved.
+;;; Copyright (c) 2018-2022 by Ben Dudson. All rights reserved.
+;;; Copyright (c) 2021-2022 by Symbolics Pte. Ltd. All rights reserved.
 
 (defpackage :array-operations/stacking
   (:use :cl :array-operations/generic
@@ -20,7 +16,15 @@
   (:export :copy-row-major-block
            :stack-rows-copy :stack-rows* :stack-rows
            :stack-cols-copy :stack-cols* :stack-cols
-           :stack* :stack))
+   :stack* :stack)
+  (:documentation "Functions for composing arrays into new arrays, by stacking.
+
+One may think of stacking blocks as the guiding metaphor.
+
+ For example, stack two row vectors to yield a 2x2 matrix:
+
+ (stack-rows #(1 2) #(3 4)) -> #2A((1 2)
+                                   (3 4))"))
 
 (in-package :array-operations/stacking)
 
@@ -114,7 +118,7 @@ All objects have a fallback method, defined using AS-ARRAY.  The only reason for
                           (coerce (aref source row) element-type))))
         (2 (let ((ncol (second dims)))
              (loop for row below (nrow destination)
-                   for source-start by (second (dims source))
+                   for source-start by ncol
                    do (copy-row-major-block source destination element-type
                                             :source-start source-start
                                             :source-end (+ source-start (second dims))

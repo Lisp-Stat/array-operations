@@ -1,0 +1,3095 @@
+This is array-operations.info, produced by makeinfo version 6.8 from
+array-operations.texi.
+
+     Copyright © 2019-2022 Ben Dudson Copyright © 2019-2022 Tamas K.
+     Papp
+
+     Permission is granted to make and distribute verbatim copies of
+     this manual provided the copyright notice and this permission
+     notice are preserved on all copies.
+
+     Permission is granted to copy and distribute modified versions of
+     this manual under the conditions for verbatim copying, provided
+     also that the section entitled “Copying” is included exactly as in
+     the original.
+
+     Permission is granted to copy and distribute translations of this
+     manual into another language, under the above conditions for
+     modified versions, except that this permission notice may be
+     translated as well.
+INFO-DIR-SECTION Lisp-Stat
+START-INFO-DIR-ENTRY
+* ARRAY-OPERATIONS Reference Manual: (array-operations). The ARRAY-OPERATIONS Reference Manual.
+END-INFO-DIR-ENTRY
+
+
+File: array-operations.info,  Node: Top,  Next: Copying,  Prev: (dir),  Up: (dir)
+
+The ARRAY-OPERATIONS Reference Manual
+*************************************
+
+This is the ARRAY-OPERATIONS Reference Manual, version 1.0.0, generated
+automatically by Declt version 4.0b2.
+
+* Menu:
+
+* Copying:: The Microsoft Public License
+* Systems:: The systems documentation
+* Files:: The files documentation
+* Packages:: The packages documentation
+* Definitions:: The symbols documentation
+* Indexes:: Concepts, functions, variables and data types
+
+     Copyright © 2019-2022 Ben Dudson Copyright © 2019-2022 Tamas K.
+     Papp
+
+     Permission is granted to make and distribute verbatim copies of
+     this manual provided the copyright notice and this permission
+     notice are preserved on all copies.
+
+     Permission is granted to copy and distribute modified versions of
+     this manual under the conditions for verbatim copying, provided
+     also that the section entitled “Copying” is included exactly as in
+     the original.
+
+     Permission is granted to copy and distribute translations of this
+     manual into another language, under the above conditions for
+     modified versions, except that this permission notice may be
+     translated as well.
+
+
+File: array-operations.info,  Node: Copying,  Next: Systems,  Prev: Top,  Up: Top
+
+Copying
+*******
+
+     This program is distributed under the terms of the Microsoft Public
+     License.
+
+
+File: array-operations.info,  Node: Systems,  Next: Files,  Prev: Copying,  Up: Top
+
+1 Systems
+*********
+
+The main system appears first, followed by any subsystem dependency.
+
+* Menu:
+
+* The array-operations system::
+* The array-operations/all system::
+* The array-operations/generic system::
+* The array-operations/reducing system::
+* The array-operations/matrices system::
+* The array-operations/creating system::
+* The array-operations/utilities system::
+* The array-operations/indexing system::
+* The array-operations/displacing system::
+* The array-operations/transforming system::
+* The array-operations/stacking system::
+
+
+File: array-operations.info,  Node: The array-operations system,  Next: The array-operations/all system,  Prev: Systems,  Up: Systems
+
+1.1 array-operations
+====================
+
+Array operations library for Common Lisp
+*Long Name*
+     Array operations for array-like data structures
+*Maintainer*
+     Ben Dudson
+*Author*
+     Tamas K. Papp <<tkpapp@gmail.com>>
+*Home Page*
+     <https://lisp-stat.dev/array-operations>
+*Bug Tracker*
+     <https://github.com/Lisp-Stat/array-operations/issues>
+*License*
+     MS-PL
+*Long Description*
+     The array-operations system is a collection of functions and macros
+     for manipulating Common Lisp arrays and performing numerical
+     calculations with them.
+
+     Array-operations is a ’generic’ way of operating on array like data
+     structures using a syntax that is natural for Common Lisp.  Several
+     aops functions have been implemented for data-frame.  For those
+     that haven’t, you can transform arrays to data frames using the
+     df:matrix-df function, and a data-frame to an array using
+     df:as-array.  This make it convenient to work with the data sets
+     using either system.
+*Version*
+     1.0.0
+*Dependencies*
+        • let-plus (system).
+        • *note array-operations/all: ❨2❩. (system).
+*Source*
+     *note array-operations.asd: ❨12❩.
+
+
+File: array-operations.info,  Node: The array-operations/all system,  Next: The array-operations/generic system,  Prev: The array-operations system,  Up: Systems
+
+1.2 array-operations/all
+========================
+
+*Long Name*
+     Array operations for array-like data structures
+*Maintainer*
+     Ben Dudson
+*Author*
+     Tamas K. Papp <<tkpapp@gmail.com>>
+*Home Page*
+     <https://lisp-stat.dev/array-operations>
+*Bug Tracker*
+     <https://github.com/Lisp-Stat/array-operations/issues>
+*License*
+     MS-PL
+*Dependencies*
+        • *note array-operations/generic: ❨3❩. (system).
+        • *note array-operations/reducing: ❨4❩. (system).
+        • *note array-operations/matrices: ❨5❩. (system).
+        • *note array-operations/creating: ❨6❩. (system).
+        • *note array-operations/indexing: ❨8❩. (system).
+        • *note array-operations/displacing: ❨9❩. (system).
+        • *note array-operations/transforming: ❨10❩. (system).
+        • *note array-operations/stacking: ❨11❩. (system).
+*Source*
+     *note array-operations.asd: ❨12❩.
+
+
+File: array-operations.info,  Node: The array-operations/generic system,  Next: The array-operations/reducing system,  Prev: The array-operations/all system,  Up: Systems
+
+1.3 array-operations/generic
+============================
+
+*Long Name*
+     Array operations for array-like data structures
+*Maintainer*
+     Ben Dudson
+*Author*
+     Tamas K. Papp <<tkpapp@gmail.com>>
+*Home Page*
+     <https://lisp-stat.dev/array-operations>
+*Bug Tracker*
+     <https://github.com/Lisp-Stat/array-operations/issues>
+*License*
+     MS-PL
+*Dependency*
+     let-plus (system).
+*Source*
+     *note array-operations.asd: ❨12❩.
+
+
+File: array-operations.info,  Node: The array-operations/reducing system,  Next: The array-operations/matrices system,  Prev: The array-operations/generic system,  Up: Systems
+
+1.4 array-operations/reducing
+=============================
+
+*Long Name*
+     Array operations for array-like data structures
+*Maintainer*
+     Ben Dudson
+*Author*
+     Tamas K. Papp <<tkpapp@gmail.com>>
+*Home Page*
+     <https://lisp-stat.dev/array-operations>
+*Bug Tracker*
+     <https://github.com/Lisp-Stat/array-operations/issues>
+*License*
+     MS-PL
+*Source*
+     *note array-operations.asd: ❨12❩.
+
+
+File: array-operations.info,  Node: The array-operations/matrices system,  Next: The array-operations/creating system,  Prev: The array-operations/reducing system,  Up: Systems
+
+1.5 array-operations/matrices
+=============================
+
+*Long Name*
+     Array operations for array-like data structures
+*Maintainer*
+     Ben Dudson
+*Author*
+     Tamas K. Papp <<tkpapp@gmail.com>>
+*Home Page*
+     <https://lisp-stat.dev/array-operations>
+*Bug Tracker*
+     <https://github.com/Lisp-Stat/array-operations/issues>
+*License*
+     MS-PL
+*Dependencies*
+        • *note array-operations/generic: ❨3❩. (system).
+        • alexandria (system).
+*Source*
+     *note array-operations.asd: ❨12❩.
+
+
+File: array-operations.info,  Node: The array-operations/creating system,  Next: The array-operations/utilities system,  Prev: The array-operations/matrices system,  Up: Systems
+
+1.6 array-operations/creating
+=============================
+
+*Long Name*
+     Array operations for array-like data structures
+*Maintainer*
+     Ben Dudson
+*Author*
+     Tamas K. Papp <<tkpapp@gmail.com>>
+*Home Page*
+     <https://lisp-stat.dev/array-operations>
+*Bug Tracker*
+     <https://github.com/Lisp-Stat/array-operations/issues>
+*License*
+     MS-PL
+*Dependencies*
+        • *note array-operations/generic: ❨3❩. (system).
+        • *note array-operations/utilities: ❨7❩. (system).
+*Source*
+     *note array-operations.asd: ❨12❩.
+
+
+File: array-operations.info,  Node: The array-operations/utilities system,  Next: The array-operations/indexing system,  Prev: The array-operations/creating system,  Up: Systems
+
+1.7 array-operations/utilities
+==============================
+
+*Long Name*
+     Array operations for array-like data structures
+*Maintainer*
+     Ben Dudson
+*Author*
+     Tamas K. Papp <<tkpapp@gmail.com>>
+*Home Page*
+     <https://lisp-stat.dev/array-operations>
+*Bug Tracker*
+     <https://github.com/Lisp-Stat/array-operations/issues>
+*License*
+     MS-PL
+*Dependencies*
+        • *note array-operations/generic: ❨3❩. (system).
+        • alexandria (system).
+*Source*
+     *note array-operations.asd: ❨12❩.
+
+
+File: array-operations.info,  Node: The array-operations/indexing system,  Next: The array-operations/displacing system,  Prev: The array-operations/utilities system,  Up: Systems
+
+1.8 array-operations/indexing
+=============================
+
+*Long Name*
+     Array operations for array-like data structures
+*Maintainer*
+     Ben Dudson
+*Author*
+     Tamas K. Papp <<tkpapp@gmail.com>>
+*Home Page*
+     <https://lisp-stat.dev/array-operations>
+*Bug Tracker*
+     <https://github.com/Lisp-Stat/array-operations/issues>
+*License*
+     MS-PL
+*Dependencies*
+        • *note array-operations/generic: ❨3❩. (system).
+        • *note array-operations/utilities: ❨7❩. (system).
+*Source*
+     *note array-operations.asd: ❨12❩.
+
+
+File: array-operations.info,  Node: The array-operations/displacing system,  Next: The array-operations/transforming system,  Prev: The array-operations/indexing system,  Up: Systems
+
+1.9 array-operations/displacing
+===============================
+
+*Long Name*
+     Array operations for array-like data structures
+*Maintainer*
+     Ben Dudson
+*Author*
+     Tamas K. Papp <<tkpapp@gmail.com>>
+*Home Page*
+     <https://lisp-stat.dev/array-operations>
+*Bug Tracker*
+     <https://github.com/Lisp-Stat/array-operations/issues>
+*License*
+     MS-PL
+*Dependencies*
+        • *note array-operations/generic: ❨3❩. (system).
+        • *note array-operations/utilities: ❨7❩. (system).
+        • alexandria (system).
+*Source*
+     *note array-operations.asd: ❨12❩.
+
+
+File: array-operations.info,  Node: The array-operations/transforming system,  Next: The array-operations/stacking system,  Prev: The array-operations/displacing system,  Up: Systems
+
+1.10 array-operations/transforming
+==================================
+
+*Long Name*
+     Array operations for array-like data structures
+*Maintainer*
+     Ben Dudson
+*Author*
+     Tamas K. Papp <<tkpapp@gmail.com>>
+*Home Page*
+     <https://lisp-stat.dev/array-operations>
+*Bug Tracker*
+     <https://github.com/Lisp-Stat/array-operations/issues>
+*License*
+     MS-PL
+*Dependencies*
+        • *note array-operations/generic: ❨3❩. (system).
+        • *note array-operations/utilities: ❨7❩. (system).
+        • *note array-operations/displacing: ❨9❩. (system).
+        • alexandria (system).
+*Source*
+     *note array-operations.asd: ❨12❩.
+
+
+File: array-operations.info,  Node: The array-operations/stacking system,  Prev: The array-operations/transforming system,  Up: Systems
+
+1.11 array-operations/stacking
+==============================
+
+*Long Name*
+     Array operations for array-like data structures
+*Maintainer*
+     Ben Dudson
+*Author*
+     Tamas K. Papp <<tkpapp@gmail.com>>
+*Home Page*
+     <https://lisp-stat.dev/array-operations>
+*Bug Tracker*
+     <https://github.com/Lisp-Stat/array-operations/issues>
+*License*
+     MS-PL
+*Dependencies*
+        • *note array-operations/generic: ❨3❩. (system).
+        • *note array-operations/utilities: ❨7❩. (system).
+        • *note array-operations/displacing: ❨9❩. (system).
+        • *note array-operations/transforming: ❨10❩. (system).
+        • alexandria (system).
+*Source*
+     *note array-operations.asd: ❨12❩.
+
+
+File: array-operations.info,  Node: Files,  Next: Packages,  Prev: Systems,  Up: Top
+
+2 Files
+*******
+
+Files are sorted by type and then listed depth-first from the systems
+components trees.
+
+* Menu:
+
+* Lisp files::
+
+
+File: array-operations.info,  Node: Lisp files,  Prev: Files,  Up: Files
+
+2.1 Lisp
+========
+
+* Menu:
+
+* The array-operations/array-operations․asd file::
+* The array-operations/all/file-type․lisp file::
+* The array-operations/generic/file-type․lisp file::
+* The array-operations/reducing/file-type․lisp file::
+* The array-operations/matrices/file-type․lisp file::
+* The array-operations/creating/file-type․lisp file::
+* The array-operations/utilities/file-type․lisp file::
+* The array-operations/indexing/file-type․lisp file::
+* The array-operations/displacing/file-type․lisp file::
+* The array-operations/transforming/file-type․lisp file::
+* The array-operations/stacking/file-type․lisp file::
+
+
+File: array-operations.info,  Node: The array-operations/array-operations․asd file,  Next: The array-operations/all/file-type․lisp file,  Prev: Lisp files,  Up: Lisp files
+
+2.1.1 array-operations/array-operations.asd
+-------------------------------------------
+
+*Source*
+     *note array-operations.asd: ❨12❩.
+*Parent Component*
+     *note array-operations: ❨1❩. (system).
+*ASDF Systems*
+        • *note array-operations: ❨1❩.
+        • *note array-operations/all: ❨2❩.
+        • *note array-operations/generic: ❨3❩.
+        • *note array-operations/reducing: ❨4❩.
+        • *note array-operations/matrices: ❨5❩.
+        • *note array-operations/creating: ❨6❩.
+        • *note array-operations/utilities: ❨7❩.
+        • *note array-operations/indexing: ❨8❩.
+        • *note array-operations/displacing: ❨9❩.
+        • *note array-operations/transforming: ❨10❩.
+        • *note array-operations/stacking: ❨11❩.
+
+
+File: array-operations.info,  Node: The array-operations/all/file-type․lisp file,  Next: The array-operations/generic/file-type․lisp file,  Prev: The array-operations/array-operations․asd file,  Up: Lisp files
+
+2.1.2 array-operations/all/file-type.lisp
+-----------------------------------------
+
+*Source*
+     *note array-operations.asd: ❨12❩.
+*Parent Component*
+     *note array-operations/all: ❨2❩. (system).
+*Packages*
+     *note array-operations/all: ❨25❩.
+
+
+File: array-operations.info,  Node: The array-operations/generic/file-type․lisp file,  Next: The array-operations/reducing/file-type․lisp file,  Prev: The array-operations/all/file-type․lisp file,  Up: Lisp files
+
+2.1.3 array-operations/generic/file-type.lisp
+---------------------------------------------
+
+*Source*
+     *note array-operations.asd: ❨12❩.
+*Parent Component*
+     *note array-operations/generic: ❨3❩. (system).
+*Packages*
+     *note array-operations/generic: ❨24❩.
+*Public Interface*
+        • *note &dims: ❨64❩. (macro).
+        • *note as-array: ❨43❩. (generic function).
+        • *note dim: ❨55❩. (generic function).
+        • *note dims: ❨52❩. (generic function).
+        • *note element-type: ❨58❩. (generic function).
+        • *note ncol: ❨49❩. (generic function).
+        • *note nrow: ❨61❩. (generic function).
+        • *note rank: ❨46❩. (generic function).
+        • *note size: ❨40❩. (generic function).
+
+
+File: array-operations.info,  Node: The array-operations/reducing/file-type․lisp file,  Next: The array-operations/matrices/file-type․lisp file,  Prev: The array-operations/generic/file-type․lisp file,  Up: Lisp files
+
+2.1.4 array-operations/reducing/file-type.lisp
+----------------------------------------------
+
+*Source*
+     *note array-operations.asd: ❨12❩.
+*Parent Component*
+     *note array-operations/reducing: ❨4❩. (system).
+*Packages*
+     *note array-operations/reducing: ❨28❩.
+*Public Interface*
+        • *note argmax: ❨105❩. (function).
+        • *note argmin: ❨101❩. (function).
+        • *note best: ❨104❩. (function).
+        • *note most: ❨103❩. (function).
+        • *note vectorize-reduce: ❨102❩. (macro).
+
+
+File: array-operations.info,  Node: The array-operations/matrices/file-type․lisp file,  Next: The array-operations/creating/file-type․lisp file,  Prev: The array-operations/reducing/file-type․lisp file,  Up: Lisp files
+
+2.1.5 array-operations/matrices/file-type.lisp
+----------------------------------------------
+
+*Source*
+     *note array-operations.asd: ❨12❩.
+*Parent Component*
+     *note array-operations/matrices: ❨5❩. (system).
+*Packages*
+     *note array-operations/matrices: ❨29❩.
+*Public Interface*
+        • *note array-matrix: ❨110❩. (type).
+        • *note matrixp: ❨108❩. (function).
+        • *note square-matrix-p: ❨109❩. (function).
+
+
+File: array-operations.info,  Node: The array-operations/creating/file-type․lisp file,  Next: The array-operations/utilities/file-type․lisp file,  Prev: The array-operations/matrices/file-type․lisp file,  Up: Lisp files
+
+2.1.6 array-operations/creating/file-type.lisp
+----------------------------------------------
+
+*Source*
+     *note array-operations.asd: ❨12❩.
+*Parent Component*
+     *note array-operations/creating: ❨6❩. (system).
+*Packages*
+     *note array-operations/creating: ❨26❩.
+*Public Interface*
+        • *note fill!: ❨66❩. (function).
+        • *note generate: ❨79❩. (function).
+        • *note generate*: ❨73❩. (function).
+        • *note linspace: ❨68❩. (function).
+        • *note linspace!: ❨82❩. (function).
+        • *note linspace*: ❨65❩. (function).
+        • *note ones: ❨76❩. (function).
+        • *note ones!: ❨83❩. (function).
+        • *note ones*: ❨84❩. (function).
+        • *note rand: ❨71❩. (function).
+        • *note rand!: ❨81❩. (function).
+        • *note rand*: ❨80❩. (function).
+        • *note randn: ❨75❩. (function).
+        • *note randn!: ❨74❩. (function).
+        • *note randn*: ❨72❩. (function).
+        • *note similar-array: ❨77❩. (function).
+        • *note zeros: ❨70❩. (function).
+        • *note zeros!: ❨69❩. (function).
+        • *note zeros*: ❨67❩. (function).
+
+
+File: array-operations.info,  Node: The array-operations/utilities/file-type․lisp file,  Next: The array-operations/indexing/file-type․lisp file,  Prev: The array-operations/creating/file-type․lisp file,  Up: Lisp files
+
+2.1.7 array-operations/utilities/file-type.lisp
+-----------------------------------------------
+
+*Source*
+     *note array-operations.asd: ❨12❩.
+*Parent Component*
+     *note array-operations/utilities: ❨7❩. (system).
+*Packages*
+     *note array-operations/utilities: ❨30❩.
+*Public Interface*
+        • *note ensure-dimensions: ❨111❩. (function).
+        • *note multf: ❨112❩. (macro).
+        • *note nested-loop: ❨117❩. (macro).
+        • *note product: ❨115❩. (function).
+        • *note same-dimensions-p: ❨114❩. (function).
+        • *note walk-subscripts: ❨116❩. (macro).
+        • *note walk-subscripts-list: ❨113❩. (macro).
+
+
+File: array-operations.info,  Node: The array-operations/indexing/file-type․lisp file,  Next: The array-operations/displacing/file-type․lisp file,  Prev: The array-operations/utilities/file-type․lisp file,  Up: Lisp files
+
+2.1.8 array-operations/indexing/file-type.lisp
+----------------------------------------------
+
+*Source*
+     *note array-operations.asd: ❨12❩.
+*Parent Component*
+     *note array-operations/indexing: ❨8❩. (system).
+*Packages*
+     *note array-operations/indexing: ❨23❩.
+*Public Interface*
+        • *note each-index: ❨36❩. (macro).
+        • *note each-index!: ❨33❩. (macro).
+        • *note each-index*: ❨37❩. (macro).
+        • *note reduce-index: ❨35❩. (macro).
+        • *note sum-index: ❨34❩. (macro).
+*Internals*
+        • *note find-array-dimensions: ❨38❩. (function).
+        • *note foreach: ❨39❩. (macro).
+
+
+File: array-operations.info,  Node: The array-operations/displacing/file-type․lisp file,  Next: The array-operations/transforming/file-type․lisp file,  Prev: The array-operations/indexing/file-type․lisp file,  Up: Lisp files
+
+2.1.9 array-operations/displacing/file-type.lisp
+------------------------------------------------
+
+*Source*
+     *note array-operations.asd: ❨12❩.
+*Parent Component*
+     *note array-operations/displacing: ❨9❩. (system).
+*Packages*
+     *note array-operations/displacing: ❨27❩.
+*Public Interface*
+        • *note combine: ❨85❩. (function).
+        • *note copy-into: ❨91❩. (function).
+        • *note displace: ❨93❩. (function).
+        • *note fill-in-dimensions: ❨94❩. (function).
+        • *note flatten: ❨87❩. (function).
+        • *note partition: ❨96❩. (function).
+        • *note (setf partition): ❨97❩. (function).
+        • *note reshape: ❨95❩. (function).
+        • *note reshape-col: ❨88❩. (function).
+        • *note reshape-row: ❨86❩. (function).
+        • *note split: ❨92❩. (function).
+        • *note sub: ❨98❩. (function).
+        • *note (setf sub): ❨99❩. (function).
+        • *note subvec: ❨89❩. (function).
+        • *note (setf subvec): ❨90❩. (function).
+*Internals*
+     *note sub-location%: ❨100❩. (function).
+
+
+File: array-operations.info,  Node: The array-operations/transforming/file-type․lisp file,  Next: The array-operations/stacking/file-type․lisp file,  Prev: The array-operations/displacing/file-type․lisp file,  Up: Lisp files
+
+2.1.10 array-operations/transforming/file-type.lisp
+---------------------------------------------------
+
+*Source*
+     *note array-operations.asd: ❨12❩.
+*Parent Component*
+     *note array-operations/transforming: ❨10❩. (system).
+*Packages*
+     *note array-operations/transforming: ❨31❩.
+*Public Interface*
+        • *note check-permutation: ❨134❩. (function).
+        • *note coercing: ❨141❩. (function).
+        • *note complement-permutation: ❨133❩. (function).
+        • *note complete-permutation: ❨131❩. (function).
+        • *note each: ❨122❩. (function).
+        • *note each*: ❨121❩. (function).
+        • *note identity-permutation-p: ❨125❩. (function).
+        • *note invert-permutation: ❨124❩. (function).
+        • *note margin: ❨126❩. (function).
+        • *note margin*: ❨127❩. (function).
+        • *note outer: ❨130❩. (function).
+        • *note outer*: ❨129❩. (function).
+        • *note permutation-incompatible-rank: ❨120❩. (condition).
+        • *note permutation-invalid-index: ❨118❩. (condition).
+        • *note permutation-repeated-index: ❨138❩. (condition).
+        • *note permute: ❨135❩. (function).
+        • *note recycle: ❨136❩. (function).
+        • *note turn: ❨128❩. (function).
+        • *note vectorize: ❨123❩. (macro).
+        • *note vectorize!: ❨137❩. (macro).
+        • *note vectorize*: ❨140❩. (macro).
+*Internals*
+        • *note array-index-row-major: ❨142❩. (function).
+        • *note array-rank-element: ❨143❩. (type).
+        • *note permutation-flags: ❨144❩. (function).
+
+
+File: array-operations.info,  Node: The array-operations/stacking/file-type․lisp file,  Prev: The array-operations/transforming/file-type․lisp file,  Up: Lisp files
+
+2.1.11 array-operations/stacking/file-type.lisp
+-----------------------------------------------
+
+*Source*
+     *note array-operations.asd: ❨12❩.
+*Parent Component*
+     *note array-operations/stacking: ❨11❩. (system).
+*Packages*
+     *note array-operations/stacking: ❨32❩.
+*Public Interface*
+        • *note copy-row-major-block: ❨147❩. (function).
+        • *note stack: ❨145❩. (function).
+        • *note stack*: ❨150❩. (function).
+        • *note stack-cols: ❨148❩. (function).
+        • *note stack-cols*: ❨149❩. (function).
+        • *note stack-cols-copy: ❨151❩. (generic function).
+        • *note stack-rows: ❨157❩. (function).
+        • *note stack-rows*: ❨146❩. (function).
+        • *note stack-rows-copy: ❨154❩. (generic function).
+*Internals*
+     *note stack*0: ❨158❩. (function).
+
+
+File: array-operations.info,  Node: Packages,  Next: Definitions,  Prev: Files,  Up: Top
+
+3 Packages
+**********
+
+Packages are listed by definition order.
+
+* Menu:
+
+* The array-operations/indexing package::
+* The array-operations/generic package::
+* The array-operations/all package::
+* The array-operations/creating package::
+* The array-operations/displacing package::
+* The array-operations/reducing package::
+* The array-operations/matrices package::
+* The array-operations/utilities package::
+* The array-operations/transforming package::
+* The array-operations/stacking package::
+
+
+File: array-operations.info,  Node: The array-operations/indexing package,  Next: The array-operations/generic package,  Prev: Packages,  Up: Packages
+
+3.1 array-operations/indexing
+=============================
+
+Macros for operating over indexes of arrays.
+*Source*
+     *note file-type.lisp: ❨19❩.
+*Use List*
+        • *note array-operations/generic: ❨24❩.
+        • *note array-operations/utilities: ❨30❩.
+        • common-lisp.
+*Used By List*
+     *note array-operations/all: ❨25❩.
+*Public Interface*
+        • *note each-index: ❨36❩. (macro).
+        • *note each-index!: ❨33❩. (macro).
+        • *note each-index*: ❨37❩. (macro).
+        • *note reduce-index: ❨35❩. (macro).
+        • *note sum-index: ❨34❩. (macro).
+*Internals*
+        • *note find-array-dimensions: ❨38❩. (function).
+        • *note foreach: ❨39❩. (macro).
+
+
+File: array-operations.info,  Node: The array-operations/generic package,  Next: The array-operations/all package,  Prev: The array-operations/indexing package,  Up: Packages
+
+3.2 array-operations/generic
+============================
+
+Generic functions for elementary array operations, with methods on
+’array.  Enables new methods to be defined to enable treating other data
+structures as arrays.
+*Source*
+     *note file-type.lisp: ❨14❩.
+*Use List*
+        • common-lisp.
+        • let-plus.
+*Used By List*
+        • *note array-operations/all: ❨25❩.
+        • *note array-operations/creating: ❨26❩.
+        • *note array-operations/displacing: ❨27❩.
+        • *note array-operations/indexing: ❨23❩.
+        • *note array-operations/matrices: ❨29❩.
+        • *note array-operations/stacking: ❨32❩.
+        • *note array-operations/transforming: ❨31❩.
+        • *note array-operations/utilities: ❨30❩.
+*Public Interface*
+        • *note &dims: ❨64❩. (macro).
+        • *note as-array: ❨43❩. (generic function).
+        • *note dim: ❨55❩. (generic function).
+        • *note dims: ❨52❩. (generic function).
+        • *note element-type: ❨58❩. (generic function).
+        • *note ncol: ❨49❩. (generic function).
+        • *note nrow: ❨61❩. (generic function).
+        • *note rank: ❨46❩. (generic function).
+        • *note size: ❨40❩. (generic function).
+
+
+File: array-operations.info,  Node: The array-operations/all package,  Next: The array-operations/creating package,  Prev: The array-operations/generic package,  Up: Packages
+
+3.3 array-operations/all
+========================
+
+This top level package re-exports the individual packages: generic,
+reducing, matrices, creating, indexing, displacing, transforming and
+stacking.  It does not export utilities.  The reason for this structure
+is the use of the ASDF package-inferred-system, where each file is its
+own package.  None of Papp’s other libraries use this, and it seems to
+have been added after he abandoned the library.
+*Source*
+     *note file-type.lisp: ❨13❩.
+*Nicknames*
+        • aops
+        • array-operations
+*Use List*
+        • *note array-operations/creating: ❨26❩.
+        • *note array-operations/displacing: ❨27❩.
+        • *note array-operations/generic: ❨24❩.
+        • *note array-operations/indexing: ❨23❩.
+        • *note array-operations/matrices: ❨29❩.
+        • *note array-operations/reducing: ❨28❩.
+        • *note array-operations/stacking: ❨32❩.
+        • *note array-operations/transforming: ❨31❩.
+*Used By List*
+     lisp-stat.
+
+
+File: array-operations.info,  Node: The array-operations/creating package,  Next: The array-operations/displacing package,  Prev: The array-operations/all package,  Up: Packages
+
+3.4 array-operations/creating
+=============================
+
+Functions for creating arrays or data frames filled with various values.
+*Source*
+     *note file-type.lisp: ❨17❩.
+*Use List*
+        • *note array-operations/generic: ❨24❩.
+        • *note array-operations/utilities: ❨30❩.
+        • common-lisp.
+*Used By List*
+     *note array-operations/all: ❨25❩.
+*Public Interface*
+        • *note fill!: ❨66❩. (function).
+        • *note generate: ❨79❩. (function).
+        • *note generate*: ❨73❩. (function).
+        • *note linspace: ❨68❩. (function).
+        • *note linspace!: ❨82❩. (function).
+        • *note linspace*: ❨65❩. (function).
+        • *note make-array-like: ❨78❩. (function).
+        • *note ones: ❨76❩. (function).
+        • *note ones!: ❨83❩. (function).
+        • *note ones*: ❨84❩. (function).
+        • *note rand: ❨71❩. (function).
+        • *note rand!: ❨81❩. (function).
+        • *note rand*: ❨80❩. (function).
+        • *note randn: ❨75❩. (function).
+        • *note randn!: ❨74❩. (function).
+        • *note randn*: ❨72❩. (function).
+        • *note similar-array: ❨77❩. (function).
+        • *note zeros: ❨70❩. (function).
+        • *note zeros!: ❨69❩. (function).
+        • *note zeros*: ❨67❩. (function).
+
+
+File: array-operations.info,  Node: The array-operations/displacing package,  Next: The array-operations/reducing package,  Prev: The array-operations/creating package,  Up: Packages
+
+3.5 array-operations/displacing
+===============================
+
+Functions that return arrays displaced in various ways from another
+array.
+*Source*
+     *note file-type.lisp: ❨20❩.
+*Use List*
+        • *note array-operations/generic: ❨24❩.
+        • *note array-operations/utilities: ❨30❩.
+        • common-lisp.
+*Used By List*
+        • *note array-operations/all: ❨25❩.
+        • *note array-operations/stacking: ❨32❩.
+        • *note array-operations/transforming: ❨31❩.
+*Public Interface*
+        • *note combine: ❨85❩. (function).
+        • *note copy-into: ❨91❩. (function).
+        • *note displace: ❨93❩. (function).
+        • *note fill-in-dimensions: ❨94❩. (function).
+        • *note flatten: ❨87❩. (function).
+        • *note partition: ❨96❩. (function).
+        • *note (setf partition): ❨97❩. (function).
+        • *note reshape: ❨95❩. (function).
+        • *note reshape-col: ❨88❩. (function).
+        • *note reshape-row: ❨86❩. (function).
+        • *note split: ❨92❩. (function).
+        • *note sub: ❨98❩. (function).
+        • *note (setf sub): ❨99❩. (function).
+        • *note subvec: ❨89❩. (function).
+        • *note (setf subvec): ❨90❩. (function).
+*Internals*
+     *note sub-location%: ❨100❩. (function).
+
+
+File: array-operations.info,  Node: The array-operations/reducing package,  Next: The array-operations/matrices package,  Prev: The array-operations/displacing package,  Up: Packages
+
+3.6 array-operations/reducing
+=============================
+
+Functions for reducing arrays, or performing reducing like operations
+over the elements of an array.
+*Source*
+     *note file-type.lisp: ❨15❩.
+*Use List*
+     common-lisp.
+*Used By List*
+     *note array-operations/all: ❨25❩.
+*Public Interface*
+        • *note argmax: ❨105❩. (function).
+        • *note argmin: ❨101❩. (function).
+        • *note best: ❨104❩. (function).
+        • *note most: ❨103❩. (function).
+        • *note vectorize-reduce: ❨102❩. (macro).
+
+
+File: array-operations.info,  Node: The array-operations/matrices package,  Next: The array-operations/utilities package,  Prev: The array-operations/reducing package,  Up: Packages
+
+3.7 array-operations/matrices
+=============================
+
+Functions for representing matrices as 2D arrays.  A matrix is a
+two-dimensional array often used for linear algebra.  See also the
+matrix functions in NUM-UTILS, which should be migrated to AOPS.
+*Source*
+     *note file-type.lisp: ❨16❩.
+*Use List*
+        • *note array-operations/generic: ❨24❩.
+        • common-lisp.
+*Used By List*
+     *note array-operations/all: ❨25❩.
+*Public Interface*
+        • *note array-matrix: ❨110❩. (type).
+        • *note matrix?: ❨106❩. (function).
+        • *note matrixp: ❨108❩. (function).
+        • *note square-matrix-p: ❨109❩. (function).
+        • *note square-matrix?: ❨107❩. (function).
+
+
+File: array-operations.info,  Node: The array-operations/utilities package,  Next: The array-operations/transforming package,  Prev: The array-operations/matrices package,  Up: Packages
+
+3.8 array-operations/utilities
+==============================
+
+*Source*
+     *note file-type.lisp: ❨18❩.
+*Use List*
+        • *note array-operations/generic: ❨24❩.
+        • common-lisp.
+*Used By List*
+        • *note array-operations/creating: ❨26❩.
+        • *note array-operations/displacing: ❨27❩.
+        • *note array-operations/indexing: ❨23❩.
+        • *note array-operations/stacking: ❨32❩.
+        • *note array-operations/transforming: ❨31❩.
+*Public Interface*
+        • *note ensure-dimensions: ❨111❩. (function).
+        • *note multf: ❨112❩. (macro).
+        • *note nested-loop: ❨117❩. (macro).
+        • *note product: ❨115❩. (function).
+        • *note same-dimensions-p: ❨114❩. (function).
+        • *note walk-subscripts: ❨116❩. (macro).
+        • *note walk-subscripts-list: ❨113❩. (macro).
+
+
+File: array-operations.info,  Node: The array-operations/transforming package,  Next: The array-operations/stacking package,  Prev: The array-operations/utilities package,  Up: Packages
+
+3.9 array-operations/transforming
+=================================
+
+Functions for transforming arrays in various ways.
+*Source*
+     *note file-type.lisp: ❨21❩.
+*Use List*
+        • *note array-operations/displacing: ❨27❩.
+        • *note array-operations/generic: ❨24❩.
+        • *note array-operations/utilities: ❨30❩.
+        • common-lisp.
+*Used By List*
+     *note array-operations/all: ❨25❩.
+*Public Interface*
+        • *note check-permutation: ❨134❩. (function).
+        • *note coercing: ❨141❩. (function).
+        • *note complement-permutation: ❨133❩. (function).
+        • *note complete-permutation: ❨131❩. (function).
+        • *note each: ❨122❩. (function).
+        • *note each*: ❨121❩. (function).
+        • *note identity-permutation-p: ❨125❩. (function).
+        • *note identity-permutation?: ❨132❩. (function).
+        • *note invert-permutation: ❨124❩. (function).
+        • *note margin: ❨126❩. (function).
+        • *note margin*: ❨127❩. (function).
+        • *note outer: ❨130❩. (function).
+        • *note outer*: ❨129❩. (function).
+        • *note permutation-incompatible-rank: ❨120❩. (condition).
+        • *note permutation-invalid-index: ❨118❩. (condition).
+        • *note permutation-repeated-index: ❨138❩. (condition).
+        • *note permute: ❨135❩. (function).
+        • *note recycle: ❨136❩. (function).
+        • *note turn: ❨128❩. (function).
+        • *note vectorize: ❨123❩. (macro).
+        • *note vectorize!: ❨137❩. (macro).
+        • *note vectorize*: ❨140❩. (macro).
+*Internals*
+        • *note array-index-row-major: ❨142❩. (function).
+        • *note array-rank-element: ❨143❩. (type).
+        • *note permutation-flags: ❨144❩. (function).
+
+
+File: array-operations.info,  Node: The array-operations/stacking package,  Prev: The array-operations/transforming package,  Up: Packages
+
+3.10 array-operations/stacking
+==============================
+
+Functions for composing arrays into new arrays, by stacking.
+
+   One may think of stacking blocks as the guiding metaphor.
+
+   For example, stack two row vectors to yield a 2x2 matrix:
+
+   (stack-rows #(1 2) #(3 4)) -> #2A((1 2)
+(3 4))
+*Source*
+     *note file-type.lisp: ❨22❩.
+*Use List*
+        • *note array-operations/displacing: ❨27❩.
+        • *note array-operations/generic: ❨24❩.
+        • *note array-operations/utilities: ❨30❩.
+        • common-lisp.
+*Used By List*
+     *note array-operations/all: ❨25❩.
+*Public Interface*
+        • *note copy-row-major-block: ❨147❩. (function).
+        • *note stack: ❨145❩. (function).
+        • *note stack*: ❨150❩. (function).
+        • *note stack-cols: ❨148❩. (function).
+        • *note stack-cols*: ❨149❩. (function).
+        • *note stack-cols-copy: ❨151❩. (generic function).
+        • *note stack-rows: ❨157❩. (function).
+        • *note stack-rows*: ❨146❩. (function).
+        • *note stack-rows-copy: ❨154❩. (generic function).
+*Internals*
+     *note stack*0: ❨158❩. (function).
+
+
+File: array-operations.info,  Node: Definitions,  Next: Indexes,  Prev: Packages,  Up: Top
+
+4 Definitions
+*************
+
+Definitions are sorted by export status, category, package, and then by
+lexicographic order.
+
+* Menu:
+
+* Public Interface::
+* Internals::
+
+
+File: array-operations.info,  Node: Public Interface,  Next: Internals,  Prev: Definitions,  Up: Definitions
+
+4.1 Public Interface
+====================
+
+* Menu:
+
+* Public macros::
+* Public ordinary functions::
+* Public generic functions::
+* Public conditions::
+* Public types::
+
+
+File: array-operations.info,  Node: Public macros,  Next: Public ordinary functions,  Prev: Public Interface,  Up: Public Interface
+
+4.1.1 Macros
+------------
+
+ -- Macro: &dims (&rest dimensions)
+     Dimensions of array-like object.
+     *Package*
+          *note array-operations/generic: ❨24❩.
+     *Source*
+          *note file-type.lisp: ❨14❩.
+ -- Macro: each-index (index &body body)
+     Given one or more symbols INDEX, walks the BODY expression to
+     determine the index ranges by looking for AREF and ROW-MAJOR-AREF
+     calls.
+
+     Transpose of 2D array A
+
+     (each-index (i j)
+     (aref A j i))
+
+     Diagonal of a square 2D array
+
+     (each-index i (aref A i i))
+
+     Turn a 2D array into an array of arrays
+
+     (each-index i
+     (each-index j
+     (aref A i j)))
+
+     Matrix-vector product:
+
+     (each-index i
+     (sum-index j
+     (* (aref A i j) (aref x j))))
+
+     *Package*
+          *note array-operations/indexing: ❨23❩.
+     *Source*
+          *note file-type.lisp: ❨19❩.
+ -- Macro: each-index! (array index &body body)
+     Sets elements of the given ARRAY to values of the BODY, evaluated
+     at array indices INDEX
+
+     Note: This has the same semantics as each-index and each-index*,
+     but the INDEX ranges are taken from the ARRAY dimensions, not
+     a code walker.
+
+     *Package*
+          *note array-operations/indexing: ❨23❩.
+     *Source*
+          *note file-type.lisp: ❨19❩.
+ -- Macro: each-index* (element-type index &body body)
+     Given one or more symbols INDEX, creates an array with
+     ELEMENT-TYPE, then iterates over the index ranges with the
+     innermost loop using the last index.  Each iteration evaluates
+     BODY, and sets the array element.
+
+     To find the range of the indices, walks the BODY expression
+     to determine the index ranges by looking for
+     AREF and ROW-MAJOR-AREF calls.
+
+     Transpose of 2D array A
+
+     (each-index* t (i j)
+     (aref A j i))
+
+     Diagonal of a square 2D array
+
+     (each-index* t i (aref A i i))
+
+     Turn a 2D array into an array of arrays
+
+     (each-index* t i
+     (each-index* t j
+     (aref A i j)))
+
+     Outer product of two 1D arrays to create a 2D array
+
+     (each-index* t (i j)
+     (* (aref x i) (aref y j)))
+
+     Matrix-vector product:
+
+     (each-index* t i
+     (sum-index j
+     (* (aref A i j) (aref x j))))
+
+     *Package*
+          *note array-operations/indexing: ❨23❩.
+     *Source*
+          *note file-type.lisp: ❨19❩.
+ -- Macro: multf (place &rest values)
+     Multiply by the arguments
+     *Package*
+          *note array-operations/utilities: ❨30❩.
+     *Source*
+          *note file-type.lisp: ❨18❩.
+ -- Macro: nested-loop (syms dimensions &body body)
+     Iterates over a multidimensional range of indices.
+
+     SYMS must be a list of symbols, with the first symbol corresponding
+     to the outermost loop.
+
+     DIMENSIONS will be evaluated, and must be a list of dimension
+     sizes, of the same length as SYMS.
+
+     Example:
+     (nested-loop (i j) ’(10 20) (format t ’~a ~a~%’ i j))
+
+     expands to:
+
+     ; Check dimensions
+     (destructuring-bind (g1 g2) ’(10 20)
+     (loop for i from 0 below g1 do
+     (loop for j from 0 below g2 do
+     (format t ’~a ~a~%’ i j))))
+
+     with some additional type and dimension checks.
+
+     *Package*
+          *note array-operations/utilities: ❨30❩.
+     *Source*
+          *note file-type.lisp: ❨18❩.
+ -- Macro: reduce-index (function index &body body)
+     Reduction over one or more INDEX symbols in an array expression.
+     The range of these symbols is determined by walking the tree
+     for AREF and ROW-MAJOR-AREF calls.
+
+     Example:
+
+     (defparameter A #2A((1 2) (3 4)))
+
+     (reduce-index #’+ i (row-major-aref A i)) ; Sum all elements
+     (sum-index) => 10
+
+     (reduce-index #’* (i j) (aref A i j)) ; Multiply all elements
+     => 24
+
+     (reduce-index #’max i (row-major-aref A i)) ; Maxmum value
+     => 4
+
+     *Package*
+          *note array-operations/indexing: ❨23❩.
+     *Source*
+          *note file-type.lisp: ❨19❩.
+ -- Macro: sum-index (index &body body)
+     Sums over one or more INDEX symbols in an array expression.  The
+     range of these symbols is determined by walking the tree for AREF
+     and ROW-MAJOR-AREF calls.
+
+     Example:
+
+     (defparameter A #2A((1 2) (3 4)))
+
+     (sum-index i (row-major-aref A i)) ; Sum all elements => 10
+
+     (sum-index (i j) (aref A i j)) ; Sum all elements
+     => 10
+
+     (sum-index i (aref A i i)) ; Trace of array
+     => 5
+
+     *Package*
+          *note array-operations/indexing: ❨23❩.
+     *Source*
+          *note file-type.lisp: ❨19❩.
+ -- Macro: vectorize (variables &body body)
+     Makes a new array of type ELEMENT-TYPE, containing the result of an
+     array expression.  All input and outputs have the same shape, and
+     BODY is evaluated for each index
+
+     VARIABLES must be a list of symbols bound to arrays.
+     Each array must have the same dimensions.  These are
+     checked at compile and run-time respectively.
+
+     (let ((a #2A((1 2) (3 4))))
+     (vectorize (a) (+ a 1)))
+     -> #2A((2 3) (4 5))
+
+     (let ((a #(1 2 3))
+     (b #(4 5 6)))
+     (vectorize (a b) (+ a (* b 2))))
+     -> #(9 12 15)
+
+     *Package*
+          *note array-operations/transforming: ❨31❩.
+     *Source*
+          *note file-type.lisp: ❨21❩.
+ -- Macro: vectorize! (result variables &body body)
+     Fills an array RESULT with the result of an array expression.  All
+     input and outputs have the same shape, and BODY is evaluated for
+     each index
+
+     VARIABLES must be a list of symbols bound to arrays.  Each array
+     must have the same dimensions.  These are checked at compile and
+     run-time respectively.
+
+     (let ((a #2A((1 2) (3 4)))
+     (b (make-array ’(2 2))))
+     (vectorize!  b (a) (+ a 1)))
+     -> #2A((2 3) (4 5))
+
+     (let ((a #(1 2 3))
+     (b #(4 5 6)))
+     (vectorize!  b (a b) (+ a (* b 2))))
+     -> #(9 12 15)
+
+     *Package*
+          *note array-operations/transforming: ❨31❩.
+     *Source*
+          *note file-type.lisp: ❨21❩.
+ -- Macro: vectorize* (element-type variables &body body)
+     Makes a new array of type ELEMENT-TYPE, containing the result of an
+     array expression.  All input and outputs have the same shape, and
+     BODY is evaluated for each index
+
+     VARIABLES must be a list of symbols bound to arrays.
+     Each array must have the same dimensions.  These are
+     checked at compile and run-time respectively.
+
+     (let ((a #2A((1 2) (3 4))))
+     (vectorize* t (a) (+ a 1)))
+     -> #2A((2 3) (4 5))
+
+     (let ((a #(1 2 3))
+     (b #(4 5 6)))
+     (vectorize* t (a b) (+ a (* b 2))))
+     -> #(9 12 15)
+
+     *Package*
+          *note array-operations/transforming: ❨31❩.
+     *Source*
+          *note file-type.lisp: ❨21❩.
+ -- Macro: vectorize-reduce (fn variables &body body)
+     Performs a reduction using FN over all elements in a vectorized
+     expression on array VARIABLES.
+
+     VARIABLES must be a list of symbols bound to arrays.
+     Each array must have the same dimensions.  These are
+     checked at compile and run-time respectively.
+
+     Example: Maximum value in an array A
+
+     (vectorize-reduce #’max (a) a)
+
+     Example: Maximum absolute difference between two arrays A and B
+
+     (vectorize-reduce #’max (a b) (abs (- a b)))
+
+     *Package*
+          *note array-operations/reducing: ❨28❩.
+     *Source*
+          *note file-type.lisp: ❨15❩.
+ -- Macro: walk-subscripts ((dimensions subscripts &optional position)
+          &body body)
+     Iterate over the subscripts of an array with given DIMENSIONS.
+     SUBSCRIPTS contains the current subscripts as a vector of fixnums,
+     POSITION has the row-major index.  Consequences are undefined if
+     either POSITION or SUBSCRIPTS is modified.
+     *Package*
+          *note array-operations/utilities: ❨30❩.
+     *Source*
+          *note file-type.lisp: ❨18❩.
+ -- Macro: walk-subscripts-list ((dimensions subscripts &optional
+          position) &body body)
+     Like WALK-SUBSCRIPTS, but SUBSCRIPTS is a newly created list for
+     each position that does not share structure and can be freely
+     used/modified/kept etc.
+     *Package*
+          *note array-operations/utilities: ❨30❩.
+     *Source*
+          *note file-type.lisp: ❨18❩.
+
+
+File: array-operations.info,  Node: Public ordinary functions,  Next: Public generic functions,  Prev: Public macros,  Up: Public Interface
+
+4.1.2 Ordinary functions
+------------------------
+
+ -- Function: argmax (array)
+     Find the row-major-aref in ARRAY with the maximum value Returns
+     both the index and the value of ARRAY at that index
+     *Package*
+          *note array-operations/reducing: ❨28❩.
+     *Source*
+          *note file-type.lisp: ❨15❩.
+ -- Function: argmin (array)
+     Find the row-major-aref in ARRAY with the minimum value Returns
+     both the index and the value of ARRAY at that index
+     *Package*
+          *note array-operations/reducing: ❨28❩.
+     *Source*
+          *note file-type.lisp: ❨15❩.
+ -- Function: best (fn array)
+     FN must accept two inputs and return true/false.  This function is
+     applied
+     to elements of ARRAY, to find the ’best’.  The row-major-aref index
+     is returned.
+
+     Example: The index of the maximum is
+
+     * (best #’> #(1 2 3 4))
+     3 ; row-major index
+     4 ; value
+
+     This function was adapted from Paul Graham’s On Lisp
+
+     *Package*
+          *note array-operations/reducing: ❨28❩.
+     *Source*
+          *note file-type.lisp: ❨15❩.
+ -- Function: check-permutation (permutation &optional rank)
+     Check if PERMUTATION is a valid permutation (of the given RANK),
+     and signal an error if necessary.
+     *Package*
+          *note array-operations/transforming: ❨31❩.
+     *Source*
+          *note file-type.lisp: ❨21❩.
+ -- Function: coercing (element-type &optional function)
+     Return a function composed of a univariate function that coerces to
+     ELEMENT-TYPE and function.  When FUNCTION is not given, return a
+     closure that coerces to ELEMENT-TYPE.
+     *Package*
+          *note array-operations/transforming: ❨31❩.
+     *Source*
+          *note file-type.lisp: ❨21❩.
+ -- Function: combine (array &optional element-type)
+     The opposite of SUBARRAYS.
+     If ELEMENT-TYPE is not given, it is inferred from the first element
+     of array, which also determines the dimensions.  If that element is
+     not an array, the original ARRAY is returned as it is.
+     *Package*
+          *note array-operations/displacing: ❨27❩.
+     *Source*
+          *note file-type.lisp: ❨20❩.
+ -- Function: complement-permutation (permutation rank)
+     Return a list of increasing indices that complement PERMUTATION,
+     i.e.  form a permutation when appended.  Atoms are accepted and
+     treated as lists of a single element.
+     *Package*
+          *note array-operations/transforming: ❨31❩.
+     *Source*
+          *note file-type.lisp: ❨21❩.
+ -- Function: complete-permutation (permutation rank)
+     Return a completed version of permutation, appending it to its
+     complement.
+     *Package*
+          *note array-operations/transforming: ❨31❩.
+     *Source*
+          *note file-type.lisp: ❨21❩.
+ -- Function: copy-into (target source)
+     Copy SOURCE into TARGET, for array arguments of compatible
+     dimensions (checked).  Return TARGET, making the implementation of
+     the semantics of SETF easy.
+     *Package*
+          *note array-operations/displacing: ❨27❩.
+     *Source*
+          *note file-type.lisp: ❨20❩.
+ -- Function: copy-row-major-block (source-array destination-array
+          element-type &key source-start source-end destination-start)
+     Copy elements with row major indexes between the given start and
+     end from SOURCE to DESTINATION, respectively.  Elements are coerced
+     to ELEMENT-TYPE when necessary.  Return no values.
+
+     This function should be used to implement copying of contiguous
+     row-major blocks of elements, most optimizations should happen
+     here.
+     *Package*
+          *note array-operations/stacking: ❨32❩.
+     *Source*
+          *note file-type.lisp: ❨22❩.
+ -- Function: displace (array dimensions &optional offset)
+     Shorthand function for displacing an array.
+     *Package*
+          *note array-operations/displacing: ❨27❩.
+     *Source*
+          *note file-type.lisp: ❨20❩.
+ -- Function: each (function array &rest other-arrays)
+     Like EACH*, with ELEMENT-TYPE T.
+     *Package*
+          *note array-operations/transforming: ❨31❩.
+     *Source*
+          *note file-type.lisp: ❨21❩.
+ -- Function: each* (element-type function array &rest other-arrays)
+     Apply function to the array arguments elementwise, and return the
+     result as an array with the given ELEMENT-TYPE. Arguments are
+     checked for dimension compatibility.
+     *Package*
+          *note array-operations/transforming: ❨31❩.
+     *Source*
+          *note file-type.lisp: ❨21❩.
+ -- Function: ensure-dimensions (object)
+     Return a list of dimensions corresponding to OBJECT. Positive
+     integers are treated as dimensions of rank 1, lists are returned as
+     they are, and arrays are queried for their dimensions.
+
+     OBJECTS accepted by this function as valid dimensions are called
+     ‘dimension specifications’ in this library.
+     *Package*
+          *note array-operations/utilities: ❨30❩.
+     *Source*
+          *note file-type.lisp: ❨18❩.
+ -- Function: fill! (array value)
+     Fills a given ARRAY with VALUE, coerced to the same element type as
+     ARRAY
+     *Package*
+          *note array-operations/creating: ❨26❩.
+     *Source*
+          *note file-type.lisp: ❨17❩.
+ -- Function: fill-in-dimensions (dimensions size)
+     If one of the dimensions is missing (indicated with T), replace it
+     with a dimension so that the total product equals SIZE. If that’s
+     not possible, signal an error.  If there are no missing dimensions,
+     just check that the product equals size.  Also accepts other
+     dimension specifications (integer, array).
+     *Package*
+          *note array-operations/displacing: ❨27❩.
+     *Source*
+          *note file-type.lisp: ❨20❩.
+ -- Function: flatten (array)
+     Return ARRAY flattened to a vector.  Will share structure.
+     *Package*
+          *note array-operations/displacing: ❨27❩.
+     *Source*
+          *note file-type.lisp: ❨20❩.
+ -- Function: generate (function dimensions &optional arguments)
+     Like GENERATE*, with ELEMENT-TYPE T.
+     *Package*
+          *note array-operations/creating: ❨26❩.
+     *Source*
+          *note file-type.lisp: ❨17❩.
+ -- Function: generate* (element-type function dimensions &optional
+          arguments)
+     Return an array with given DIMENSIONS and ELEMENT-TYPE, with
+     elements generated by calling FUNCTION.
+
+     Function is called with:
+
+     - no arguments, when ARGUMENTS is nil
+     - the position (= row major index), when ARGUMENTS is :POSITION
+     - a list of subscripts, when ARGUMENTS is :SUBSCRIPTS
+     - both when ARGUMENTS is :POSITION-AND-SUBSCRIPTS
+
+     The traversal order is unspecified and may be nonlinear.
+     *Package*
+          *note array-operations/creating: ❨26❩.
+     *Source*
+          *note file-type.lisp: ❨17❩.
+ -- Function: identity-permutation-p (permutation &optional rank)
+     Test if PERMUTATION is the identity permutation, i.e.  a sequence
+     of consecutive integers starting at 0.  Note that permutation is
+     otherwise not checked, i.e.  it may not be a permutation.
+     *Package*
+          *note array-operations/transforming: ❨31❩.
+     *Source*
+          *note file-type.lisp: ❨21❩.
+ -- Function: identity-permutation? (permutation &optional rank)
+     Test if PERMUTATION is the identity permutation, i.e.  a sequence
+     of consecutive integers starting at 0.  Note that permutation is
+     otherwise not checked, i.e.  it may not be a permutation.
+     *Package*
+          *note array-operations/transforming: ❨31❩.
+     *Alias for*
+          *note identity-permutation-p: ❨125❩.
+ -- Function: invert-permutation (permutation)
+     Invert a permutation.
+     *Package*
+          *note array-operations/transforming: ❨31❩.
+     *Source*
+          *note file-type.lisp: ❨21❩.
+ -- Function: linspace (start stop n)
+     Make a vector of N elements and type T, containing evenly spaced
+     numbers over an interval.  The first element is equal to START and
+     last element STOP,
+     with constant difference between consecutive elements.
+
+     (linspace 0 4 5) -> #(0 1 2 3 4)
+     (linspace 1 3 5) -> #(0 1/2 1 3/2 2)
+     (linspace 0 4d0 3) -> #(0.0d0 2.0d0 4.0d0)
+
+     *Package*
+          *note array-operations/creating: ❨26❩.
+     *Source*
+          *note file-type.lisp: ❨17❩.
+ -- Function: linspace! (array start stop)
+     Fill an array with evenly spaced numbers over an interval.
+     The first element is equal to START and last element STOP,
+     with constant difference between consecutive elements in
+     ROW-MAJOR-INDEX.
+     *Package*
+          *note array-operations/creating: ❨26❩.
+     *Source*
+          *note file-type.lisp: ❨17❩.
+ -- Function: linspace* (element-type start stop n)
+     Make a vector of N elements and type ELEMENT-TYPE, containing
+     evenly spaced numbers over an interval.  The first element is equal
+     to START and last element STOP,
+     with constant difference between consecutive elements.
+     *Package*
+          *note array-operations/creating: ❨26❩.
+     *Source*
+          *note file-type.lisp: ❨17❩.
+ -- Function: make-array-like (array &key dimensions adjustable
+          element-type initial-element fill-pointer)
+     Returns new array with the same properties as ARRAY.
+     Keyword arguments will override properties of ARRAY.
+     If INITIAL-ELEMENT is specified, it is coerced to ELEMENT-TYPE.
+     *Package*
+          *note array-operations/creating: ❨26❩.
+     *Alias for*
+          *note similar-array: ❨77❩.
+ -- Function: margin (function array inner &optional outer)
+     Like MARGIN*, with ELEMENT-TYPE T.
+     *Package*
+          *note array-operations/transforming: ❨31❩.
+     *Source*
+          *note file-type.lisp: ❨21❩.
+ -- Function: margin* (element-type function array inner &optional
+          outer)
+     PERMUTE ARRAY with ‘(,@OUTER ,@INNER), split the inner subarrays,
+     apply FUNCTION to each, return the results in an array of
+     dimensions OUTER, with the given ELEMENT-TYPE.
+     *Package*
+          *note array-operations/transforming: ❨31❩.
+     *Source*
+          *note file-type.lisp: ❨21❩.
+ -- Function: matrix? (matrix)
+     Return NIL if MATRIX does not have rank 2.
+     *Package*
+          *note array-operations/matrices: ❨29❩.
+     *Alias for*
+          *note matrixp: ❨108❩.
+ -- Function: matrixp (matrix)
+     Return NIL if MATRIX does not have rank 2.
+     *Package*
+          *note array-operations/matrices: ❨29❩.
+     *Source*
+          *note file-type.lisp: ❨16❩.
+ -- Function: most (fn array)
+     Finds the element of ARRAY that returns the value closest to
+     positive infinity when FN is applied to the array value.  Returns
+     the row-major-aref index, and the winning value.
+
+     Example: The maximum of an array is
+     (most #’identity #(1 2 3))
+     -> 2 (row-major index)
+     3 (value)
+
+     Minimum of an array is
+     (most #’- #(1 2 3))
+     0
+     -1
+
+     This function was adapted from Paul Graham’s On Lisp
+
+     *Package*
+          *note array-operations/reducing: ❨28❩.
+     *Source*
+          *note file-type.lisp: ❨15❩.
+ -- Function: ones (dimensions)
+     Makes an array of shape DIMENSIONS and type T, filled with ones
+     *Package*
+          *note array-operations/creating: ❨26❩.
+     *Source*
+          *note file-type.lisp: ❨17❩.
+ -- Function: ones! (array)
+     Fills the given ARRAY with 1’s, coerced to the element type.
+     Returns ARRAY.
+     *Package*
+          *note array-operations/creating: ❨26❩.
+     *Source*
+          *note file-type.lisp: ❨17❩.
+ -- Function: ones* (element-type dimensions)
+     Makes an array of shape DIMENSIONS and type ELEMENT-TYPE, filled
+     with ones coerced to the specified type ELEMENT-TYPE.
+     *Package*
+          *note array-operations/creating: ❨26❩.
+     *Source*
+          *note file-type.lisp: ❨17❩.
+ -- Function: outer (function &rest arrays)
+     Like OUTER, with ELEMENT-TYPE t.
+     *Package*
+          *note array-operations/transforming: ❨31❩.
+     *Source*
+          *note file-type.lisp: ❨21❩.
+ -- Function: outer* (element-type function &rest arrays)
+     Generalized outer product of ARRAYS with FUNCTION. The resulting
+     array has the concatenated dimensions of ARRAYS, and the given
+     ELEMENT-TYPE.
+     *Package*
+          *note array-operations/transforming: ❨31❩.
+     *Source*
+          *note file-type.lisp: ❨21❩.
+ -- Function: partition (array start &optional end)
+     Return a subset of the array, on the first indexes between START
+     and END.
+     *Package*
+          *note array-operations/displacing: ❨27❩.
+     *Source*
+          *note file-type.lisp: ❨20❩.
+ -- Function: (setf partition) (array start &optional end)
+     *Package*
+          *note array-operations/displacing: ❨27❩.
+     *Source*
+          *note file-type.lisp: ❨20❩.
+ -- Function: permute (permutation array)
+     Return ARRAY with the axes permuted by PERMUTATION, which is a
+     sequence of indexes.  Specifically, an array A is transformed to B,
+     where
+
+     B[b_1,...,b_n] = A[a_1,...,a_n] with b_i=a_{P[i]}
+
+     P is the permutation.
+
+     Array element type is preserved.
+     *Package*
+          *note array-operations/transforming: ❨31❩.
+     *Source*
+          *note file-type.lisp: ❨21❩.
+ -- Function: product (dimensions)
+     Product of elements in the argument.  NOT EXPORTED.
+     *Package*
+          *note array-operations/utilities: ❨30❩.
+     *Source*
+          *note file-type.lisp: ❨18❩.
+ -- Function: rand (dimensions)
+     Makes an array of shape DIMENSIONS and type T, filled with random
+     numbers uniformly distributed between 0 and 1.
+
+     Uses the built-in RANDOM function.
+
+     (rand 3) -> #(0.39319038 0.69693553 0.5021677)
+     (rand ’(2 2)) -> #2A((0.91003513 0.23208928) (0.5577954
+     0.94657767))
+
+     NOTE: If it’s important that these numbers are really random
+     (e.g.  cryptographic applications), then you should probably
+     not use this function.
+
+     *Package*
+          *note array-operations/creating: ❨26❩.
+     *Source*
+          *note file-type.lisp: ❨17❩.
+ -- Function: rand! (array)
+     Fills a given ARRAY with random numbers, uniformly distributed
+     between 0 and 1.  Uses the built-in RANDOM function.  Returns
+     ARRAY.
+     *Package*
+          *note array-operations/creating: ❨26❩.
+     *Source*
+          *note file-type.lisp: ❨17❩.
+ -- Function: rand* (element-type dimensions)
+     Makes an array of shape DIMENSIONS and type ELEMENT-TYPE, filled
+     with random numbers uniformly distributed between 0 and 1.
+
+     Uses the built-in RANDOM function.
+
+     (rand 3) -> #(0.39319038 0.69693553 0.5021677)
+     (rand ’(2 2)) -> #2A((0.91003513 0.23208928) (0.5577954
+     0.94657767))
+
+     NOTE: If it’s important that these numbers are really random
+     (e.g.  cryptographic applications), then you should probably
+     not use this function.
+
+     *Package*
+          *note array-operations/creating: ❨26❩.
+     *Source*
+          *note file-type.lisp: ❨17❩.
+ -- Function: randn (dimensions)
+     Creates an array of shape DIMENSIONS and type T, and fills with
+     normally distributed numbers with a mean of zero and standard
+     deviation of 1
+
+     Uses the Box-Muller algorithm and built-in random number generator.
+
+     (rand 3) -> #(-0.82067037 -0.60068226 -0.21494178)
+     (randn ’(2 2)) -> #2A((1.6905352 -2.5379088) (0.8461403 -1.505984))
+
+     NOTE: If it’s important that these numbers are really random
+     (e.g.  cryptographic applications), then you should probably
+     not use this function.
+
+     *Package*
+          *note array-operations/creating: ❨26❩.
+     *Source*
+          *note file-type.lisp: ❨17❩.
+ -- Function: randn! (array)
+     Fills ARRAY with normally distributed numbers with a mean of zero
+     and standard deviation of 1
+
+     Uses the Box-Muller algorithm and built-in random number generator.
+
+     NOTE: If it’s important that these numbers are really random
+     (e.g.  cryptographic applications), then you should probably
+     not use this function.
+
+     *Package*
+          *note array-operations/creating: ❨26❩.
+     *Source*
+          *note file-type.lisp: ❨17❩.
+ -- Function: randn* (element-type dimensions)
+     Creates an array of shape DIMENSIONS and type ELEMENT-TYPE, and
+     fills with normally distributed numbers with a mean of zero and
+     standard deviation of 1
+
+     Uses the Box-Muller algorithm and built-in random number generator.
+
+     (rand 3) -> #(-0.82067037 -0.60068226 -0.21494178)
+     (randn ’(2 2)) -> #2A((1.6905352 -2.5379088) (0.8461403 -1.505984))
+
+     NOTE: If it’s important that these numbers are really random
+     (e.g.  cryptographic applications), then you should probably
+     not use this function.
+
+     *Package*
+          *note array-operations/creating: ❨26❩.
+     *Source*
+          *note file-type.lisp: ❨17❩.
+ -- Function: recycle (object &key inner outer element-type)
+     Recycle elements of OBJECT, extending the dimensions by outer
+     (repeating OBJECT) and inner (repeating each element of OBJECT).
+     When both INNER and OUTER are nil, the OBJECT is returned as is.
+     Non-array OBJECTs are interpreted as rank 0 arrays, following the
+     usual semantics.
+     *Package*
+          *note array-operations/transforming: ❨31❩.
+     *Source*
+          *note file-type.lisp: ❨21❩.
+ -- Function: reshape (array dimensions &optional offset)
+     Reshape ARRAY using DIMENSIONS (which can also be dimension
+     specifications).
+     If DIMENSIONS is a list, it may contain a single element T which
+     will be calculated to match the total size of the resulting array.
+     *Package*
+          *note array-operations/displacing: ❨27❩.
+     *Source*
+          *note file-type.lisp: ❨20❩.
+ -- Function: reshape-col (array)
+     Array reshaped as an Nx1 matrix.
+     *Package*
+          *note array-operations/displacing: ❨27❩.
+     *Source*
+          *note file-type.lisp: ❨20❩.
+ -- Function: reshape-row (array)
+     Array reshaped as an 1xN matrix.
+     *Package*
+          *note array-operations/displacing: ❨27❩.
+     *Source*
+          *note file-type.lisp: ❨20❩.
+ -- Function: same-dimensions-p (array &rest arrays)
+     Test if arguments have the same dimensions.  NOT EXPORTED.
+     *Package*
+          *note array-operations/utilities: ❨30❩.
+     *Source*
+          *note file-type.lisp: ❨18❩.
+ -- Function: similar-array (array &key dimensions adjustable
+          element-type initial-element fill-pointer)
+     Returns new array with the same properties as ARRAY.
+     Keyword arguments will override properties of ARRAY.
+     If INITIAL-ELEMENT is specified, it is coerced to ELEMENT-TYPE.
+     *Package*
+          *note array-operations/creating: ❨26❩.
+     *Source*
+          *note file-type.lisp: ❨17❩.
+ -- Function: split (array rank)
+     Return an array of subarrays, split off at RANK. All subarrays are
+     displaced and share structure.
+     *Package*
+          *note array-operations/displacing: ❨27❩.
+     *Source*
+          *note file-type.lisp: ❨20❩.
+ -- Function: square-matrix-p (matrix)
+     Test if MATRIX has two dimensions and that they are equal.
+     *Package*
+          *note array-operations/matrices: ❨29❩.
+     *Source*
+          *note file-type.lisp: ❨16❩.
+ -- Function: square-matrix? (matrix)
+     Test if MATRIX has two dimensions and that they are equal.
+     *Package*
+          *note array-operations/matrices: ❨29❩.
+     *Alias for*
+          *note square-matrix-p: ❨109❩.
+ -- Function: stack (axis array &rest arrays)
+     Like STACK*, with element-type T.
+     *Package*
+          *note array-operations/stacking: ❨32❩.
+     *Source*
+          *note file-type.lisp: ❨22❩.
+ -- Function: stack* (element-type axis array &rest arrays)
+     Stack array arguments along AXIS. ELEMENT-TYPE determines the
+     element-type of the result.
+     *Package*
+          *note array-operations/stacking: ❨32❩.
+     *Source*
+          *note file-type.lisp: ❨22❩.
+ -- Function: stack-cols (&rest objects)
+     Like STACK-COLS*, with ELEMENT-TYPE T.
+     *Package*
+          *note array-operations/stacking: ❨32❩.
+     *Source*
+          *note file-type.lisp: ❨22❩.
+ -- Function: stack-cols* (element-type &rest objects)
+     Stack OBJECTS column-wise into an array of the given ELEMENT-TYPE,
+     coercing if necessary.  Always return a simple array of rank 2.
+
+     How objects are used depends on their dimensions, queried by DIMS:
+
+     - when the object has 0 dimensions, fill a column with the element.
+
+     - when the object has 1 dimension, use it as a column.
+
+     - when the object has 2 dimensions, use it as a matrix.
+
+     When applicable, compatibility of dimensions is checked, and the
+     result is used to determine the number of rows.  When all objects
+     have 0 dimensions, the result has one row.
+     *Package*
+          *note array-operations/stacking: ❨32❩.
+     *Source*
+          *note file-type.lisp: ❨22❩.
+ -- Function: stack-rows (&rest objects)
+     Like STACK-ROWS*, with ELEMENT-TYPE T.
+     *Package*
+          *note array-operations/stacking: ❨32❩.
+     *Source*
+          *note file-type.lisp: ❨22❩.
+ -- Function: stack-rows* (element-type &rest objects)
+     Stack OBJECTS row-wise into an array of the given ELEMENT-TYPE,
+     coercing if necessary.  Always return a simple array of rank 2.
+
+     How objects are used depends on their dimensions, queried by DIMS:
+
+     - when the object has 0 dimensions, fill a row with the element.
+
+     - when the object has 1 dimension, use it as a row.
+
+     - when the object has 2 dimensions, use it as a matrix.
+
+     When applicable, compatibility of dimensions is checked, and the
+     result is used to determine the number of columns.  When all
+     objects have 0 dimensions, the result has one column.
+     *Package*
+          *note array-operations/stacking: ❨32❩.
+     *Source*
+          *note file-type.lisp: ❨22❩.
+ -- Function: sub (array &rest subscripts)
+     Given a partial list of subscripts, return the subarray that starts
+     there, with all the other subscripts set to 0, dimensions inferred
+     from the original.
+
+     If no subscripts are given, the original array is returned.
+     Implemented by displacing, may share structure.
+     *Package*
+          *note array-operations/displacing: ❨27❩.
+     *Source*
+          *note file-type.lisp: ❨20❩.
+ -- Function: (setf sub) (array &rest subscripts)
+     *Package*
+          *note array-operations/displacing: ❨27❩.
+     *Source*
+          *note file-type.lisp: ❨20❩.
+ -- Function: subvec (vector start &optional end)
+     Displaced vector between START and END.
+     *Package*
+          *note array-operations/displacing: ❨27❩.
+     *Source*
+          *note file-type.lisp: ❨20❩.
+ -- Function: (setf subvec) (vector start &optional end)
+     *Package*
+          *note array-operations/displacing: ❨27❩.
+     *Source*
+          *note file-type.lisp: ❨20❩.
+ -- Function: turn (array nturns &optional rank-1 rank-2)
+     Turns an array by a specified number of clockwise 90° rotations.
+     The axis of rotation is specified by RANK-1 (defaulting to 0) and
+     RANK-2 (defaulting to 1).
+     *Package*
+          *note array-operations/transforming: ❨31❩.
+     *Source*
+          *note file-type.lisp: ❨21❩.
+ -- Function: zeros (dimensions)
+     Makes an array of shape DIMENSIONS and type T, filled with zeros
+     *Package*
+          *note array-operations/creating: ❨26❩.
+     *Source*
+          *note file-type.lisp: ❨17❩.
+ -- Function: zeros! (array)
+     Fills the given ARRAY with zero values, coerced to the element
+     type.  Returns ARRAY.
+     *Package*
+          *note array-operations/creating: ❨26❩.
+     *Source*
+          *note file-type.lisp: ❨17❩.
+ -- Function: zeros* (element-type dimensions)
+     Makes an array of shape DIMENSIONS and type ELEMENT-TYPE, filled
+     with zeros coerced to the specified type ELEMENT-TYPE.
+     *Package*
+          *note array-operations/creating: ❨26❩.
+     *Source*
+          *note file-type.lisp: ❨17❩.
+
+
+File: array-operations.info,  Node: Public generic functions,  Next: Public conditions,  Prev: Public ordinary functions,  Up: Public Interface
+
+4.1.3 Generic functions
+-----------------------
+
+ -- Generic Function: as-array (object)
+     Return the contents of OBJECT as an array.  Exact semantics depends
+     on OBJECT, but generally objects which contain elements in a
+     rectilinear coordinate system should have a natural mapping to
+     arrays.
+
+     When the second value is T, the array itself does not share
+     structure with OBJECT, but its elements may.  Otherwise, it is
+     indeterminate whether the two objects share structure, and
+     consequences of modifying the result are not defined.  Methods are
+     encouraged but not required to return a second value.
+     *Package*
+          *note array-operations/generic: ❨24❩.
+     *Source*
+          *note file-type.lisp: ❨14❩.
+     *Methods*
+           -- Method: as-array ((array array))
+           -- Method: as-array (object)
+ -- Generic Function: dim (array axis)
+     Return specificed dimension of ARRAY.
+     *Package*
+          *note array-operations/generic: ❨24❩.
+     *Source*
+          *note file-type.lisp: ❨14❩.
+     *Methods*
+           -- Method: dim ((array array) axis)
+           -- Method: dim (array axis)
+ -- Generic Function: dims (array)
+     Return a list of dimensions.
+
+     For non-array objects, SIZE, DIM, NROW and NCOL use this method by
+     default, so it is enough to define it (unless efficiency is a
+     concern).
+
+     When DIMS is not defined for an object, it falls back to as-array,
+     which may be very inefficient for objects which need to be consed.
+     It is always advisable to define DIMS.
+     *Package*
+          *note array-operations/generic: ❨24❩.
+     *Source*
+          *note file-type.lisp: ❨14❩.
+     *Methods*
+           -- Method: dims ((array array))
+           -- Method: dims (array)
+ -- Generic Function: element-type (array)
+     Return TYPE such that
+
+     1.  all elements of ARRAY are guaranteed to be a subtype of TYPE,
+
+     2.  if applicable, elements of ARRAY can be set to values which are
+     of a type that is a subtype of TYPE.
+     *Package*
+          *note array-operations/generic: ❨24❩.
+     *Source*
+          *note file-type.lisp: ❨14❩.
+     *Methods*
+           -- Method: element-type ((array array))
+           -- Method: element-type (array)
+ -- Generic Function: ncol (array)
+     Number of columns.  Will signal an error if ARRAY is not a matrix.
+     *Package*
+          *note array-operations/generic: ❨24❩.
+     *Source*
+          *note file-type.lisp: ❨14❩.
+     *Methods*
+           -- Method: ncol ((array array))
+           -- Method: ncol (array)
+ -- Generic Function: nrow (array)
+     Number of rows.  Will signal an error if ARRAY is not a matrix.
+     *Package*
+          *note array-operations/generic: ❨24❩.
+     *Source*
+          *note file-type.lisp: ❨14❩.
+     *Methods*
+           -- Method: nrow ((array array))
+           -- Method: nrow (array)
+ -- Generic Function: rank (array)
+     Return the rank of ARRAY.
+     *Package*
+          *note array-operations/generic: ❨24❩.
+     *Source*
+          *note file-type.lisp: ❨14❩.
+     *Methods*
+           -- Method: rank ((array array))
+           -- Method: rank (array)
+ -- Generic Function: size (array)
+     Return the total number of elements in array.
+     *Package*
+          *note array-operations/generic: ❨24❩.
+     *Source*
+          *note file-type.lisp: ❨14❩.
+     *Methods*
+           -- Method: size ((array array))
+           -- Method: size (array)
+ -- Generic Function: stack-cols-copy (source destination element-type
+          start-col)
+     Method used to implement the copying of objects in STACK-COL*, by
+     copying the elements of SOURCE to DESTINATION, starting with the
+     column index START-COL in the latter.  Elements are coerced to
+     ELEMENT-TYPE.
+
+     This method is only called when (DIMS SOURCE) was non-nil.  It is
+     assumed that it only changes elements in DESTINATION which are
+     supposed to be copies of SOURCE. DESTINATION is always a matrix
+     with element-type upgraded from ELEMENT-TYPE, and its NROW should
+     match the relevant dimension of SOURCE.
+
+     All objects have a fallback method, defined using AS-ARRAY. The
+     only reason for defining a method is efficiency.
+     *Package*
+          *note array-operations/stacking: ❨32❩.
+     *Source*
+          *note file-type.lisp: ❨22❩.
+     *Methods*
+           -- Method: stack-cols-copy (source destination element-type
+                    start-col)
+           -- Method: stack-cols-copy ((source array) destination
+                    element-type start-col)
+ -- Generic Function: stack-rows-copy (source destination element-type
+          start-row)
+     Method used to implement the copying of objects in STACK-ROW*, by
+     copying the elements of SOURCE to DESTINATION, starting with the
+     row index START-ROW in the latter.  Elements are coerced to
+     ELEMENT-TYPE.
+
+     This method is only called when (DIMS SOURCE) was non-nil.  It is
+     assumed that it only changes elements in DESTINATION which are
+     supposed to be copies of SOURCE. DESTINATION is always a matrix
+     with element-type upgraded from ELEMENT-TYPE, and its NCOL should
+     match the relevant dimension of SOURCE.
+
+     All objects have a fallback method, defined using AS-ARRAY. The
+     only reason for defining a method is efficiency.
+     *Package*
+          *note array-operations/stacking: ❨32❩.
+     *Source*
+          *note file-type.lisp: ❨22❩.
+     *Methods*
+           -- Method: stack-rows-copy (source destination element-type
+                    start-row)
+           -- Method: stack-rows-copy ((source array) destination
+                    element-type start-row)
+
+
+File: array-operations.info,  Node: Public conditions,  Next: Public types,  Prev: Public generic functions,  Up: Public Interface
+
+4.1.4 Conditions
+----------------
+
+ -- Condition: permutation-incompatible-rank
+     *Package*
+          *note array-operations/transforming: ❨31❩.
+     *Source*
+          *note file-type.lisp: ❨21❩.
+     *Direct superclasses*
+          error.
+ -- Condition: permutation-invalid-index
+     *Package*
+          *note array-operations/transforming: ❨31❩.
+     *Source*
+          *note file-type.lisp: ❨21❩.
+     *Direct superclasses*
+          error.
+     *Direct slots*
+           -- Slot: index
+               *Initargs*
+                    :index
+ -- Condition: permutation-repeated-index
+     *Package*
+          *note array-operations/transforming: ❨31❩.
+     *Source*
+          *note file-type.lisp: ❨21❩.
+     *Direct superclasses*
+          error.
+     *Direct slots*
+           -- Slot: index
+               *Initargs*
+                    :index
+
+
+File: array-operations.info,  Node: Public types,  Prev: Public conditions,  Up: Public Interface
+
+4.1.5 Types
+-----------
+
+ -- Type: array-matrix ()
+     A rank-2 array.
+     *Package*
+          *note array-operations/matrices: ❨29❩.
+     *Source*
+          *note file-type.lisp: ❨16❩.
+
+
+File: array-operations.info,  Node: Internals,  Prev: Public Interface,  Up: Definitions
+
+4.2 Internals
+=============
+
+* Menu:
+
+* Private macros::
+* Private ordinary functions::
+* Private types::
+
+
+File: array-operations.info,  Node: Private macros,  Next: Private ordinary functions,  Prev: Internals,  Up: Internals
+
+4.2.1 Macros
+------------
+
+ -- Macro: foreach (&key index sum value)
+     Examples:
+
+     Matrix-matrix multiply
+
+     (foreach :index (i j) :sum k
+     :value (* (aref A i k) (aref B k j)))
+
+     Sum over vector
+
+     (foreach :sum i :value (aref A i))
+
+     *Package*
+          *note array-operations/indexing: ❨23❩.
+     *Source*
+          *note file-type.lisp: ❨19❩.
+
+
+File: array-operations.info,  Node: Private ordinary functions,  Next: Private types,  Prev: Private macros,  Up: Internals
+
+4.2.2 Ordinary functions
+------------------------
+
+ -- Function: array-index-row-major (array rmi &optional result)
+     *Package*
+          *note array-operations/transforming: ❨31❩.
+     *Source*
+          *note file-type.lisp: ❨21❩.
+ -- Function: find-array-dimensions (expr)
+     Walks an expression tree EXPR, finds AREF and ROW-MAJOR-AREF, SVREF
+     or ELT calls.  Returns a list of (symbol, expr) where EXPR is an
+     expression which evaluates to the array dimension size for SYMBOL.
+
+     Example:
+     (find-array-dimensions ’(+ (aref a i) (* 2 (aref b j k))))
+
+     -> ((I ARRAY-DIMENSION A 0) (K ARRAY-DIMENSION B 1) (J
+     ARRAY-DIMENSION B 0))
+     *Package*
+          *note array-operations/indexing: ❨23❩.
+     *Source*
+          *note file-type.lisp: ❨19❩.
+ -- Function: permutation-flags (permutation &optional rank)
+     Make a bit vector of flags with indexes from PERMUTATION, signaling
+     errors for invalid and repeated indices.  NOT EXPORTED.
+     *Package*
+          *note array-operations/transforming: ❨31❩.
+     *Source*
+          *note file-type.lisp: ❨21❩.
+ -- Function: stack*0 (element-type arrays)
+     Stack arrays along the 0 axis, returning an array with given
+     ELEMENT-TYPE.
+     *Package*
+          *note array-operations/stacking: ❨32❩.
+     *Source*
+          *note file-type.lisp: ❨22❩.
+ -- Function: sub-location% (dimensions subscripts)
+     Return (values OFFSET REMAINING-DIMENSIONS) that can be used to
+     displace a row-major subarray starting at SUBSCRIPTS in an array
+     with the given DIMENSIONS. NOT EXPORTED.
+     *Package*
+          *note array-operations/displacing: ❨27❩.
+     *Source*
+          *note file-type.lisp: ❨20❩.
+
+
+File: array-operations.info,  Node: Private types,  Prev: Private ordinary functions,  Up: Internals
+
+4.2.3 Types
+-----------
+
+ -- Type: array-rank-element ()
+     *Package*
+          *note array-operations/transforming: ❨31❩.
+     *Source*
+          *note file-type.lisp: ❨21❩.
+
+
+File: array-operations.info,  Node: Indexes,  Prev: Definitions,  Up: Top
+
+Appendix A Indexes
+******************
+
+* Menu:
+
+* Concept index::
+* Function index::
+* Variable index::
+* Data type index::
+
+
+File: array-operations.info,  Node: Concept index,  Next: Function index,  Prev: Indexes,  Up: Indexes
+
+A.1 Concepts
+============
+
+
+File: array-operations.info,  Node: Function index,  Next: Variable index,  Prev: Concept index,  Up: Indexes
+
+A.2 Functions
+=============
+
+ [index ]
+* Menu:
+
+* &dims:                                 Public macros.       (line   6)
+* (setf partition):                      Public ordinary functions.
+                                                              (line 327)
+* (setf sub):                            Public ordinary functions.
+                                                              (line 585)
+* (setf subvec):                         Public ordinary functions.
+                                                              (line 596)
+* argmax:                                Public ordinary functions.
+                                                              (line   6)
+* argmin:                                Public ordinary functions.
+                                                              (line  13)
+* array-index-row-major:                 Private ordinary functions.
+                                                              (line   6)
+* as-array:                              Public generic functions.
+                                                              (line   6)
+* as-array <1>:                          Public generic functions.
+                                                              (line  22)
+* as-array <2>:                          Public generic functions.
+                                                              (line  23)
+* best:                                  Public ordinary functions.
+                                                              (line  20)
+* check-permutation:                     Public ordinary functions.
+                                                              (line  38)
+* coercing:                              Public ordinary functions.
+                                                              (line  45)
+* combine:                               Public ordinary functions.
+                                                              (line  53)
+* complement-permutation:                Public ordinary functions.
+                                                              (line  62)
+* complete-permutation:                  Public ordinary functions.
+                                                              (line  70)
+* copy-into:                             Public ordinary functions.
+                                                              (line  77)
+* copy-row-major-block:                  Public ordinary functions.
+                                                              (line  85)
+* dim:                                   Public generic functions.
+                                                              (line  24)
+* dim <1>:                               Public generic functions.
+                                                              (line  31)
+* dim <2>:                               Public generic functions.
+                                                              (line  32)
+* dims:                                  Public generic functions.
+                                                              (line  33)
+* dims <1>:                              Public generic functions.
+                                                              (line  48)
+* dims <2>:                              Public generic functions.
+                                                              (line  49)
+* displace:                              Public ordinary functions.
+                                                              (line  98)
+* each:                                  Public ordinary functions.
+                                                              (line 104)
+* each*:                                 Public ordinary functions.
+                                                              (line 110)
+* each-index:                            Public macros.       (line  12)
+* each-index!:                           Public macros.       (line  42)
+* each-index*:                           Public macros.       (line  54)
+* element-type:                          Public generic functions.
+                                                              (line  50)
+* element-type <1>:                      Public generic functions.
+                                                              (line  62)
+* element-type <2>:                      Public generic functions.
+                                                              (line  63)
+* ensure-dimensions:                     Public ordinary functions.
+                                                              (line 118)
+* fill!:                                 Public ordinary functions.
+                                                              (line 129)
+* fill-in-dimensions:                    Public ordinary functions.
+                                                              (line 136)
+* find-array-dimensions:                 Private ordinary functions.
+                                                              (line  11)
+* flatten:                               Public ordinary functions.
+                                                              (line 146)
+* foreach:                               Private macros.      (line   6)
+* Function, (setf partition):            Public ordinary functions.
+                                                              (line 328)
+* Function, (setf sub):                  Public ordinary functions.
+                                                              (line 586)
+* Function, (setf subvec):               Public ordinary functions.
+                                                              (line 597)
+* Function, argmax:                      Public ordinary functions.
+                                                              (line   7)
+* Function, argmin:                      Public ordinary functions.
+                                                              (line  14)
+* Function, array-index-row-major:       Private ordinary functions.
+                                                              (line   7)
+* Function, best:                        Public ordinary functions.
+                                                              (line  21)
+* Function, check-permutation:           Public ordinary functions.
+                                                              (line  39)
+* Function, coercing:                    Public ordinary functions.
+                                                              (line  46)
+* Function, combine:                     Public ordinary functions.
+                                                              (line  54)
+* Function, complement-permutation:      Public ordinary functions.
+                                                              (line  63)
+* Function, complete-permutation:        Public ordinary functions.
+                                                              (line  71)
+* Function, copy-into:                   Public ordinary functions.
+                                                              (line  78)
+* Function, copy-row-major-block:        Public ordinary functions.
+                                                              (line  87)
+* Function, displace:                    Public ordinary functions.
+                                                              (line  99)
+* Function, each:                        Public ordinary functions.
+                                                              (line 105)
+* Function, each*:                       Public ordinary functions.
+                                                              (line 111)
+* Function, ensure-dimensions:           Public ordinary functions.
+                                                              (line 119)
+* Function, fill!:                       Public ordinary functions.
+                                                              (line 130)
+* Function, fill-in-dimensions:          Public ordinary functions.
+                                                              (line 137)
+* Function, find-array-dimensions:       Private ordinary functions.
+                                                              (line  12)
+* Function, flatten:                     Public ordinary functions.
+                                                              (line 147)
+* Function, generate:                    Public ordinary functions.
+                                                              (line 153)
+* Function, generate*:                   Public ordinary functions.
+                                                              (line 160)
+* Function, identity-permutation-p:      Public ordinary functions.
+                                                              (line 176)
+* Function, identity-permutation?:       Public ordinary functions.
+                                                              (line 184)
+* Function, invert-permutation:          Public ordinary functions.
+                                                              (line 192)
+* Function, linspace:                    Public ordinary functions.
+                                                              (line 198)
+* Function, linspace!:                   Public ordinary functions.
+                                                              (line 212)
+* Function, linspace*:                   Public ordinary functions.
+                                                              (line 221)
+* Function, make-array-like:             Public ordinary functions.
+                                                              (line 231)
+* Function, margin:                      Public ordinary functions.
+                                                              (line 239)
+* Function, margin*:                     Public ordinary functions.
+                                                              (line 246)
+* Function, matrix?:                     Public ordinary functions.
+                                                              (line 254)
+* Function, matrixp:                     Public ordinary functions.
+                                                              (line 260)
+* Function, most:                        Public ordinary functions.
+                                                              (line 266)
+* Function, ones:                        Public ordinary functions.
+                                                              (line 287)
+* Function, ones!:                       Public ordinary functions.
+                                                              (line 293)
+* Function, ones*:                       Public ordinary functions.
+                                                              (line 300)
+* Function, outer:                       Public ordinary functions.
+                                                              (line 307)
+* Function, outer*:                      Public ordinary functions.
+                                                              (line 313)
+* Function, partition:                   Public ordinary functions.
+                                                              (line 321)
+* Function, permutation-flags:           Private ordinary functions.
+                                                              (line  26)
+* Function, permute:                     Public ordinary functions.
+                                                              (line 333)
+* Function, product:                     Public ordinary functions.
+                                                              (line 347)
+* Function, rand:                        Public ordinary functions.
+                                                              (line 353)
+* Function, rand!:                       Public ordinary functions.
+                                                              (line 371)
+* Function, rand*:                       Public ordinary functions.
+                                                              (line 379)
+* Function, randn:                       Public ordinary functions.
+                                                              (line 397)
+* Function, randn!:                      Public ordinary functions.
+                                                              (line 415)
+* Function, randn*:                      Public ordinary functions.
+                                                              (line 429)
+* Function, recycle:                     Public ordinary functions.
+                                                              (line 447)
+* Function, reshape:                     Public ordinary functions.
+                                                              (line 457)
+* Function, reshape-col:                 Public ordinary functions.
+                                                              (line 466)
+* Function, reshape-row:                 Public ordinary functions.
+                                                              (line 472)
+* Function, same-dimensions-p:           Public ordinary functions.
+                                                              (line 478)
+* Function, similar-array:               Public ordinary functions.
+                                                              (line 485)
+* Function, split:                       Public ordinary functions.
+                                                              (line 493)
+* Function, square-matrix-p:             Public ordinary functions.
+                                                              (line 500)
+* Function, square-matrix?:              Public ordinary functions.
+                                                              (line 506)
+* Function, stack:                       Public ordinary functions.
+                                                              (line 512)
+* Function, stack*:                      Public ordinary functions.
+                                                              (line 518)
+* Function, stack*0:                     Private ordinary functions.
+                                                              (line  33)
+* Function, stack-cols:                  Public ordinary functions.
+                                                              (line 525)
+* Function, stack-cols*:                 Public ordinary functions.
+                                                              (line 531)
+* Function, stack-rows:                  Public ordinary functions.
+                                                              (line 550)
+* Function, stack-rows*:                 Public ordinary functions.
+                                                              (line 556)
+* Function, sub:                         Public ordinary functions.
+                                                              (line 575)
+* Function, sub-location%:               Private ordinary functions.
+                                                              (line  40)
+* Function, subvec:                      Public ordinary functions.
+                                                              (line 591)
+* Function, turn:                        Public ordinary functions.
+                                                              (line 602)
+* Function, zeros:                       Public ordinary functions.
+                                                              (line 610)
+* Function, zeros!:                      Public ordinary functions.
+                                                              (line 616)
+* Function, zeros*:                      Public ordinary functions.
+                                                              (line 623)
+* generate:                              Public ordinary functions.
+                                                              (line 152)
+* generate*:                             Public ordinary functions.
+                                                              (line 158)
+* Generic Function, as-array:            Public generic functions.
+                                                              (line   7)
+* Generic Function, dim:                 Public generic functions.
+                                                              (line  25)
+* Generic Function, dims:                Public generic functions.
+                                                              (line  34)
+* Generic Function, element-type:        Public generic functions.
+                                                              (line  51)
+* Generic Function, ncol:                Public generic functions.
+                                                              (line  65)
+* Generic Function, nrow:                Public generic functions.
+                                                              (line  74)
+* Generic Function, rank:                Public generic functions.
+                                                              (line  83)
+* Generic Function, size:                Public generic functions.
+                                                              (line  92)
+* Generic Function, stack-cols-copy:     Public generic functions.
+                                                              (line 102)
+* Generic Function, stack-rows-copy:     Public generic functions.
+                                                              (line 126)
+* identity-permutation-p:                Public ordinary functions.
+                                                              (line 175)
+* identity-permutation?:                 Public ordinary functions.
+                                                              (line 183)
+* invert-permutation:                    Public ordinary functions.
+                                                              (line 191)
+* linspace:                              Public ordinary functions.
+                                                              (line 197)
+* linspace!:                             Public ordinary functions.
+                                                              (line 211)
+* linspace*:                             Public ordinary functions.
+                                                              (line 220)
+* Macro, &dims:                          Public macros.       (line   7)
+* Macro, each-index:                     Public macros.       (line  13)
+* Macro, each-index!:                    Public macros.       (line  43)
+* Macro, each-index*:                    Public macros.       (line  55)
+* Macro, foreach:                        Private macros.      (line   7)
+* Macro, multf:                          Public macros.       (line  95)
+* Macro, nested-loop:                    Public macros.       (line 101)
+* Macro, reduce-index:                   Public macros.       (line 127)
+* Macro, sum-index:                      Public macros.       (line 149)
+* Macro, vectorize:                      Public macros.       (line 170)
+* Macro, vectorize!:                     Public macros.       (line 192)
+* Macro, vectorize*:                     Public macros.       (line 215)
+* Macro, vectorize-reduce:               Public macros.       (line 237)
+* Macro, walk-subscripts:                Public macros.       (line 258)
+* Macro, walk-subscripts-list:           Public macros.       (line 268)
+* make-array-like:                       Public ordinary functions.
+                                                              (line 229)
+* margin:                                Public ordinary functions.
+                                                              (line 238)
+* margin*:                               Public ordinary functions.
+                                                              (line 244)
+* matrix?:                               Public ordinary functions.
+                                                              (line 253)
+* matrixp:                               Public ordinary functions.
+                                                              (line 259)
+* Method, as-array:                      Public generic functions.
+                                                              (line  23)
+* Method, as-array <1>:                  Public generic functions.
+                                                              (line  24)
+* Method, dim:                           Public generic functions.
+                                                              (line  32)
+* Method, dim <1>:                       Public generic functions.
+                                                              (line  33)
+* Method, dims:                          Public generic functions.
+                                                              (line  49)
+* Method, dims <1>:                      Public generic functions.
+                                                              (line  50)
+* Method, element-type:                  Public generic functions.
+                                                              (line  63)
+* Method, element-type <1>:              Public generic functions.
+                                                              (line  64)
+* Method, ncol:                          Public generic functions.
+                                                              (line  72)
+* Method, ncol <1>:                      Public generic functions.
+                                                              (line  73)
+* Method, nrow:                          Public generic functions.
+                                                              (line  81)
+* Method, nrow <1>:                      Public generic functions.
+                                                              (line  82)
+* Method, rank:                          Public generic functions.
+                                                              (line  90)
+* Method, rank <1>:                      Public generic functions.
+                                                              (line  91)
+* Method, size:                          Public generic functions.
+                                                              (line  99)
+* Method, size <1>:                      Public generic functions.
+                                                              (line 100)
+* Method, stack-cols-copy:               Public generic functions.
+                                                              (line 122)
+* Method, stack-cols-copy <1>:           Public generic functions.
+                                                              (line 124)
+* Method, stack-rows-copy:               Public generic functions.
+                                                              (line 146)
+* Method, stack-rows-copy <1>:           Public generic functions.
+                                                              (line 148)
+* most:                                  Public ordinary functions.
+                                                              (line 265)
+* multf:                                 Public macros.       (line  94)
+* ncol:                                  Public generic functions.
+                                                              (line  64)
+* ncol <1>:                              Public generic functions.
+                                                              (line  71)
+* ncol <2>:                              Public generic functions.
+                                                              (line  72)
+* nested-loop:                           Public macros.       (line 100)
+* nrow:                                  Public generic functions.
+                                                              (line  73)
+* nrow <1>:                              Public generic functions.
+                                                              (line  80)
+* nrow <2>:                              Public generic functions.
+                                                              (line  81)
+* ones:                                  Public ordinary functions.
+                                                              (line 286)
+* ones!:                                 Public ordinary functions.
+                                                              (line 292)
+* ones*:                                 Public ordinary functions.
+                                                              (line 299)
+* outer:                                 Public ordinary functions.
+                                                              (line 306)
+* outer*:                                Public ordinary functions.
+                                                              (line 312)
+* partition:                             Public ordinary functions.
+                                                              (line 320)
+* permutation-flags:                     Private ordinary functions.
+                                                              (line  25)
+* permute:                               Public ordinary functions.
+                                                              (line 332)
+* product:                               Public ordinary functions.
+                                                              (line 346)
+* rand:                                  Public ordinary functions.
+                                                              (line 352)
+* rand!:                                 Public ordinary functions.
+                                                              (line 370)
+* rand*:                                 Public ordinary functions.
+                                                              (line 378)
+* randn:                                 Public ordinary functions.
+                                                              (line 396)
+* randn!:                                Public ordinary functions.
+                                                              (line 414)
+* randn*:                                Public ordinary functions.
+                                                              (line 428)
+* rank:                                  Public generic functions.
+                                                              (line  82)
+* rank <1>:                              Public generic functions.
+                                                              (line  89)
+* rank <2>:                              Public generic functions.
+                                                              (line  90)
+* recycle:                               Public ordinary functions.
+                                                              (line 446)
+* reduce-index:                          Public macros.       (line 126)
+* reshape:                               Public ordinary functions.
+                                                              (line 456)
+* reshape-col:                           Public ordinary functions.
+                                                              (line 465)
+* reshape-row:                           Public ordinary functions.
+                                                              (line 471)
+* same-dimensions-p:                     Public ordinary functions.
+                                                              (line 477)
+* similar-array:                         Public ordinary functions.
+                                                              (line 483)
+* size:                                  Public generic functions.
+                                                              (line  91)
+* size <1>:                              Public generic functions.
+                                                              (line  98)
+* size <2>:                              Public generic functions.
+                                                              (line  99)
+* split:                                 Public ordinary functions.
+                                                              (line 492)
+* square-matrix-p:                       Public ordinary functions.
+                                                              (line 499)
+* square-matrix?:                        Public ordinary functions.
+                                                              (line 505)
+* stack:                                 Public ordinary functions.
+                                                              (line 511)
+* stack*:                                Public ordinary functions.
+                                                              (line 517)
+* stack*0:                               Private ordinary functions.
+                                                              (line  32)
+* stack-cols:                            Public ordinary functions.
+                                                              (line 524)
+* stack-cols*:                           Public ordinary functions.
+                                                              (line 530)
+* stack-cols-copy:                       Public generic functions.
+                                                              (line 100)
+* stack-cols-copy <1>:                   Public generic functions.
+                                                              (line 120)
+* stack-cols-copy <2>:                   Public generic functions.
+                                                              (line 122)
+* stack-rows:                            Public ordinary functions.
+                                                              (line 549)
+* stack-rows*:                           Public ordinary functions.
+                                                              (line 555)
+* stack-rows-copy:                       Public generic functions.
+                                                              (line 124)
+* stack-rows-copy <1>:                   Public generic functions.
+                                                              (line 144)
+* stack-rows-copy <2>:                   Public generic functions.
+                                                              (line 146)
+* sub:                                   Public ordinary functions.
+                                                              (line 574)
+* sub-location%:                         Private ordinary functions.
+                                                              (line  39)
+* subvec:                                Public ordinary functions.
+                                                              (line 590)
+* sum-index:                             Public macros.       (line 148)
+* turn:                                  Public ordinary functions.
+                                                              (line 601)
+* vectorize:                             Public macros.       (line 169)
+* vectorize!:                            Public macros.       (line 191)
+* vectorize*:                            Public macros.       (line 214)
+* vectorize-reduce:                      Public macros.       (line 236)
+* walk-subscripts:                       Public macros.       (line 256)
+* walk-subscripts-list:                  Public macros.       (line 266)
+* zeros:                                 Public ordinary functions.
+                                                              (line 609)
+* zeros!:                                Public ordinary functions.
+                                                              (line 615)
+* zeros*:                                Public ordinary functions.
+                                                              (line 622)
+
+
+File: array-operations.info,  Node: Variable index,  Next: Data type index,  Prev: Function index,  Up: Indexes
+
+A.3 Variables
+=============
+
+ [index ]
+* Menu:
+
+* index:                                 Public conditions.    (line 21)
+* index <1>:                             Public conditions.    (line 32)
+* Slot, index:                           Public conditions.    (line 22)
+* Slot, index <1>:                       Public conditions.    (line 33)
+
+
+File: array-operations.info,  Node: Data type index,  Prev: Variable index,  Up: Indexes
+
+A.4 Data types
+==============
+
+ [index ]
+* Menu:
+
+* array-matrix:                          Public types.         (line  6)
+* array-operations:                      The array-operations system.
+                                                               (line  6)
+* array-operations.asd:                  The array-operations/array-operations․asd file.
+                                                               (line  6)
+* array-operations/all:                  The array-operations/all system.
+                                                               (line  6)
+* array-operations/all <1>:              The array-operations/all package.
+                                                               (line  6)
+* array-operations/creating:             The array-operations/creating system.
+                                                               (line  6)
+* array-operations/creating <1>:         The array-operations/creating package.
+                                                               (line  6)
+* array-operations/displacing:           The array-operations/displacing system.
+                                                               (line  6)
+* array-operations/displacing <1>:       The array-operations/displacing package.
+                                                               (line  6)
+* array-operations/generic:              The array-operations/generic system.
+                                                               (line  6)
+* array-operations/generic <1>:          The array-operations/generic package.
+                                                               (line  6)
+* array-operations/indexing:             The array-operations/indexing system.
+                                                               (line  6)
+* array-operations/indexing <1>:         The array-operations/indexing package.
+                                                               (line  6)
+* array-operations/matrices:             The array-operations/matrices system.
+                                                               (line  6)
+* array-operations/matrices <1>:         The array-operations/matrices package.
+                                                               (line  6)
+* array-operations/reducing:             The array-operations/reducing system.
+                                                               (line  6)
+* array-operations/reducing <1>:         The array-operations/reducing package.
+                                                               (line  6)
+* array-operations/stacking:             The array-operations/stacking system.
+                                                               (line  6)
+* array-operations/stacking <1>:         The array-operations/stacking package.
+                                                               (line  6)
+* array-operations/transforming:         The array-operations/transforming system.
+                                                               (line  6)
+* array-operations/transforming <1>:     The array-operations/transforming package.
+                                                               (line  6)
+* array-operations/utilities:            The array-operations/utilities system.
+                                                               (line  6)
+* array-operations/utilities <1>:        The array-operations/utilities package.
+                                                               (line  6)
+* array-rank-element:                    Private types.        (line  6)
+* Condition, permutation-incompatible-rank: Public conditions. (line  7)
+* Condition, permutation-invalid-index:  Public conditions.    (line 14)
+* Condition, permutation-repeated-index: Public conditions.    (line 25)
+* File, array-operations.asd:            The array-operations/array-operations․asd file.
+                                                               (line  6)
+* File, file-type.lisp:                  The array-operations/all/file-type․lisp file.
+                                                               (line  6)
+* File, file-type.lisp <1>:              The array-operations/generic/file-type․lisp file.
+                                                               (line  6)
+* File, file-type.lisp <2>:              The array-operations/reducing/file-type․lisp file.
+                                                               (line  6)
+* File, file-type.lisp <3>:              The array-operations/matrices/file-type․lisp file.
+                                                               (line  6)
+* File, file-type.lisp <4>:              The array-operations/creating/file-type․lisp file.
+                                                               (line  6)
+* File, file-type.lisp <5>:              The array-operations/utilities/file-type․lisp file.
+                                                               (line  6)
+* File, file-type.lisp <6>:              The array-operations/indexing/file-type․lisp file.
+                                                               (line  6)
+* File, file-type.lisp <7>:              The array-operations/displacing/file-type․lisp file.
+                                                               (line  6)
+* File, file-type.lisp <8>:              The array-operations/transforming/file-type․lisp file.
+                                                               (line  6)
+* File, file-type.lisp <9>:              The array-operations/stacking/file-type․lisp file.
+                                                               (line  6)
+* file-type.lisp:                        The array-operations/all/file-type․lisp file.
+                                                               (line  6)
+* file-type.lisp <1>:                    The array-operations/generic/file-type․lisp file.
+                                                               (line  6)
+* file-type.lisp <2>:                    The array-operations/reducing/file-type․lisp file.
+                                                               (line  6)
+* file-type.lisp <3>:                    The array-operations/matrices/file-type․lisp file.
+                                                               (line  6)
+* file-type.lisp <4>:                    The array-operations/creating/file-type․lisp file.
+                                                               (line  6)
+* file-type.lisp <5>:                    The array-operations/utilities/file-type․lisp file.
+                                                               (line  6)
+* file-type.lisp <6>:                    The array-operations/indexing/file-type․lisp file.
+                                                               (line  6)
+* file-type.lisp <7>:                    The array-operations/displacing/file-type․lisp file.
+                                                               (line  6)
+* file-type.lisp <8>:                    The array-operations/transforming/file-type․lisp file.
+                                                               (line  6)
+* file-type.lisp <9>:                    The array-operations/stacking/file-type․lisp file.
+                                                               (line  6)
+* Package, array-operations/all:         The array-operations/all package.
+                                                               (line  6)
+* Package, array-operations/creating:    The array-operations/creating package.
+                                                               (line  6)
+* Package, array-operations/displacing:  The array-operations/displacing package.
+                                                               (line  6)
+* Package, array-operations/generic:     The array-operations/generic package.
+                                                               (line  6)
+* Package, array-operations/indexing:    The array-operations/indexing package.
+                                                               (line  6)
+* Package, array-operations/matrices:    The array-operations/matrices package.
+                                                               (line  6)
+* Package, array-operations/reducing:    The array-operations/reducing package.
+                                                               (line  6)
+* Package, array-operations/stacking:    The array-operations/stacking package.
+                                                               (line  6)
+* Package, array-operations/transforming: The array-operations/transforming package.
+                                                               (line  6)
+* Package, array-operations/utilities:   The array-operations/utilities package.
+                                                               (line  6)
+* permutation-incompatible-rank:         Public conditions.    (line  6)
+* permutation-invalid-index:             Public conditions.    (line 13)
+* permutation-repeated-index:            Public conditions.    (line 24)
+* System, array-operations:              The array-operations system.
+                                                               (line  6)
+* System, array-operations/all:          The array-operations/all system.
+                                                               (line  6)
+* System, array-operations/creating:     The array-operations/creating system.
+                                                               (line  6)
+* System, array-operations/displacing:   The array-operations/displacing system.
+                                                               (line  6)
+* System, array-operations/generic:      The array-operations/generic system.
+                                                               (line  6)
+* System, array-operations/indexing:     The array-operations/indexing system.
+                                                               (line  6)
+* System, array-operations/matrices:     The array-operations/matrices system.
+                                                               (line  6)
+* System, array-operations/reducing:     The array-operations/reducing system.
+                                                               (line  6)
+* System, array-operations/stacking:     The array-operations/stacking system.
+                                                               (line  6)
+* System, array-operations/transforming: The array-operations/transforming system.
+                                                               (line  6)
+* System, array-operations/utilities:    The array-operations/utilities system.
+                                                               (line  6)
+* Type, array-matrix:                    Public types.         (line  7)
+* Type, array-rank-element:              Private types.        (line  7)
+
+
+
+Tag Table:
+Node: Top981
+Node: Copying2242
+Node: Systems2432
+Node: The array-operations system3063
+Ref: ❨1❩3243
+Node: The array-operations/all system4396
+Ref: ❨2❩4612
+Node: The array-operations/generic system5495
+Ref: ❨3❩5728
+Node: The array-operations/reducing system6114
+Ref: ❨4❩6354
+Node: The array-operations/matrices system6703
+Ref: ❨5❩6944
+Node: The array-operations/creating system7404
+Ref: ❨6❩7646
+Node: The array-operations/utilities system8138
+Ref: ❨7❩8382
+Node: The array-operations/indexing system8842
+Ref: ❨8❩9086
+Node: The array-operations/displacing system9578
+Ref: ❨9❩9829
+Node: The array-operations/transforming system10354
+Ref: ❨10❩10611
+Node: The array-operations/stacking system11202
+Ref: ❨11❩11404
+Node: Files12064
+Node: Lisp files12283
+Node: The array-operations/array-operations․asd file13002
+Ref: ❨12❩13270
+Node: The array-operations/all/file-type․lisp file13993
+Ref: ❨13❩14297
+Node: The array-operations/generic/file-type․lisp file14475
+Ref: ❨14❩14790
+Node: The array-operations/reducing/file-type․lisp file15482
+Ref: ❨15❩15804
+Node: The array-operations/matrices/file-type․lisp file16259
+Ref: ❨16❩16582
+Node: The array-operations/creating/file-type․lisp file16948
+Ref: ❨17❩17272
+Node: The array-operations/utilities/file-type․lisp file18400
+Ref: ❨18❩18726
+Node: The array-operations/indexing/file-type․lisp file19316
+Ref: ❨19❩19642
+Node: The array-operations/displacing/file-type․lisp file20218
+Ref: ❨20❩20551
+Node: The array-operations/transforming/file-type․lisp file21593
+Ref: ❨21❩21932
+Node: The array-operations/stacking/file-type․lisp file23505
+Ref: ❨22❩23774
+Node: Packages24543
+Node: The array-operations/indexing package25131
+Ref: ❨23❩25346
+Node: The array-operations/generic package26030
+Ref: ❨24❩26267
+Node: The array-operations/all package27499
+Ref: ❨25❩27728
+Node: The array-operations/creating package28721
+Ref: ❨26❩28963
+Node: The array-operations/displacing package30284
+Ref: ❨27❩30535
+Node: The array-operations/reducing package31832
+Ref: ❨28❩32079
+Node: The array-operations/matrices package32581
+Ref: ❨29❩32827
+Node: The array-operations/utilities package33504
+Ref: ❨30❩33756
+Node: The array-operations/transforming package34589
+Ref: ❨31❩34847
+Node: The array-operations/stacking package36646
+Ref: ❨32❩36851
+Node: Definitions37975
+Node: Public Interface38237
+Node: Public macros38518
+Ref: ❨64❩38716
+Ref: ❨36❩38918
+Ref: ❨33❩39591
+Ref: ❨37❩40028
+Ref: ❨112❩41056
+Ref: ❨117❩41264
+Ref: ❨35❩42038
+Ref: ❨34❩42684
+Ref: ❨123❩43273
+Ref: ❨137❩43994
+Ref: ❨140❩44737
+Ref: ❨102❩45466
+Ref: ❨116❩46162
+Ref: ❨113❩46643
+Node: Public ordinary functions46935
+Ref: ❨105❩47158
+Ref: ❨101❩47437
+Ref: ❨104❩47717
+Ref: ❨134❩48259
+Ref: ❨141❩48553
+Ref: ❨85❩48920
+Ref: ❨133❩49340
+Ref: ❨131❩49704
+Ref: ❨91❩49957
+Ref: ❨147❩50390
+Ref: ❨93❩50921
+Ref: ❨122❩51151
+Ref: ❨121❩51386
+Ref: ❨111❩51735
+Ref: ❨66❩52218
+Ref: ❨94❩52477
+Ref: ❨87❩52965
+Ref: ❨79❩53220
+Ref: ❨73❩53475
+Ref: ❨125❩54097
+Ref: ❨132❩54494
+Ref: ❨124❩54885
+Ref: ❨68❩55078
+Ref: ❨82❩55601
+Ref: ❨65❩55989
+Ref: ❨78❩56467
+Ref: ❨126❩56838
+Ref: ❨127❩57090
+Ref: ❨106❩57437
+Ref: ❨108❩57637
+Ref: ❨103❩57839
+Ref: ❨76❩58438
+Ref: ❨83❩58659
+Ref: ❨84❩58917
+Ref: ❨130❩59214
+Ref: ❨129❩59438
+Ref: ❨96❩59775
+Ref: ❨97❩60044
+Ref: ❨135❩60212
+Ref: ❨115❩60650
+Ref: ❨71❩60864
+Ref: ❨81❩61478
+Ref: ❨80❩61795
+Ref: ❨75❩62425
+Ref: ❨74❩63104
+Ref: ❨72❩63617
+Ref: ❨136❩64339
+Ref: ❨95❩64825
+Ref: ❨88❩65214
+Ref: ❨86❩65412
+Ref: ❨114❩65629
+Ref: ❨77❩65933
+Ref: ❨92❩66275
+Ref: ❨109❩66548
+Ref: ❨107❩66774
+Ref: ❨145❩67013
+Ref: ❨150❩67236
+Ref: ❨148❩67501
+Ref: ❨149❩67724
+Ref: ❨157❩68490
+Ref: ❨146❩68713
+Ref: ❨98❩69478
+Ref: ❨99❩69942
+Ref: ❨89❩70118
+Ref: ❨90❩70346
+Ref: ❨128❩70530
+Ref: ❨70❩70864
+Ref: ❨69❩71087
+Ref: ❨67❩71353
+Node: Public generic functions71608
+Ref: ❨43❩71844
+Ref: ❨44❩72578
+Ref: ❨45❩72618
+Ref: ❨55❩72657
+Ref: ❨56❩72885
+Ref: ❨57❩72924
+Ref: ❨52❩72959
+Ref: ❨53❩73518
+Ref: ❨54❩73553
+Ref: ❨58❩73596
+Ref: ❨59❩74000
+Ref: ❨60❩74043
+Ref: ❨49❩74078
+Ref: ❨50❩74331
+Ref: ❨51❩74366
+Ref: ❨61❩74401
+Ref: ❨62❩74651
+Ref: ❨63❩74686
+Ref: ❨46❩74721
+Ref: ❨47❩74933
+Ref: ❨48❩74968
+Ref: ❨40❩75003
+Ref: ❨41❩75235
+Ref: ❨42❩75270
+Ref: ❨151❩75362
+Ref: ❨152❩76280
+Ref: ❨153❩76390
+Ref: ❨154❩76482
+Ref: ❨155❩77397
+Ref: ❨156❩77507
+Node: Public conditions77508
+Ref: ❨120❩77722
+Ref: ❨118❩77935
+Ref: ❨119❩78153
+Ref: ❨138❩78248
+Ref: ❨139❩78466
+Node: Public types78520
+Ref: ❨110❩78672
+Node: Internals78818
+Node: Private macros79017
+Ref: ❨39❩79209
+Node: Private ordinary functions79520
+Ref: ❨142❩79763
+Ref: ❨38❩79934
+Ref: ❨144❩80503
+Ref: ❨158❩80809
+Ref: ❨100❩81070
+Node: Private types81382
+Ref: ❨143❩81543
+Node: Indexes81672
+Node: Concept index81874
+Node: Function index82007
+Node: Variable index113639
+Node: Data type index114097
+
+End Tag Table
+
+
+Local Variables:
+coding: utf-8
+End:

@@ -1,4 +1,7 @@
-;;;; Functions for representing matrices as 2D arrays.
+;;; -*- Mode: LISP; Base: 10; Syntax: ANSI-Common-lisp; Package: ARRAY-OPERATIONS/MATRICES -*-
+;;; Copyright (c) 2012-2018 by Tamas Papp. All rights reserved.
+;;; Copyright (c) 2018-2022 by Ben Dudson. All rights reserved.
+;;; Copyright (c) 2021-2022 by Symbolics Pte. Ltd. All rights reserved.
 
 (defpackage :array-operations/matrices
   (:use :cl :array-operations/generic)
@@ -7,9 +10,10 @@
   (:export :array-matrix
            :matrixp
            :square-matrix-p
-           ;; the next two are demarcated aliases for the previous two
+           ;; the next two are deprecated aliases for the previous two
            :matrix?
-           :square-matrix?))
+           :square-matrix?)
+  (:documentation "Functions for representing matrices as 2D arrays.  A matrix is a two-dimensional array often used for linear algebra.  See also the matrix functions in NUM-UTILS,  which should be migrated to AOPS."))
 
 (in-package :array-operations/matrices)
 
@@ -20,7 +24,7 @@
 (declaim (inline matrixp square-matrix-p))
 
 (defun matrixp (matrix)
-  "Test if MATRIX has rank 2."
+  "Return NIL if MATRIX does not have rank 2."
   (length= (dims matrix) 2))
 
 (defun square-matrix-p (matrix)
