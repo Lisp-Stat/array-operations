@@ -9,11 +9,10 @@
   :long-description  #.(uiop:read-file-string
 			(uiop:subpathname *load-pathname* "description.text"))
   :author "Tamas K. Papp <tkpapp@gmail.com>"
-  :maintainer "Ben Dudson"
   :maintainer "Steve Nunez"
   :version "1.0.0"
   :long-name "Array operations for array-like data structures"
-  :homepage "https://lisp-stat.dev/array-operations"
+  :homepage "https://lisp-stat.dev/docs/manuals/array-operations"
   :bug-tracker "https://github.com/Lisp-Stat/array-operations/issues"
   :license :MS-PL
   :class :package-inferred-system
@@ -25,7 +24,6 @@
 (defsystem #:array-operations/tests
   :description "Unit tests for the ARRAY-OPERATIONS library."
   :author "Tamas K. Papp <tkpapp@gmail.com>"
-  :maintainer "Ben Dudson"
   :maintainer "Steve Nunez"
   :license :MS-PL
   :depends-on (:array-operations       ; loads everything else

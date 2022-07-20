@@ -22,7 +22,7 @@
   <p align="center">
   A collection of functions and macros for manipulating Lisp-Stat data-frames and CL arrays
 	<br />
-    <a href="https://lisp-stat.dev/docs/tasks/array-operations/"><strong>Explore the docs »</strong></a>
+    <a href="https://lisp-stat.dev/docs/manuals/array-operations/"><strong>Explore the docs »</strong></a>
     <br />
     <br />
     <a href="https://github.com/lisp-stat/array-operations/issues">Report Bug</a>
@@ -134,7 +134,7 @@ or generated using a function, optionally given index position
 `(generate #'identity '(2 3) :position) ; => #2A((0 1 2)
 	                                             (3 4 5))`
 
-For more examples, please refer to the [manual](https://lisp-stat.dev/docs/tasks/array-operations).
+For more examples, please refer to the [manual](https://lisp-stat.dev/docs/manuals/array-operations).
 
 
 <!-- ROADMAP -->

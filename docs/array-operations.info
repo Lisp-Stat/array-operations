@@ -1,7 +1,7 @@
 This is array-operations.info, produced by makeinfo version 6.8 from
 array-operations.texi.
 
-     Copyright © 2019-2022 Ben Dudson Copyright © 2019-2022 Tamas K.
+     Copyright © 2019-2022 Steve Nunez Copyright © 2019-2022 Tamas K.
      Papp
 
      Permission is granted to make and distribute verbatim copies of
@@ -19,16 +19,16 @@ array-operations.texi.
      translated as well.
 INFO-DIR-SECTION Lisp-Stat
 START-INFO-DIR-ENTRY
-* ARRAY-OPERATIONS Reference Manual: (array-operations). The ARRAY-OPERATIONS Reference Manual.
+* Array Operations Reference Manual: (array-operations). The Array Operations Reference Manual.
 END-INFO-DIR-ENTRY
 
 
 File: array-operations.info,  Node: Top,  Next: Copying,  Prev: (dir),  Up: (dir)
 
-The ARRAY-OPERATIONS Reference Manual
+The Array Operations Reference Manual
 *************************************
 
-This is the ARRAY-OPERATIONS Reference Manual, version 1.0.0, generated
+This is the Array Operations Reference Manual, version 1.0.0, generated
 automatically by Declt version 4.0b2.
 
 * Menu:
@@ -40,7 +40,7 @@ automatically by Declt version 4.0b2.
 * Definitions:: The symbols documentation
 * Indexes:: Concepts, functions, variables and data types
 
-     Copyright © 2019-2022 Ben Dudson Copyright © 2019-2022 Tamas K.
+     Copyright © 2019-2022 Steve Nunez Copyright © 2019-2022 Tamas K.
      Papp
 
      Permission is granted to make and distribute verbatim copies of
@@ -98,11 +98,11 @@ Array operations library for Common Lisp
 *Long Name*
      Array operations for array-like data structures
 *Maintainer*
-     Ben Dudson
+     Steve Nunez
 *Author*
      Tamas K. Papp <<tkpapp@gmail.com>>
 *Home Page*
-     <https://lisp-stat.dev/array-operations>
+     <https://lisp-stat.dev/docs/manuals/array-operations>
 *Bug Tracker*
      <https://github.com/Lisp-Stat/array-operations/issues>
 *License*
@@ -136,11 +136,11 @@ File: array-operations.info,  Node: The array-operations/all system,  Next: The 
 *Long Name*
      Array operations for array-like data structures
 *Maintainer*
-     Ben Dudson
+     Steve Nunez
 *Author*
      Tamas K. Papp <<tkpapp@gmail.com>>
 *Home Page*
-     <https://lisp-stat.dev/array-operations>
+     <https://lisp-stat.dev/docs/manuals/array-operations>
 *Bug Tracker*
      <https://github.com/Lisp-Stat/array-operations/issues>
 *License*
@@ -166,11 +166,11 @@ File: array-operations.info,  Node: The array-operations/generic system,  Next: 
 *Long Name*
      Array operations for array-like data structures
 *Maintainer*
-     Ben Dudson
+     Steve Nunez
 *Author*
      Tamas K. Papp <<tkpapp@gmail.com>>
 *Home Page*
-     <https://lisp-stat.dev/array-operations>
+     <https://lisp-stat.dev/docs/manuals/array-operations>
 *Bug Tracker*
      <https://github.com/Lisp-Stat/array-operations/issues>
 *License*
@@ -189,11 +189,11 @@ File: array-operations.info,  Node: The array-operations/reducing system,  Next:
 *Long Name*
      Array operations for array-like data structures
 *Maintainer*
-     Ben Dudson
+     Steve Nunez
 *Author*
      Tamas K. Papp <<tkpapp@gmail.com>>
 *Home Page*
-     <https://lisp-stat.dev/array-operations>
+     <https://lisp-stat.dev/docs/manuals/array-operations>
 *Bug Tracker*
      <https://github.com/Lisp-Stat/array-operations/issues>
 *License*
@@ -210,11 +210,11 @@ File: array-operations.info,  Node: The array-operations/matrices system,  Next:
 *Long Name*
      Array operations for array-like data structures
 *Maintainer*
-     Ben Dudson
+     Steve Nunez
 *Author*
      Tamas K. Papp <<tkpapp@gmail.com>>
 *Home Page*
-     <https://lisp-stat.dev/array-operations>
+     <https://lisp-stat.dev/docs/manuals/array-operations>
 *Bug Tracker*
      <https://github.com/Lisp-Stat/array-operations/issues>
 *License*
@@ -234,11 +234,11 @@ File: array-operations.info,  Node: The array-operations/creating system,  Next:
 *Long Name*
      Array operations for array-like data structures
 *Maintainer*
-     Ben Dudson
+     Steve Nunez
 *Author*
      Tamas K. Papp <<tkpapp@gmail.com>>
 *Home Page*
-     <https://lisp-stat.dev/array-operations>
+     <https://lisp-stat.dev/docs/manuals/array-operations>
 *Bug Tracker*
      <https://github.com/Lisp-Stat/array-operations/issues>
 *License*
@@ -258,11 +258,11 @@ File: array-operations.info,  Node: The array-operations/utilities system,  Next
 *Long Name*
      Array operations for array-like data structures
 *Maintainer*
-     Ben Dudson
+     Steve Nunez
 *Author*
      Tamas K. Papp <<tkpapp@gmail.com>>
 *Home Page*
-     <https://lisp-stat.dev/array-operations>
+     <https://lisp-stat.dev/docs/manuals/array-operations>
 *Bug Tracker*
      <https://github.com/Lisp-Stat/array-operations/issues>
 *License*
@@ -282,11 +282,11 @@ File: array-operations.info,  Node: The array-operations/indexing system,  Next:
 *Long Name*
      Array operations for array-like data structures
 *Maintainer*
-     Ben Dudson
+     Steve Nunez
 *Author*
      Tamas K. Papp <<tkpapp@gmail.com>>
 *Home Page*
-     <https://lisp-stat.dev/array-operations>
+     <https://lisp-stat.dev/docs/manuals/array-operations>
 *Bug Tracker*
      <https://github.com/Lisp-Stat/array-operations/issues>
 *License*
@@ -306,11 +306,11 @@ File: array-operations.info,  Node: The array-operations/displacing system,  Nex
 *Long Name*
      Array operations for array-like data structures
 *Maintainer*
-     Ben Dudson
+     Steve Nunez
 *Author*
      Tamas K. Papp <<tkpapp@gmail.com>>
 *Home Page*
-     <https://lisp-stat.dev/array-operations>
+     <https://lisp-stat.dev/docs/manuals/array-operations>
 *Bug Tracker*
      <https://github.com/Lisp-Stat/array-operations/issues>
 *License*
@@ -331,11 +331,11 @@ File: array-operations.info,  Node: The array-operations/transforming system,  N
 *Long Name*
      Array operations for array-like data structures
 *Maintainer*
-     Ben Dudson
+     Steve Nunez
 *Author*
      Tamas K. Papp <<tkpapp@gmail.com>>
 *Home Page*
-     <https://lisp-stat.dev/array-operations>
+     <https://lisp-stat.dev/docs/manuals/array-operations>
 *Bug Tracker*
      <https://github.com/Lisp-Stat/array-operations/issues>
 *License*
@@ -357,11 +357,11 @@ File: array-operations.info,  Node: The array-operations/stacking system,  Prev:
 *Long Name*
      Array operations for array-like data structures
 *Maintainer*
-     Ben Dudson
+     Steve Nunez
 *Author*
      Tamas K. Papp <<tkpapp@gmail.com>>
 *Home Page*
-     <https://lisp-stat.dev/array-operations>
+     <https://lisp-stat.dev/docs/manuals/array-operations>
 *Bug Tracker*
      <https://github.com/Lisp-Stat/array-operations/issues>
 *License*
@@ -2874,218 +2874,218 @@ A.4 Data types
 
 
 Tag Table:
-Node: Top981
-Node: Copying2242
-Node: Systems2432
-Node: The array-operations system3063
-Ref: ❨1❩3243
-Node: The array-operations/all system4396
-Ref: ❨2❩4612
-Node: The array-operations/generic system5495
-Ref: ❨3❩5728
-Node: The array-operations/reducing system6114
-Ref: ❨4❩6354
-Node: The array-operations/matrices system6703
-Ref: ❨5❩6944
-Node: The array-operations/creating system7404
-Ref: ❨6❩7646
-Node: The array-operations/utilities system8138
-Ref: ❨7❩8382
-Node: The array-operations/indexing system8842
-Ref: ❨8❩9086
-Node: The array-operations/displacing system9578
-Ref: ❨9❩9829
-Node: The array-operations/transforming system10354
-Ref: ❨10❩10611
-Node: The array-operations/stacking system11202
-Ref: ❨11❩11404
-Node: Files12064
-Node: Lisp files12283
-Node: The array-operations/array-operations․asd file13002
-Ref: ❨12❩13270
-Node: The array-operations/all/file-type․lisp file13993
-Ref: ❨13❩14297
-Node: The array-operations/generic/file-type․lisp file14475
-Ref: ❨14❩14790
-Node: The array-operations/reducing/file-type․lisp file15482
-Ref: ❨15❩15804
-Node: The array-operations/matrices/file-type․lisp file16259
-Ref: ❨16❩16582
-Node: The array-operations/creating/file-type․lisp file16948
-Ref: ❨17❩17272
-Node: The array-operations/utilities/file-type․lisp file18400
-Ref: ❨18❩18726
-Node: The array-operations/indexing/file-type․lisp file19316
-Ref: ❨19❩19642
-Node: The array-operations/displacing/file-type․lisp file20218
-Ref: ❨20❩20551
-Node: The array-operations/transforming/file-type․lisp file21593
-Ref: ❨21❩21932
-Node: The array-operations/stacking/file-type․lisp file23505
-Ref: ❨22❩23774
-Node: Packages24543
-Node: The array-operations/indexing package25131
-Ref: ❨23❩25346
-Node: The array-operations/generic package26030
-Ref: ❨24❩26267
-Node: The array-operations/all package27499
-Ref: ❨25❩27728
-Node: The array-operations/creating package28721
-Ref: ❨26❩28963
-Node: The array-operations/displacing package30284
-Ref: ❨27❩30535
-Node: The array-operations/reducing package31832
-Ref: ❨28❩32079
-Node: The array-operations/matrices package32581
-Ref: ❨29❩32827
-Node: The array-operations/utilities package33504
-Ref: ❨30❩33756
-Node: The array-operations/transforming package34589
-Ref: ❨31❩34847
-Node: The array-operations/stacking package36646
-Ref: ❨32❩36851
-Node: Definitions37975
-Node: Public Interface38237
-Node: Public macros38518
-Ref: ❨64❩38716
-Ref: ❨36❩38918
-Ref: ❨33❩39591
-Ref: ❨37❩40028
-Ref: ❨112❩41056
-Ref: ❨117❩41264
-Ref: ❨35❩42038
-Ref: ❨34❩42684
-Ref: ❨123❩43273
-Ref: ❨137❩43994
-Ref: ❨140❩44737
-Ref: ❨102❩45466
-Ref: ❨116❩46162
-Ref: ❨113❩46643
-Node: Public ordinary functions46935
-Ref: ❨105❩47158
-Ref: ❨101❩47437
-Ref: ❨104❩47717
-Ref: ❨134❩48259
-Ref: ❨141❩48553
-Ref: ❨85❩48920
-Ref: ❨133❩49340
-Ref: ❨131❩49704
-Ref: ❨91❩49957
-Ref: ❨147❩50390
-Ref: ❨93❩50921
-Ref: ❨122❩51151
-Ref: ❨121❩51386
-Ref: ❨111❩51735
-Ref: ❨66❩52218
-Ref: ❨94❩52477
-Ref: ❨87❩52965
-Ref: ❨79❩53220
-Ref: ❨73❩53475
-Ref: ❨125❩54097
-Ref: ❨132❩54494
-Ref: ❨124❩54885
-Ref: ❨68❩55078
-Ref: ❨82❩55601
-Ref: ❨65❩55989
-Ref: ❨78❩56467
-Ref: ❨126❩56838
-Ref: ❨127❩57090
-Ref: ❨106❩57437
-Ref: ❨108❩57637
-Ref: ❨103❩57839
-Ref: ❨76❩58438
-Ref: ❨83❩58659
-Ref: ❨84❩58917
-Ref: ❨130❩59214
-Ref: ❨129❩59438
-Ref: ❨96❩59775
-Ref: ❨97❩60044
-Ref: ❨135❩60212
-Ref: ❨115❩60650
-Ref: ❨71❩60864
-Ref: ❨81❩61478
-Ref: ❨80❩61795
-Ref: ❨75❩62425
-Ref: ❨74❩63104
-Ref: ❨72❩63617
-Ref: ❨136❩64339
-Ref: ❨95❩64825
-Ref: ❨88❩65214
-Ref: ❨86❩65412
-Ref: ❨114❩65629
-Ref: ❨77❩65933
-Ref: ❨92❩66275
-Ref: ❨109❩66548
-Ref: ❨107❩66774
-Ref: ❨145❩67013
-Ref: ❨150❩67236
-Ref: ❨148❩67501
-Ref: ❨149❩67724
-Ref: ❨157❩68490
-Ref: ❨146❩68713
-Ref: ❨98❩69478
-Ref: ❨99❩69942
-Ref: ❨89❩70118
-Ref: ❨90❩70346
-Ref: ❨128❩70530
-Ref: ❨70❩70864
-Ref: ❨69❩71087
-Ref: ❨67❩71353
-Node: Public generic functions71608
-Ref: ❨43❩71844
-Ref: ❨44❩72578
-Ref: ❨45❩72618
-Ref: ❨55❩72657
-Ref: ❨56❩72885
-Ref: ❨57❩72924
-Ref: ❨52❩72959
-Ref: ❨53❩73518
-Ref: ❨54❩73553
-Ref: ❨58❩73596
-Ref: ❨59❩74000
-Ref: ❨60❩74043
-Ref: ❨49❩74078
-Ref: ❨50❩74331
-Ref: ❨51❩74366
-Ref: ❨61❩74401
-Ref: ❨62❩74651
-Ref: ❨63❩74686
-Ref: ❨46❩74721
-Ref: ❨47❩74933
-Ref: ❨48❩74968
-Ref: ❨40❩75003
-Ref: ❨41❩75235
-Ref: ❨42❩75270
-Ref: ❨151❩75362
-Ref: ❨152❩76280
-Ref: ❨153❩76390
-Ref: ❨154❩76482
-Ref: ❨155❩77397
-Ref: ❨156❩77507
-Node: Public conditions77508
-Ref: ❨120❩77722
-Ref: ❨118❩77935
-Ref: ❨119❩78153
-Ref: ❨138❩78248
-Ref: ❨139❩78466
-Node: Public types78520
-Ref: ❨110❩78672
-Node: Internals78818
-Node: Private macros79017
-Ref: ❨39❩79209
-Node: Private ordinary functions79520
-Ref: ❨142❩79763
-Ref: ❨38❩79934
-Ref: ❨144❩80503
-Ref: ❨158❩80809
-Ref: ❨100❩81070
-Node: Private types81382
-Ref: ❨143❩81543
-Node: Indexes81672
-Node: Concept index81874
-Node: Function index82007
-Node: Variable index113639
-Node: Data type index114097
+Node: Top982
+Node: Copying2244
+Node: Systems2434
+Node: The array-operations system3065
+Ref: ❨1❩3245
+Node: The array-operations/all system4412
+Ref: ❨2❩4628
+Node: The array-operations/generic system5525
+Ref: ❨3❩5758
+Node: The array-operations/reducing system6158
+Ref: ❨4❩6398
+Node: The array-operations/matrices system6761
+Ref: ❨5❩7002
+Node: The array-operations/creating system7476
+Ref: ❨6❩7718
+Node: The array-operations/utilities system8224
+Ref: ❨7❩8468
+Node: The array-operations/indexing system8942
+Ref: ❨8❩9186
+Node: The array-operations/displacing system9692
+Ref: ❨9❩9943
+Node: The array-operations/transforming system10482
+Ref: ❨10❩10739
+Node: The array-operations/stacking system11344
+Ref: ❨11❩11546
+Node: Files12220
+Node: Lisp files12439
+Node: The array-operations/array-operations․asd file13158
+Ref: ❨12❩13426
+Node: The array-operations/all/file-type․lisp file14149
+Ref: ❨13❩14453
+Node: The array-operations/generic/file-type․lisp file14631
+Ref: ❨14❩14946
+Node: The array-operations/reducing/file-type․lisp file15638
+Ref: ❨15❩15960
+Node: The array-operations/matrices/file-type․lisp file16415
+Ref: ❨16❩16738
+Node: The array-operations/creating/file-type․lisp file17104
+Ref: ❨17❩17428
+Node: The array-operations/utilities/file-type․lisp file18556
+Ref: ❨18❩18882
+Node: The array-operations/indexing/file-type․lisp file19472
+Ref: ❨19❩19798
+Node: The array-operations/displacing/file-type․lisp file20374
+Ref: ❨20❩20707
+Node: The array-operations/transforming/file-type․lisp file21749
+Ref: ❨21❩22088
+Node: The array-operations/stacking/file-type․lisp file23661
+Ref: ❨22❩23930
+Node: Packages24699
+Node: The array-operations/indexing package25287
+Ref: ❨23❩25502
+Node: The array-operations/generic package26186
+Ref: ❨24❩26423
+Node: The array-operations/all package27655
+Ref: ❨25❩27884
+Node: The array-operations/creating package28877
+Ref: ❨26❩29119
+Node: The array-operations/displacing package30440
+Ref: ❨27❩30691
+Node: The array-operations/reducing package31988
+Ref: ❨28❩32235
+Node: The array-operations/matrices package32737
+Ref: ❨29❩32983
+Node: The array-operations/utilities package33660
+Ref: ❨30❩33912
+Node: The array-operations/transforming package34745
+Ref: ❨31❩35003
+Node: The array-operations/stacking package36802
+Ref: ❨32❩37007
+Node: Definitions38131
+Node: Public Interface38393
+Node: Public macros38674
+Ref: ❨64❩38872
+Ref: ❨36❩39074
+Ref: ❨33❩39747
+Ref: ❨37❩40184
+Ref: ❨112❩41212
+Ref: ❨117❩41420
+Ref: ❨35❩42194
+Ref: ❨34❩42840
+Ref: ❨123❩43429
+Ref: ❨137❩44150
+Ref: ❨140❩44893
+Ref: ❨102❩45622
+Ref: ❨116❩46318
+Ref: ❨113❩46799
+Node: Public ordinary functions47091
+Ref: ❨105❩47314
+Ref: ❨101❩47593
+Ref: ❨104❩47873
+Ref: ❨134❩48415
+Ref: ❨141❩48709
+Ref: ❨85❩49076
+Ref: ❨133❩49496
+Ref: ❨131❩49860
+Ref: ❨91❩50113
+Ref: ❨147❩50546
+Ref: ❨93❩51077
+Ref: ❨122❩51307
+Ref: ❨121❩51542
+Ref: ❨111❩51891
+Ref: ❨66❩52374
+Ref: ❨94❩52633
+Ref: ❨87❩53121
+Ref: ❨79❩53376
+Ref: ❨73❩53631
+Ref: ❨125❩54253
+Ref: ❨132❩54650
+Ref: ❨124❩55041
+Ref: ❨68❩55234
+Ref: ❨82❩55757
+Ref: ❨65❩56145
+Ref: ❨78❩56623
+Ref: ❨126❩56994
+Ref: ❨127❩57246
+Ref: ❨106❩57593
+Ref: ❨108❩57793
+Ref: ❨103❩57995
+Ref: ❨76❩58594
+Ref: ❨83❩58815
+Ref: ❨84❩59073
+Ref: ❨130❩59370
+Ref: ❨129❩59594
+Ref: ❨96❩59931
+Ref: ❨97❩60200
+Ref: ❨135❩60368
+Ref: ❨115❩60806
+Ref: ❨71❩61020
+Ref: ❨81❩61634
+Ref: ❨80❩61951
+Ref: ❨75❩62581
+Ref: ❨74❩63260
+Ref: ❨72❩63773
+Ref: ❨136❩64495
+Ref: ❨95❩64981
+Ref: ❨88❩65370
+Ref: ❨86❩65568
+Ref: ❨114❩65785
+Ref: ❨77❩66089
+Ref: ❨92❩66431
+Ref: ❨109❩66704
+Ref: ❨107❩66930
+Ref: ❨145❩67169
+Ref: ❨150❩67392
+Ref: ❨148❩67657
+Ref: ❨149❩67880
+Ref: ❨157❩68646
+Ref: ❨146❩68869
+Ref: ❨98❩69634
+Ref: ❨99❩70098
+Ref: ❨89❩70274
+Ref: ❨90❩70502
+Ref: ❨128❩70686
+Ref: ❨70❩71020
+Ref: ❨69❩71243
+Ref: ❨67❩71509
+Node: Public generic functions71764
+Ref: ❨43❩72000
+Ref: ❨44❩72734
+Ref: ❨45❩72774
+Ref: ❨55❩72813
+Ref: ❨56❩73041
+Ref: ❨57❩73080
+Ref: ❨52❩73115
+Ref: ❨53❩73674
+Ref: ❨54❩73709
+Ref: ❨58❩73752
+Ref: ❨59❩74156
+Ref: ❨60❩74199
+Ref: ❨49❩74234
+Ref: ❨50❩74487
+Ref: ❨51❩74522
+Ref: ❨61❩74557
+Ref: ❨62❩74807
+Ref: ❨63❩74842
+Ref: ❨46❩74877
+Ref: ❨47❩75089
+Ref: ❨48❩75124
+Ref: ❨40❩75159
+Ref: ❨41❩75391
+Ref: ❨42❩75426
+Ref: ❨151❩75518
+Ref: ❨152❩76436
+Ref: ❨153❩76546
+Ref: ❨154❩76638
+Ref: ❨155❩77553
+Ref: ❨156❩77663
+Node: Public conditions77664
+Ref: ❨120❩77878
+Ref: ❨118❩78091
+Ref: ❨119❩78309
+Ref: ❨138❩78404
+Ref: ❨139❩78622
+Node: Public types78676
+Ref: ❨110❩78828
+Node: Internals78974
+Node: Private macros79173
+Ref: ❨39❩79365
+Node: Private ordinary functions79676
+Ref: ❨142❩79919
+Ref: ❨38❩80090
+Ref: ❨144❩80659
+Ref: ❨158❩80965
+Ref: ❨100❩81226
+Node: Private types81538
+Ref: ❨143❩81699
+Node: Indexes81828
+Node: Concept index82030
+Node: Function index82163
+Node: Variable index113795
+Node: Data type index114253
 
 End Tag Table
 

@@ -1,0 +1,3463 @@
+\input texinfo
+
+@c array-operations.texi --- Reference manual
+
+@c Copyright (C) 2019-2022 Steve Nunez
+@c Copyright (C) 2019-2022 Tamas K. Papp
+
+@c This file is part of Array Operations.
+
+@c This program is distributed under the terms of the Microsoft Public
+@c License.
+
+
+@c Commentary:
+
+@c Generated automatically by Declt version 4.0 beta 2 "William Riker"
+@c on Wed Jul 20 11:08:35 2022 GMT+8.
+
+
+@c ====================================================================
+@c Header
+@c ====================================================================
+@c %**start of header
+@setfilename array-operations.info
+@settitle The Array Operations Reference Manual
+@afourpaper
+@documentencoding UTF-8
+@c %**end of header
+
+
+
+@c ====================================================================
+@c Format Specific Tweaks
+@c ====================================================================
+@tex
+%% Declt uses several Unicode characters to "reveal" blanks. This
+%% works fine in HTML or Info output, but TeX will have problems with
+%% these. The code below translates those characters to something that
+%% TeX can handle.
+
+%% U+23B5 (Bottom Square Bracket), used to reveal white spaces, is
+%% translated to its Computer Modern teletype version.
+\DeclareUnicodeCharacter{23B5}{{\tt\char'040}}
+
+%% U+21B5 (Downwards Arrow With Corner Leftwards), used to reveal
+%% carriage returns, is translated to \hookleftarrow in math mode.
+\DeclareUnicodeCharacter{21B5}{\ensuremath\hookleftarrow}
+
+%% U+21E5 (Rightwards Arrow To Bar), used to reveal tabs, is
+%% translated to something that looks similar, based on a rightarrow
+%% and a vertical bar from the math extension font.
+\DeclareUnicodeCharacter{21E5}{%
+  \ensuremath{\rightarrow\kern-.5em\mathchar\"130C}}
+
+
+%% Declt uses several Unicode characters to replace "fragile" ones in
+%% anchor names and references. These characters are chosen to resemble
+%% the original ones, without interfering with Info syntax. In TeX
+%% however, we can switch them back to the original versions, because
+%% cross-references are done differently. In theory, I think we could do
+%% something similar for HTML output (again, only the Info syntax poses
+%% problems), but I don't know how to do something similar to what's
+%% below.
+
+%% U+2024 (One Dot Leader) replaces periods.
+\DeclareUnicodeCharacter{2024}{.}
+
+%% U+2236 (Ratio) replaces colons.
+\DeclareUnicodeCharacter{2236}{:}
+
+%% U+2768 (Medium Left Parenthesis Ornament) replaces left parenthesis.
+\DeclareUnicodeCharacter{2768}{(}
+
+%% U+2769 (Medium Right Parenthesis Ornament) replaces right parenthesis.
+\DeclareUnicodeCharacter{2769}{)}
+
+%% U+214B (Turned Ampersand) replaces ampersands.
+\DeclareUnicodeCharacter{214B}{&}
+
+%% U+2216 (Set Minus) replaces backslashes.
+\DeclareUnicodeCharacter{2216}{\char"5C}
+
+%% The following ones are already defined in texinfo.tex so we have nothing
+%% more to do:
+%% U+201A (Single Low-9 Quotation Mark) replaces commas.
+%% U+2205 (Empty Set) replaces empty symbol names.
+
+@end tex
+
+
+
+@c ====================================================================
+@c Settings
+@c ====================================================================
+@setchapternewpage odd
+@documentdescription
+The Array Operations Reference Manual, version 1.0.0.
+@end documentdescription
+
+
+
+@c ====================================================================
+@c New Commands
+@c ====================================================================
+
+@c ---------------
+@c Indexing macros
+@c ---------------
+
+@c Packages
+@macro packageindex{name}
+@tpindex \name\
+@tpindex @r{Package, }\name\
+@end macro
+
+@c Systems
+@macro systemindex{name}
+@tpindex \name\
+@tpindex @r{System, }\name\
+@end macro
+
+@c Modules
+@macro moduleindex{name}
+@tpindex @t{\name\}
+@tpindex Module, @t{\name\}
+@end macro
+
+@c Files
+@macro fileindex{name}
+@tpindex @t{\name\}
+@tpindex File, @t{\name\}
+@end macro
+
+@c The following macros are meant to be used within @defxxx environments.
+@c Texinfo performs half the indexing job and we do the other half.
+
+@c Constants
+@macro constantsubindex{name}
+@vindex @r{Constant, }\name\
+@end macro
+
+@c Special variables
+@macro specialsubindex{name}
+@vindex @r{Special Variable, }\name\
+@end macro
+
+@c Symbol macros
+@macro symbolmacrosubindex{name}
+@vindex @r{Symbol Macro, }\name\
+@end macro
+
+@c Slots
+@macro slotsubindex{name}
+@vindex @r{Slot, }\name\
+@end macro
+
+@c Macros
+@macro macrosubindex{name}
+@findex @r{Macro, }\name\
+@end macro
+
+@c Compiler Macros
+@macro compilermacrosubindex{name}
+@findex @r{Compiler Macro, }\name\
+@end macro
+
+@c Functions
+@macro functionsubindex{name}
+@findex @r{Function, }\name\
+@end macro
+
+@c Methods
+@macro methodsubindex{name}
+@findex @r{Method, }\name\
+@end macro
+
+@c Generic Functions
+@macro genericsubindex{name}
+@findex @r{Generic Function, }\name\
+@end macro
+
+@c Setf Expanders
+@macro expandersubindex{name}
+@findex @r{Setf Expander, }\name\
+@end macro
+
+@c Method Combinations
+@macro combinationsubindex{name}
+@findex @r{Method Combination, }\name\
+@end macro
+
+@c Conditions
+@macro conditionsubindex{name}
+@tpindex @r{Condition, }\name\
+@end macro
+
+@c Structures
+@macro structuresubindex{name}
+@tpindex @r{Structure, }\name\
+@end macro
+
+@c Types
+@macro typesubindex{name}
+@tpindex @r{Type, }\name\
+@end macro
+
+@c Classes
+@macro classsubindex{name}
+@tpindex @r{Class, }\name\
+@end macro
+
+
+
+@c ====================================================================
+@c Info Category and Directory
+@c ====================================================================
+@dircategory Lisp-Stat
+@direntry
+* Array Operations Reference Manual: (array-operations). The Array Operations Reference Manual.
+@end direntry
+
+
+
+@c ====================================================================
+@c Copying
+@c ====================================================================
+@copying
+@quotation
+Copyright @copyright{} 2019-2022 Steve Nunez
+Copyright @copyright{} 2019-2022 Tamas K. Papp
+
+Permission is granted to make and distribute verbatim copies of this
+manual provided the copyright notice and this permission notice are
+preserved on all copies.
+
+@ignore
+Permission is granted to process this file through TeX and print the
+results, provided the printed document carries a copying permission
+notice identical to this one except for the removal of this paragraph
+(this paragraph not being relevant to the printed manual).
+
+@end ignore
+Permission is granted to copy and distribute modified versions of this
+manual under the conditions for verbatim copying, provided also that the
+section entitled ``Copying'' is included exactly as in the original.
+
+Permission is granted to copy and distribute translations of this manual
+into another language, under the above conditions for modified versions,
+except that this permission notice may be translated as well.
+@end quotation
+@end copying
+
+
+
+@c ====================================================================
+@c Title Page
+@c ====================================================================
+@titlepage
+@title The Array Operations Reference Manual
+@subtitle Array operations for array-like data structures, version 1.0.0
+
+@author Steve Nunez
+@author Tamas K. Papp <@email{tkpapp@atchar{}gmail.com}>
+
+@page
+@quotation
+This manual was generated automatically by Declt 4.0b2.
+@end quotation
+@vskip 0pt plus 1filll
+@insertcopying
+@end titlepage
+
+
+
+@c ====================================================================
+@c Table of Contents
+@c ====================================================================
+@contents
+
+
+
+@c ====================================================================
+@c Top
+@c ====================================================================
+@ifnottex
+@node Top, Copying, (dir), (dir)
+@top The Array Operations Reference Manual
+This is the Array Operations Reference Manual, version 1.0.0,
+generated automatically by Declt version 4.0b2.
+
+@menu
+* Copying:: The Microsoft Public License
+* Systems:: The systems documentation
+* Files:: The files documentation
+* Packages:: The packages documentation
+* Definitions:: The symbols documentation
+* Indexes:: Concepts, functions, variables and data types
+@end menu
+
+@insertcopying
+@end ifnottex
+
+
+
+@c ====================================================================
+@c Copying
+@c ====================================================================
+@node Copying, Systems, Top, Top
+@unnumbered Copying
+@quotation
+This program is distributed under the terms of the Microsoft Public
+License.
+@end quotation
+
+
+
+@c ====================================================================
+@c Systems
+@c ====================================================================
+@node Systems, Files, Copying, Top
+@chapter Systems
+The main system appears first, followed by any subsystem dependency.
+
+@menu
+* The array-operations system::
+* The array-operations/all system::
+* The array-operations/generic system::
+* The array-operations/reducing system::
+* The array-operations/matrices system::
+* The array-operations/creating system::
+* The array-operations/utilities system::
+* The array-operations/indexing system::
+* The array-operations/displacing system::
+* The array-operations/transforming system::
+* The array-operations/stacking system::
+@end menu
+
+
+@c ---------------------------
+@c The array-operations system
+@c ---------------------------
+@node The array-operations system, The array-operations/all system, Systems, Systems
+@section @t{array-operations}
+@anchor{❨1❩}@c
+@systemindex{array-operations}@c
+Array operations library for Common Lisp
+@table @strong
+@item Long Name
+Array operations for array-like data structures
+@item Maintainer
+Steve Nunez
+@item Author
+Tamas K. Papp <@email{tkpapp@atchar{}gmail.com}>
+@item Home Page
+@uref{https://lisp-stat.dev/docs/manuals/array-operations}
+@item Bug Tracker
+@uref{https://github.com/Lisp-Stat/array-operations/issues}
+@item License
+MS-PL
+@item Long Description
+The array-operations system is a collection of functions and macros for manipulating Common Lisp arrays and performing numerical calculations with them.@*
+
+Array-operations is a 'generic' way of operating on array like data structures using a syntax that is natural for Common Lisp.  Several aops functions have been implemented for data-frame.  For those that haven't@comma{} you can transform arrays to data frames using the df:matrix-df function@comma{} and a data-frame to an array using df:as-array.  This make it convenient to work with the data sets using either system.
+@item Version
+1.0.0
+@item Dependencies
+@itemize @bullet
+@item
+@t{let-plus}@: (system).
+@item
+@ref{❨2❩, , @t{array-operations/all}}@: (system).
+@end itemize
+@item Source
+@ref{❨12❩, , @t{array-operations.asd}}.
+@end table
+
+
+@c -------------------------------
+@c The array-operations/all system
+@c -------------------------------
+@node The array-operations/all system, The array-operations/generic system, The array-operations system, Systems
+@section @t{array-operations/all}
+@anchor{❨2❩}@c
+@systemindex{array-operations/all}@c
+@table @strong
+@item Long Name
+Array operations for array-like data structures
+@item Maintainer
+Steve Nunez
+@item Author
+Tamas K. Papp <@email{tkpapp@atchar{}gmail.com}>
+@item Home Page
+@uref{https://lisp-stat.dev/docs/manuals/array-operations}
+@item Bug Tracker
+@uref{https://github.com/Lisp-Stat/array-operations/issues}
+@item License
+MS-PL
+@item Dependencies
+@itemize @bullet
+@item
+@ref{❨3❩, , @t{array-operations/generic}}@: (system).
+@item
+@ref{❨4❩, , @t{array-operations/reducing}}@: (system).
+@item
+@ref{❨5❩, , @t{array-operations/matrices}}@: (system).
+@item
+@ref{❨6❩, , @t{array-operations/creating}}@: (system).
+@item
+@ref{❨8❩, , @t{array-operations/indexing}}@: (system).
+@item
+@ref{❨9❩, , @t{array-operations/displacing}}@: (system).
+@item
+@ref{❨10❩, , @t{array-operations/transforming}}@: (system).
+@item
+@ref{❨11❩, , @t{array-operations/stacking}}@: (system).
+@end itemize
+@item Source
+@ref{❨12❩, , @t{array-operations.asd}}.
+@end table
+
+
+@c -----------------------------------
+@c The array-operations/generic system
+@c -----------------------------------
+@node The array-operations/generic system, The array-operations/reducing system, The array-operations/all system, Systems
+@section @t{array-operations/generic}
+@anchor{❨3❩}@c
+@systemindex{array-operations/generic}@c
+@table @strong
+@item Long Name
+Array operations for array-like data structures
+@item Maintainer
+Steve Nunez
+@item Author
+Tamas K. Papp <@email{tkpapp@atchar{}gmail.com}>
+@item Home Page
+@uref{https://lisp-stat.dev/docs/manuals/array-operations}
+@item Bug Tracker
+@uref{https://github.com/Lisp-Stat/array-operations/issues}
+@item License
+MS-PL
+@item Dependency
+@t{let-plus}@: (system).
+@item Source
+@ref{❨12❩, , @t{array-operations.asd}}.
+@end table
+
+
+@c ------------------------------------
+@c The array-operations/reducing system
+@c ------------------------------------
+@node The array-operations/reducing system, The array-operations/matrices system, The array-operations/generic system, Systems
+@section @t{array-operations/reducing}
+@anchor{❨4❩}@c
+@systemindex{array-operations/reducing}@c
+@table @strong
+@item Long Name
+Array operations for array-like data structures
+@item Maintainer
+Steve Nunez
+@item Author
+Tamas K. Papp <@email{tkpapp@atchar{}gmail.com}>
+@item Home Page
+@uref{https://lisp-stat.dev/docs/manuals/array-operations}
+@item Bug Tracker
+@uref{https://github.com/Lisp-Stat/array-operations/issues}
+@item License
+MS-PL
+@item Source
+@ref{❨12❩, , @t{array-operations.asd}}.
+@end table
+
+
+@c ------------------------------------
+@c The array-operations/matrices system
+@c ------------------------------------
+@node The array-operations/matrices system, The array-operations/creating system, The array-operations/reducing system, Systems
+@section @t{array-operations/matrices}
+@anchor{❨5❩}@c
+@systemindex{array-operations/matrices}@c
+@table @strong
+@item Long Name
+Array operations for array-like data structures
+@item Maintainer
+Steve Nunez
+@item Author
+Tamas K. Papp <@email{tkpapp@atchar{}gmail.com}>
+@item Home Page
+@uref{https://lisp-stat.dev/docs/manuals/array-operations}
+@item Bug Tracker
+@uref{https://github.com/Lisp-Stat/array-operations/issues}
+@item License
+MS-PL
+@item Dependencies
+@itemize @bullet
+@item
+@ref{❨3❩, , @t{array-operations/generic}}@: (system).
+@item
+@t{alexandria}@: (system).
+@end itemize
+@item Source
+@ref{❨12❩, , @t{array-operations.asd}}.
+@end table
+
+
+@c ------------------------------------
+@c The array-operations/creating system
+@c ------------------------------------
+@node The array-operations/creating system, The array-operations/utilities system, The array-operations/matrices system, Systems
+@section @t{array-operations/creating}
+@anchor{❨6❩}@c
+@systemindex{array-operations/creating}@c
+@table @strong
+@item Long Name
+Array operations for array-like data structures
+@item Maintainer
+Steve Nunez
+@item Author
+Tamas K. Papp <@email{tkpapp@atchar{}gmail.com}>
+@item Home Page
+@uref{https://lisp-stat.dev/docs/manuals/array-operations}
+@item Bug Tracker
+@uref{https://github.com/Lisp-Stat/array-operations/issues}
+@item License
+MS-PL
+@item Dependencies
+@itemize @bullet
+@item
+@ref{❨3❩, , @t{array-operations/generic}}@: (system).
+@item
+@ref{❨7❩, , @t{array-operations/utilities}}@: (system).
+@end itemize
+@item Source
+@ref{❨12❩, , @t{array-operations.asd}}.
+@end table
+
+
+@c -------------------------------------
+@c The array-operations/utilities system
+@c -------------------------------------
+@node The array-operations/utilities system, The array-operations/indexing system, The array-operations/creating system, Systems
+@section @t{array-operations/utilities}
+@anchor{❨7❩}@c
+@systemindex{array-operations/utilities}@c
+@table @strong
+@item Long Name
+Array operations for array-like data structures
+@item Maintainer
+Steve Nunez
+@item Author
+Tamas K. Papp <@email{tkpapp@atchar{}gmail.com}>
+@item Home Page
+@uref{https://lisp-stat.dev/docs/manuals/array-operations}
+@item Bug Tracker
+@uref{https://github.com/Lisp-Stat/array-operations/issues}
+@item License
+MS-PL
+@item Dependencies
+@itemize @bullet
+@item
+@ref{❨3❩, , @t{array-operations/generic}}@: (system).
+@item
+@t{alexandria}@: (system).
+@end itemize
+@item Source
+@ref{❨12❩, , @t{array-operations.asd}}.
+@end table
+
+
+@c ------------------------------------
+@c The array-operations/indexing system
+@c ------------------------------------
+@node The array-operations/indexing system, The array-operations/displacing system, The array-operations/utilities system, Systems
+@section @t{array-operations/indexing}
+@anchor{❨8❩}@c
+@systemindex{array-operations/indexing}@c
+@table @strong
+@item Long Name
+Array operations for array-like data structures
+@item Maintainer
+Steve Nunez
+@item Author
+Tamas K. Papp <@email{tkpapp@atchar{}gmail.com}>
+@item Home Page
+@uref{https://lisp-stat.dev/docs/manuals/array-operations}
+@item Bug Tracker
+@uref{https://github.com/Lisp-Stat/array-operations/issues}
+@item License
+MS-PL
+@item Dependencies
+@itemize @bullet
+@item
+@ref{❨3❩, , @t{array-operations/generic}}@: (system).
+@item
+@ref{❨7❩, , @t{array-operations/utilities}}@: (system).
+@end itemize
+@item Source
+@ref{❨12❩, , @t{array-operations.asd}}.
+@end table
+
+
+@c --------------------------------------
+@c The array-operations/displacing system
+@c --------------------------------------
+@node The array-operations/displacing system, The array-operations/transforming system, The array-operations/indexing system, Systems
+@section @t{array-operations/displacing}
+@anchor{❨9❩}@c
+@systemindex{array-operations/displacing}@c
+@table @strong
+@item Long Name
+Array operations for array-like data structures
+@item Maintainer
+Steve Nunez
+@item Author
+Tamas K. Papp <@email{tkpapp@atchar{}gmail.com}>
+@item Home Page
+@uref{https://lisp-stat.dev/docs/manuals/array-operations}
+@item Bug Tracker
+@uref{https://github.com/Lisp-Stat/array-operations/issues}
+@item License
+MS-PL
+@item Dependencies
+@itemize @bullet
+@item
+@ref{❨3❩, , @t{array-operations/generic}}@: (system).
+@item
+@ref{❨7❩, , @t{array-operations/utilities}}@: (system).
+@item
+@t{alexandria}@: (system).
+@end itemize
+@item Source
+@ref{❨12❩, , @t{array-operations.asd}}.
+@end table
+
+
+@c ----------------------------------------
+@c The array-operations/transforming system
+@c ----------------------------------------
+@node The array-operations/transforming system, The array-operations/stacking system, The array-operations/displacing system, Systems
+@section @t{array-operations/transforming}
+@anchor{❨10❩}@c
+@systemindex{array-operations/transforming}@c
+@table @strong
+@item Long Name
+Array operations for array-like data structures
+@item Maintainer
+Steve Nunez
+@item Author
+Tamas K. Papp <@email{tkpapp@atchar{}gmail.com}>
+@item Home Page
+@uref{https://lisp-stat.dev/docs/manuals/array-operations}
+@item Bug Tracker
+@uref{https://github.com/Lisp-Stat/array-operations/issues}
+@item License
+MS-PL
+@item Dependencies
+@itemize @bullet
+@item
+@ref{❨3❩, , @t{array-operations/generic}}@: (system).
+@item
+@ref{❨7❩, , @t{array-operations/utilities}}@: (system).
+@item
+@ref{❨9❩, , @t{array-operations/displacing}}@: (system).
+@item
+@t{alexandria}@: (system).
+@end itemize
+@item Source
+@ref{❨12❩, , @t{array-operations.asd}}.
+@end table
+
+
+@c ------------------------------------
+@c The array-operations/stacking system
+@c ------------------------------------
+@node The array-operations/stacking system, , The array-operations/transforming system, Systems
+@section @t{array-operations/stacking}
+@anchor{❨11❩}@c
+@systemindex{array-operations/stacking}@c
+@table @strong
+@item Long Name
+Array operations for array-like data structures
+@item Maintainer
+Steve Nunez
+@item Author
+Tamas K. Papp <@email{tkpapp@atchar{}gmail.com}>
+@item Home Page
+@uref{https://lisp-stat.dev/docs/manuals/array-operations}
+@item Bug Tracker
+@uref{https://github.com/Lisp-Stat/array-operations/issues}
+@item License
+MS-PL
+@item Dependencies
+@itemize @bullet
+@item
+@ref{❨3❩, , @t{array-operations/generic}}@: (system).
+@item
+@ref{❨7❩, , @t{array-operations/utilities}}@: (system).
+@item
+@ref{❨9❩, , @t{array-operations/displacing}}@: (system).
+@item
+@ref{❨10❩, , @t{array-operations/transforming}}@: (system).
+@item
+@t{alexandria}@: (system).
+@end itemize
+@item Source
+@ref{❨12❩, , @t{array-operations.asd}}.
+@end table
+
+
+
+@c ====================================================================
+@c Files
+@c ====================================================================
+@node Files, Packages, Systems, Top
+@chapter Files
+Files are sorted by type and then listed depth-first from the systems
+components trees.
+
+@menu
+* Lisp files::
+@end menu
+
+
+@c ----------
+@c Lisp files
+@c ----------
+@node Lisp files, , Files, Files
+@section Lisp
+@menu
+* The array-operations/array-operations․asd file::
+* The array-operations/all/file-type․lisp file::
+* The array-operations/generic/file-type․lisp file::
+* The array-operations/reducing/file-type․lisp file::
+* The array-operations/matrices/file-type․lisp file::
+* The array-operations/creating/file-type․lisp file::
+* The array-operations/utilities/file-type․lisp file::
+* The array-operations/indexing/file-type․lisp file::
+* The array-operations/displacing/file-type․lisp file::
+* The array-operations/transforming/file-type․lisp file::
+* The array-operations/stacking/file-type․lisp file::
+@end menu
+
+@node The array-operations/array-operations․asd file, The array-operations/all/file-type․lisp file, Lisp files, Lisp files
+@subsection @t{array-operations/array-operations.asd}
+@anchor{❨12❩}@c
+@fileindex{array-operations.asd}@c
+@table @strong
+@item Source
+@ref{❨12❩, , @t{array-operations.asd}}.
+@item Parent Component
+@ref{❨1❩, , @t{array-operations}}@: (system).
+@item ASDF Systems
+@itemize @bullet
+@item
+@ref{❨1❩, , @t{array-operations}}.
+@item
+@ref{❨2❩, , @t{array-operations/all}}.
+@item
+@ref{❨3❩, , @t{array-operations/generic}}.
+@item
+@ref{❨4❩, , @t{array-operations/reducing}}.
+@item
+@ref{❨5❩, , @t{array-operations/matrices}}.
+@item
+@ref{❨6❩, , @t{array-operations/creating}}.
+@item
+@ref{❨7❩, , @t{array-operations/utilities}}.
+@item
+@ref{❨8❩, , @t{array-operations/indexing}}.
+@item
+@ref{❨9❩, , @t{array-operations/displacing}}.
+@item
+@ref{❨10❩, , @t{array-operations/transforming}}.
+@item
+@ref{❨11❩, , @t{array-operations/stacking}}.
+@end itemize
+@end table
+
+@node The array-operations/all/file-type․lisp file, The array-operations/generic/file-type․lisp file, The array-operations/array-operations․asd file, Lisp files
+@subsection @t{array-operations/all/file-type.lisp}
+@anchor{❨13❩}@c
+@fileindex{file-type.lisp}@c
+@table @strong
+@item Source
+@ref{❨12❩, , @t{array-operations.asd}}.
+@item Parent Component
+@ref{❨2❩, , @t{array-operations/all}}@: (system).
+@item Packages
+@ref{❨25❩, , @t{array-operations/all}}.
+@end table
+
+@node The array-operations/generic/file-type․lisp file, The array-operations/reducing/file-type․lisp file, The array-operations/all/file-type․lisp file, Lisp files
+@subsection @t{array-operations/generic/file-type.lisp}
+@anchor{❨14❩}@c
+@fileindex{file-type.lisp}@c
+@table @strong
+@item Source
+@ref{❨12❩, , @t{array-operations.asd}}.
+@item Parent Component
+@ref{❨3❩, , @t{array-operations/generic}}@: (system).
+@item Packages
+@ref{❨24❩, , @t{array-operations/generic}}.
+@item Public Interface
+@itemize @bullet
+@item
+@ref{❨64❩, , @t{@ampchar{}dims}}@: (macro).
+@item
+@ref{❨43❩, , @t{as-array}}@: (generic function).
+@item
+@ref{❨55❩, , @t{dim}}@: (generic function).
+@item
+@ref{❨52❩, , @t{dims}}@: (generic function).
+@item
+@ref{❨58❩, , @t{element-type}}@: (generic function).
+@item
+@ref{❨49❩, , @t{ncol}}@: (generic function).
+@item
+@ref{❨61❩, , @t{nrow}}@: (generic function).
+@item
+@ref{❨46❩, , @t{rank}}@: (generic function).
+@item
+@ref{❨40❩, , @t{size}}@: (generic function).
+@end itemize
+@end table
+
+@node The array-operations/reducing/file-type․lisp file, The array-operations/matrices/file-type․lisp file, The array-operations/generic/file-type․lisp file, Lisp files
+@subsection @t{array-operations/reducing/file-type.lisp}
+@anchor{❨15❩}@c
+@fileindex{file-type.lisp}@c
+@table @strong
+@item Source
+@ref{❨12❩, , @t{array-operations.asd}}.
+@item Parent Component
+@ref{❨4❩, , @t{array-operations/reducing}}@: (system).
+@item Packages
+@ref{❨28❩, , @t{array-operations/reducing}}.
+@item Public Interface
+@itemize @bullet
+@item
+@ref{❨105❩, , @t{argmax}}@: (function).
+@item
+@ref{❨101❩, , @t{argmin}}@: (function).
+@item
+@ref{❨104❩, , @t{best}}@: (function).
+@item
+@ref{❨103❩, , @t{most}}@: (function).
+@item
+@ref{❨102❩, , @t{vectorize-reduce}}@: (macro).
+@end itemize
+@end table
+
+@node The array-operations/matrices/file-type․lisp file, The array-operations/creating/file-type․lisp file, The array-operations/reducing/file-type․lisp file, Lisp files
+@subsection @t{array-operations/matrices/file-type.lisp}
+@anchor{❨16❩}@c
+@fileindex{file-type.lisp}@c
+@table @strong
+@item Source
+@ref{❨12❩, , @t{array-operations.asd}}.
+@item Parent Component
+@ref{❨5❩, , @t{array-operations/matrices}}@: (system).
+@item Packages
+@ref{❨29❩, , @t{array-operations/matrices}}.
+@item Public Interface
+@itemize @bullet
+@item
+@ref{❨110❩, , @t{array-matrix}}@: (type).
+@item
+@ref{❨108❩, , @t{matrixp}}@: (function).
+@item
+@ref{❨109❩, , @t{square-matrix-p}}@: (function).
+@end itemize
+@end table
+
+@node The array-operations/creating/file-type․lisp file, The array-operations/utilities/file-type․lisp file, The array-operations/matrices/file-type․lisp file, Lisp files
+@subsection @t{array-operations/creating/file-type.lisp}
+@anchor{❨17❩}@c
+@fileindex{file-type.lisp}@c
+@table @strong
+@item Source
+@ref{❨12❩, , @t{array-operations.asd}}.
+@item Parent Component
+@ref{❨6❩, , @t{array-operations/creating}}@: (system).
+@item Packages
+@ref{❨26❩, , @t{array-operations/creating}}.
+@item Public Interface
+@itemize @bullet
+@item
+@ref{❨66❩, , @t{fill!}}@: (function).
+@item
+@ref{❨79❩, , @t{generate}}@: (function).
+@item
+@ref{❨73❩, , @t{generate*}}@: (function).
+@item
+@ref{❨68❩, , @t{linspace}}@: (function).
+@item
+@ref{❨82❩, , @t{linspace!}}@: (function).
+@item
+@ref{❨65❩, , @t{linspace*}}@: (function).
+@item
+@ref{❨76❩, , @t{ones}}@: (function).
+@item
+@ref{❨83❩, , @t{ones!}}@: (function).
+@item
+@ref{❨84❩, , @t{ones*}}@: (function).
+@item
+@ref{❨71❩, , @t{rand}}@: (function).
+@item
+@ref{❨81❩, , @t{rand!}}@: (function).
+@item
+@ref{❨80❩, , @t{rand*}}@: (function).
+@item
+@ref{❨75❩, , @t{randn}}@: (function).
+@item
+@ref{❨74❩, , @t{randn!}}@: (function).
+@item
+@ref{❨72❩, , @t{randn*}}@: (function).
+@item
+@ref{❨77❩, , @t{similar-array}}@: (function).
+@item
+@ref{❨70❩, , @t{zeros}}@: (function).
+@item
+@ref{❨69❩, , @t{zeros!}}@: (function).
+@item
+@ref{❨67❩, , @t{zeros*}}@: (function).
+@end itemize
+@end table
+
+@node The array-operations/utilities/file-type․lisp file, The array-operations/indexing/file-type․lisp file, The array-operations/creating/file-type․lisp file, Lisp files
+@subsection @t{array-operations/utilities/file-type.lisp}
+@anchor{❨18❩}@c
+@fileindex{file-type.lisp}@c
+@table @strong
+@item Source
+@ref{❨12❩, , @t{array-operations.asd}}.
+@item Parent Component
+@ref{❨7❩, , @t{array-operations/utilities}}@: (system).
+@item Packages
+@ref{❨30❩, , @t{array-operations/utilities}}.
+@item Public Interface
+@itemize @bullet
+@item
+@ref{❨111❩, , @t{ensure-dimensions}}@: (function).
+@item
+@ref{❨112❩, , @t{multf}}@: (macro).
+@item
+@ref{❨117❩, , @t{nested-loop}}@: (macro).
+@item
+@ref{❨115❩, , @t{product}}@: (function).
+@item
+@ref{❨114❩, , @t{same-dimensions-p}}@: (function).
+@item
+@ref{❨116❩, , @t{walk-subscripts}}@: (macro).
+@item
+@ref{❨113❩, , @t{walk-subscripts-list}}@: (macro).
+@end itemize
+@end table
+
+@node The array-operations/indexing/file-type․lisp file, The array-operations/displacing/file-type․lisp file, The array-operations/utilities/file-type․lisp file, Lisp files
+@subsection @t{array-operations/indexing/file-type.lisp}
+@anchor{❨19❩}@c
+@fileindex{file-type.lisp}@c
+@table @strong
+@item Source
+@ref{❨12❩, , @t{array-operations.asd}}.
+@item Parent Component
+@ref{❨8❩, , @t{array-operations/indexing}}@: (system).
+@item Packages
+@ref{❨23❩, , @t{array-operations/indexing}}.
+@item Public Interface
+@itemize @bullet
+@item
+@ref{❨36❩, , @t{each-index}}@: (macro).
+@item
+@ref{❨33❩, , @t{each-index!}}@: (macro).
+@item
+@ref{❨37❩, , @t{each-index*}}@: (macro).
+@item
+@ref{❨35❩, , @t{reduce-index}}@: (macro).
+@item
+@ref{❨34❩, , @t{sum-index}}@: (macro).
+@end itemize
+@item Internals
+@itemize @bullet
+@item
+@ref{❨38❩, , @t{find-array-dimensions}}@: (function).
+@item
+@ref{❨39❩, , @t{foreach}}@: (macro).
+@end itemize
+@end table
+
+@node The array-operations/displacing/file-type․lisp file, The array-operations/transforming/file-type․lisp file, The array-operations/indexing/file-type․lisp file, Lisp files
+@subsection @t{array-operations/displacing/file-type.lisp}
+@anchor{❨20❩}@c
+@fileindex{file-type.lisp}@c
+@table @strong
+@item Source
+@ref{❨12❩, , @t{array-operations.asd}}.
+@item Parent Component
+@ref{❨9❩, , @t{array-operations/displacing}}@: (system).
+@item Packages
+@ref{❨27❩, , @t{array-operations/displacing}}.
+@item Public Interface
+@itemize @bullet
+@item
+@ref{❨85❩, , @t{combine}}@: (function).
+@item
+@ref{❨91❩, , @t{copy-into}}@: (function).
+@item
+@ref{❨93❩, , @t{displace}}@: (function).
+@item
+@ref{❨94❩, , @t{fill-in-dimensions}}@: (function).
+@item
+@ref{❨87❩, , @t{flatten}}@: (function).
+@item
+@ref{❨96❩, , @t{partition}}@: (function).
+@item
+@ref{❨97❩, , @t{(setf partition)}}@: (function).
+@item
+@ref{❨95❩, , @t{reshape}}@: (function).
+@item
+@ref{❨88❩, , @t{reshape-col}}@: (function).
+@item
+@ref{❨86❩, , @t{reshape-row}}@: (function).
+@item
+@ref{❨92❩, , @t{split}}@: (function).
+@item
+@ref{❨98❩, , @t{sub}}@: (function).
+@item
+@ref{❨99❩, , @t{(setf sub)}}@: (function).
+@item
+@ref{❨89❩, , @t{subvec}}@: (function).
+@item
+@ref{❨90❩, , @t{(setf subvec)}}@: (function).
+@end itemize
+@item Internals
+@ref{❨100❩, , @t{sub-location%}}@: (function).
+@end table
+
+@node The array-operations/transforming/file-type․lisp file, The array-operations/stacking/file-type․lisp file, The array-operations/displacing/file-type․lisp file, Lisp files
+@subsection @t{array-operations/transforming/file-type.lisp}
+@anchor{❨21❩}@c
+@fileindex{file-type.lisp}@c
+@table @strong
+@item Source
+@ref{❨12❩, , @t{array-operations.asd}}.
+@item Parent Component
+@ref{❨10❩, , @t{array-operations/transforming}}@: (system).
+@item Packages
+@ref{❨31❩, , @t{array-operations/transforming}}.
+@item Public Interface
+@itemize @bullet
+@item
+@ref{❨134❩, , @t{check-permutation}}@: (function).
+@item
+@ref{❨141❩, , @t{coercing}}@: (function).
+@item
+@ref{❨133❩, , @t{complement-permutation}}@: (function).
+@item
+@ref{❨131❩, , @t{complete-permutation}}@: (function).
+@item
+@ref{❨122❩, , @t{each}}@: (function).
+@item
+@ref{❨121❩, , @t{each*}}@: (function).
+@item
+@ref{❨125❩, , @t{identity-permutation-p}}@: (function).
+@item
+@ref{❨124❩, , @t{invert-permutation}}@: (function).
+@item
+@ref{❨126❩, , @t{margin}}@: (function).
+@item
+@ref{❨127❩, , @t{margin*}}@: (function).
+@item
+@ref{❨130❩, , @t{outer}}@: (function).
+@item
+@ref{❨129❩, , @t{outer*}}@: (function).
+@item
+@ref{❨120❩, , @t{permutation-incompatible-rank}}@: (condition).
+@item
+@ref{❨118❩, , @t{permutation-invalid-index}}@: (condition).
+@item
+@ref{❨138❩, , @t{permutation-repeated-index}}@: (condition).
+@item
+@ref{❨135❩, , @t{permute}}@: (function).
+@item
+@ref{❨136❩, , @t{recycle}}@: (function).
+@item
+@ref{❨128❩, , @t{turn}}@: (function).
+@item
+@ref{❨123❩, , @t{vectorize}}@: (macro).
+@item
+@ref{❨137❩, , @t{vectorize!}}@: (macro).
+@item
+@ref{❨140❩, , @t{vectorize*}}@: (macro).
+@end itemize
+@item Internals
+@itemize @bullet
+@item
+@ref{❨142❩, , @t{array-index-row-major}}@: (function).
+@item
+@ref{❨143❩, , @t{array-rank-element}}@: (type).
+@item
+@ref{❨144❩, , @t{permutation-flags}}@: (function).
+@end itemize
+@end table
+
+@node The array-operations/stacking/file-type․lisp file, , The array-operations/transforming/file-type․lisp file, Lisp files
+@subsection @t{array-operations/stacking/file-type.lisp}
+@anchor{❨22❩}@c
+@fileindex{file-type.lisp}@c
+@table @strong
+@item Source
+@ref{❨12❩, , @t{array-operations.asd}}.
+@item Parent Component
+@ref{❨11❩, , @t{array-operations/stacking}}@: (system).
+@item Packages
+@ref{❨32❩, , @t{array-operations/stacking}}.
+@item Public Interface
+@itemize @bullet
+@item
+@ref{❨147❩, , @t{copy-row-major-block}}@: (function).
+@item
+@ref{❨145❩, , @t{stack}}@: (function).
+@item
+@ref{❨150❩, , @t{stack*}}@: (function).
+@item
+@ref{❨148❩, , @t{stack-cols}}@: (function).
+@item
+@ref{❨149❩, , @t{stack-cols*}}@: (function).
+@item
+@ref{❨151❩, , @t{stack-cols-copy}}@: (generic function).
+@item
+@ref{❨157❩, , @t{stack-rows}}@: (function).
+@item
+@ref{❨146❩, , @t{stack-rows*}}@: (function).
+@item
+@ref{❨154❩, , @t{stack-rows-copy}}@: (generic function).
+@end itemize
+@item Internals
+@ref{❨158❩, , @t{stack*0}}@: (function).
+@end table
+
+
+
+@c ====================================================================
+@c Packages
+@c ====================================================================
+@node Packages, Definitions, Files, Top
+@chapter Packages
+Packages are listed by definition order.
+
+@menu
+* The array-operations/indexing package::
+* The array-operations/generic package::
+* The array-operations/all package::
+* The array-operations/creating package::
+* The array-operations/displacing package::
+* The array-operations/reducing package::
+* The array-operations/matrices package::
+* The array-operations/utilities package::
+* The array-operations/transforming package::
+* The array-operations/stacking package::
+@end menu
+
+
+@c -------------------------------------
+@c The array-operations/indexing package
+@c -------------------------------------
+@node The array-operations/indexing package, The array-operations/generic package, Packages, Packages
+@section @t{array-operations/indexing}
+@anchor{❨23❩}@c
+@packageindex{array-operations/indexing}@c
+Macros for operating over indexes of arrays.
+@table @strong
+@item Source
+@ref{❨19❩, , @t{file-type.lisp}}.
+@item Use List
+@itemize @bullet
+@item
+@ref{❨24❩, , @t{array-operations/generic}}.
+@item
+@ref{❨30❩, , @t{array-operations/utilities}}.
+@item
+@t{common-lisp}.
+@end itemize
+@item Used By List
+@ref{❨25❩, , @t{array-operations/all}}.
+@item Public Interface
+@itemize @bullet
+@item
+@ref{❨36❩, , @t{each-index}}@: (macro).
+@item
+@ref{❨33❩, , @t{each-index!}}@: (macro).
+@item
+@ref{❨37❩, , @t{each-index*}}@: (macro).
+@item
+@ref{❨35❩, , @t{reduce-index}}@: (macro).
+@item
+@ref{❨34❩, , @t{sum-index}}@: (macro).
+@end itemize
+@item Internals
+@itemize @bullet
+@item
+@ref{❨38❩, , @t{find-array-dimensions}}@: (function).
+@item
+@ref{❨39❩, , @t{foreach}}@: (macro).
+@end itemize
+@end table
+
+
+@c ------------------------------------
+@c The array-operations/generic package
+@c ------------------------------------
+@node The array-operations/generic package, The array-operations/all package, The array-operations/indexing package, Packages
+@section @t{array-operations/generic}
+@anchor{❨24❩}@c
+@packageindex{array-operations/generic}@c
+Generic functions for elementary array operations@comma{} with methods on 'array.  Enables new methods to be defined to enable treating other data structures as arrays.
+@table @strong
+@item Source
+@ref{❨14❩, , @t{file-type.lisp}}.
+@item Use List
+@itemize @bullet
+@item
+@t{common-lisp}.
+@item
+@t{let-plus}.
+@end itemize
+@item Used By List
+@itemize @bullet
+@item
+@ref{❨25❩, , @t{array-operations/all}}.
+@item
+@ref{❨26❩, , @t{array-operations/creating}}.
+@item
+@ref{❨27❩, , @t{array-operations/displacing}}.
+@item
+@ref{❨23❩, , @t{array-operations/indexing}}.
+@item
+@ref{❨29❩, , @t{array-operations/matrices}}.
+@item
+@ref{❨32❩, , @t{array-operations/stacking}}.
+@item
+@ref{❨31❩, , @t{array-operations/transforming}}.
+@item
+@ref{❨30❩, , @t{array-operations/utilities}}.
+@end itemize
+@item Public Interface
+@itemize @bullet
+@item
+@ref{❨64❩, , @t{@ampchar{}dims}}@: (macro).
+@item
+@ref{❨43❩, , @t{as-array}}@: (generic function).
+@item
+@ref{❨55❩, , @t{dim}}@: (generic function).
+@item
+@ref{❨52❩, , @t{dims}}@: (generic function).
+@item
+@ref{❨58❩, , @t{element-type}}@: (generic function).
+@item
+@ref{❨49❩, , @t{ncol}}@: (generic function).
+@item
+@ref{❨61❩, , @t{nrow}}@: (generic function).
+@item
+@ref{❨46❩, , @t{rank}}@: (generic function).
+@item
+@ref{❨40❩, , @t{size}}@: (generic function).
+@end itemize
+@end table
+
+
+@c --------------------------------
+@c The array-operations/all package
+@c --------------------------------
+@node The array-operations/all package, The array-operations/creating package, The array-operations/generic package, Packages
+@section @t{array-operations/all}
+@anchor{❨25❩}@c
+@packageindex{array-operations/all}@c
+This top level package re-exports the individual packages: generic@comma{} reducing@comma{} matrices@comma{} creating@comma{} indexing@comma{} displacing@comma{} transforming and stacking.  It does not export utilities.  The reason for this structure is the use of the ASDF package-inferred-system@comma{} where each file is its own package.  None of Papp's other libraries use this@comma{} and it seems to have been added after he abandoned the library.
+@table @strong
+@item Source
+@ref{❨13❩, , @t{file-type.lisp}}.
+@item Nicknames
+@itemize @bullet
+@item
+@t{aops}
+@item
+@t{array-operations}
+@end itemize
+@item Use List
+@itemize @bullet
+@item
+@ref{❨26❩, , @t{array-operations/creating}}.
+@item
+@ref{❨27❩, , @t{array-operations/displacing}}.
+@item
+@ref{❨24❩, , @t{array-operations/generic}}.
+@item
+@ref{❨23❩, , @t{array-operations/indexing}}.
+@item
+@ref{❨29❩, , @t{array-operations/matrices}}.
+@item
+@ref{❨28❩, , @t{array-operations/reducing}}.
+@item
+@ref{❨32❩, , @t{array-operations/stacking}}.
+@item
+@ref{❨31❩, , @t{array-operations/transforming}}.
+@end itemize
+@item Used By List
+@t{lisp-stat}.
+@end table
+
+
+@c -------------------------------------
+@c The array-operations/creating package
+@c -------------------------------------
+@node The array-operations/creating package, The array-operations/displacing package, The array-operations/all package, Packages
+@section @t{array-operations/creating}
+@anchor{❨26❩}@c
+@packageindex{array-operations/creating}@c
+Functions for creating arrays or data frames filled with various values.
+@table @strong
+@item Source
+@ref{❨17❩, , @t{file-type.lisp}}.
+@item Use List
+@itemize @bullet
+@item
+@ref{❨24❩, , @t{array-operations/generic}}.
+@item
+@ref{❨30❩, , @t{array-operations/utilities}}.
+@item
+@t{common-lisp}.
+@end itemize
+@item Used By List
+@ref{❨25❩, , @t{array-operations/all}}.
+@item Public Interface
+@itemize @bullet
+@item
+@ref{❨66❩, , @t{fill!}}@: (function).
+@item
+@ref{❨79❩, , @t{generate}}@: (function).
+@item
+@ref{❨73❩, , @t{generate*}}@: (function).
+@item
+@ref{❨68❩, , @t{linspace}}@: (function).
+@item
+@ref{❨82❩, , @t{linspace!}}@: (function).
+@item
+@ref{❨65❩, , @t{linspace*}}@: (function).
+@item
+@ref{❨78❩, , @t{make-array-like}}@: (function).
+@item
+@ref{❨76❩, , @t{ones}}@: (function).
+@item
+@ref{❨83❩, , @t{ones!}}@: (function).
+@item
+@ref{❨84❩, , @t{ones*}}@: (function).
+@item
+@ref{❨71❩, , @t{rand}}@: (function).
+@item
+@ref{❨81❩, , @t{rand!}}@: (function).
+@item
+@ref{❨80❩, , @t{rand*}}@: (function).
+@item
+@ref{❨75❩, , @t{randn}}@: (function).
+@item
+@ref{❨74❩, , @t{randn!}}@: (function).
+@item
+@ref{❨72❩, , @t{randn*}}@: (function).
+@item
+@ref{❨77❩, , @t{similar-array}}@: (function).
+@item
+@ref{❨70❩, , @t{zeros}}@: (function).
+@item
+@ref{❨69❩, , @t{zeros!}}@: (function).
+@item
+@ref{❨67❩, , @t{zeros*}}@: (function).
+@end itemize
+@end table
+
+
+@c ---------------------------------------
+@c The array-operations/displacing package
+@c ---------------------------------------
+@node The array-operations/displacing package, The array-operations/reducing package, The array-operations/creating package, Packages
+@section @t{array-operations/displacing}
+@anchor{❨27❩}@c
+@packageindex{array-operations/displacing}@c
+Functions that return arrays displaced in various ways from another array.
+@table @strong
+@item Source
+@ref{❨20❩, , @t{file-type.lisp}}.
+@item Use List
+@itemize @bullet
+@item
+@ref{❨24❩, , @t{array-operations/generic}}.
+@item
+@ref{❨30❩, , @t{array-operations/utilities}}.
+@item
+@t{common-lisp}.
+@end itemize
+@item Used By List
+@itemize @bullet
+@item
+@ref{❨25❩, , @t{array-operations/all}}.
+@item
+@ref{❨32❩, , @t{array-operations/stacking}}.
+@item
+@ref{❨31❩, , @t{array-operations/transforming}}.
+@end itemize
+@item Public Interface
+@itemize @bullet
+@item
+@ref{❨85❩, , @t{combine}}@: (function).
+@item
+@ref{❨91❩, , @t{copy-into}}@: (function).
+@item
+@ref{❨93❩, , @t{displace}}@: (function).
+@item
+@ref{❨94❩, , @t{fill-in-dimensions}}@: (function).
+@item
+@ref{❨87❩, , @t{flatten}}@: (function).
+@item
+@ref{❨96❩, , @t{partition}}@: (function).
+@item
+@ref{❨97❩, , @t{(setf partition)}}@: (function).
+@item
+@ref{❨95❩, , @t{reshape}}@: (function).
+@item
+@ref{❨88❩, , @t{reshape-col}}@: (function).
+@item
+@ref{❨86❩, , @t{reshape-row}}@: (function).
+@item
+@ref{❨92❩, , @t{split}}@: (function).
+@item
+@ref{❨98❩, , @t{sub}}@: (function).
+@item
+@ref{❨99❩, , @t{(setf sub)}}@: (function).
+@item
+@ref{❨89❩, , @t{subvec}}@: (function).
+@item
+@ref{❨90❩, , @t{(setf subvec)}}@: (function).
+@end itemize
+@item Internals
+@ref{❨100❩, , @t{sub-location%}}@: (function).
+@end table
+
+
+@c -------------------------------------
+@c The array-operations/reducing package
+@c -------------------------------------
+@node The array-operations/reducing package, The array-operations/matrices package, The array-operations/displacing package, Packages
+@section @t{array-operations/reducing}
+@anchor{❨28❩}@c
+@packageindex{array-operations/reducing}@c
+Functions for reducing arrays@comma{} or performing reducing like operations over the elements of an array.
+@table @strong
+@item Source
+@ref{❨15❩, , @t{file-type.lisp}}.
+@item Use List
+@t{common-lisp}.
+@item Used By List
+@ref{❨25❩, , @t{array-operations/all}}.
+@item Public Interface
+@itemize @bullet
+@item
+@ref{❨105❩, , @t{argmax}}@: (function).
+@item
+@ref{❨101❩, , @t{argmin}}@: (function).
+@item
+@ref{❨104❩, , @t{best}}@: (function).
+@item
+@ref{❨103❩, , @t{most}}@: (function).
+@item
+@ref{❨102❩, , @t{vectorize-reduce}}@: (macro).
+@end itemize
+@end table
+
+
+@c -------------------------------------
+@c The array-operations/matrices package
+@c -------------------------------------
+@node The array-operations/matrices package, The array-operations/utilities package, The array-operations/reducing package, Packages
+@section @t{array-operations/matrices}
+@anchor{❨29❩}@c
+@packageindex{array-operations/matrices}@c
+Functions for representing matrices as 2D arrays.  A matrix is a two-dimensional array often used for linear algebra.  See also the matrix functions in NUM-UTILS@comma{}  which should be migrated to AOPS.
+@table @strong
+@item Source
+@ref{❨16❩, , @t{file-type.lisp}}.
+@item Use List
+@itemize @bullet
+@item
+@ref{❨24❩, , @t{array-operations/generic}}.
+@item
+@t{common-lisp}.
+@end itemize
+@item Used By List
+@ref{❨25❩, , @t{array-operations/all}}.
+@item Public Interface
+@itemize @bullet
+@item
+@ref{❨110❩, , @t{array-matrix}}@: (type).
+@item
+@ref{❨106❩, , @t{matrix?}}@: (function).
+@item
+@ref{❨108❩, , @t{matrixp}}@: (function).
+@item
+@ref{❨109❩, , @t{square-matrix-p}}@: (function).
+@item
+@ref{❨107❩, , @t{square-matrix?}}@: (function).
+@end itemize
+@end table
+
+
+@c --------------------------------------
+@c The array-operations/utilities package
+@c --------------------------------------
+@node The array-operations/utilities package, The array-operations/transforming package, The array-operations/matrices package, Packages
+@section @t{array-operations/utilities}
+@anchor{❨30❩}@c
+@packageindex{array-operations/utilities}@c
+@table @strong
+@item Source
+@ref{❨18❩, , @t{file-type.lisp}}.
+@item Use List
+@itemize @bullet
+@item
+@ref{❨24❩, , @t{array-operations/generic}}.
+@item
+@t{common-lisp}.
+@end itemize
+@item Used By List
+@itemize @bullet
+@item
+@ref{❨26❩, , @t{array-operations/creating}}.
+@item
+@ref{❨27❩, , @t{array-operations/displacing}}.
+@item
+@ref{❨23❩, , @t{array-operations/indexing}}.
+@item
+@ref{❨32❩, , @t{array-operations/stacking}}.
+@item
+@ref{❨31❩, , @t{array-operations/transforming}}.
+@end itemize
+@item Public Interface
+@itemize @bullet
+@item
+@ref{❨111❩, , @t{ensure-dimensions}}@: (function).
+@item
+@ref{❨112❩, , @t{multf}}@: (macro).
+@item
+@ref{❨117❩, , @t{nested-loop}}@: (macro).
+@item
+@ref{❨115❩, , @t{product}}@: (function).
+@item
+@ref{❨114❩, , @t{same-dimensions-p}}@: (function).
+@item
+@ref{❨116❩, , @t{walk-subscripts}}@: (macro).
+@item
+@ref{❨113❩, , @t{walk-subscripts-list}}@: (macro).
+@end itemize
+@end table
+
+
+@c -----------------------------------------
+@c The array-operations/transforming package
+@c -----------------------------------------
+@node The array-operations/transforming package, The array-operations/stacking package, The array-operations/utilities package, Packages
+@section @t{array-operations/transforming}
+@anchor{❨31❩}@c
+@packageindex{array-operations/transforming}@c
+Functions for transforming arrays in various ways.
+@table @strong
+@item Source
+@ref{❨21❩, , @t{file-type.lisp}}.
+@item Use List
+@itemize @bullet
+@item
+@ref{❨27❩, , @t{array-operations/displacing}}.
+@item
+@ref{❨24❩, , @t{array-operations/generic}}.
+@item
+@ref{❨30❩, , @t{array-operations/utilities}}.
+@item
+@t{common-lisp}.
+@end itemize
+@item Used By List
+@ref{❨25❩, , @t{array-operations/all}}.
+@item Public Interface
+@itemize @bullet
+@item
+@ref{❨134❩, , @t{check-permutation}}@: (function).
+@item
+@ref{❨141❩, , @t{coercing}}@: (function).
+@item
+@ref{❨133❩, , @t{complement-permutation}}@: (function).
+@item
+@ref{❨131❩, , @t{complete-permutation}}@: (function).
+@item
+@ref{❨122❩, , @t{each}}@: (function).
+@item
+@ref{❨121❩, , @t{each*}}@: (function).
+@item
+@ref{❨125❩, , @t{identity-permutation-p}}@: (function).
+@item
+@ref{❨132❩, , @t{identity-permutation?}}@: (function).
+@item
+@ref{❨124❩, , @t{invert-permutation}}@: (function).
+@item
+@ref{❨126❩, , @t{margin}}@: (function).
+@item
+@ref{❨127❩, , @t{margin*}}@: (function).
+@item
+@ref{❨130❩, , @t{outer}}@: (function).
+@item
+@ref{❨129❩, , @t{outer*}}@: (function).
+@item
+@ref{❨120❩, , @t{permutation-incompatible-rank}}@: (condition).
+@item
+@ref{❨118❩, , @t{permutation-invalid-index}}@: (condition).
+@item
+@ref{❨138❩, , @t{permutation-repeated-index}}@: (condition).
+@item
+@ref{❨135❩, , @t{permute}}@: (function).
+@item
+@ref{❨136❩, , @t{recycle}}@: (function).
+@item
+@ref{❨128❩, , @t{turn}}@: (function).
+@item
+@ref{❨123❩, , @t{vectorize}}@: (macro).
+@item
+@ref{❨137❩, , @t{vectorize!}}@: (macro).
+@item
+@ref{❨140❩, , @t{vectorize*}}@: (macro).
+@end itemize
+@item Internals
+@itemize @bullet
+@item
+@ref{❨142❩, , @t{array-index-row-major}}@: (function).
+@item
+@ref{❨143❩, , @t{array-rank-element}}@: (type).
+@item
+@ref{❨144❩, , @t{permutation-flags}}@: (function).
+@end itemize
+@end table
+
+
+@c -------------------------------------
+@c The array-operations/stacking package
+@c -------------------------------------
+@node The array-operations/stacking package, , The array-operations/transforming package, Packages
+@section @t{array-operations/stacking}
+@anchor{❨32❩}@c
+@packageindex{array-operations/stacking}@c
+Functions for composing arrays into new arrays@comma{} by stacking.
+
+One may think of stacking blocks as the guiding metaphor.
+
+ For example@comma{} stack two row vectors to yield a 2x2 matrix:
+
+ (stack-rows @hashchar{}(1 2) @hashchar{}(3 4)) -> @hashchar{}2A((1 2)@*
+                                   (3 4))
+@table @strong
+@item Source
+@ref{❨22❩, , @t{file-type.lisp}}.
+@item Use List
+@itemize @bullet
+@item
+@ref{❨27❩, , @t{array-operations/displacing}}.
+@item
+@ref{❨24❩, , @t{array-operations/generic}}.
+@item
+@ref{❨30❩, , @t{array-operations/utilities}}.
+@item
+@t{common-lisp}.
+@end itemize
+@item Used By List
+@ref{❨25❩, , @t{array-operations/all}}.
+@item Public Interface
+@itemize @bullet
+@item
+@ref{❨147❩, , @t{copy-row-major-block}}@: (function).
+@item
+@ref{❨145❩, , @t{stack}}@: (function).
+@item
+@ref{❨150❩, , @t{stack*}}@: (function).
+@item
+@ref{❨148❩, , @t{stack-cols}}@: (function).
+@item
+@ref{❨149❩, , @t{stack-cols*}}@: (function).
+@item
+@ref{❨151❩, , @t{stack-cols-copy}}@: (generic function).
+@item
+@ref{❨157❩, , @t{stack-rows}}@: (function).
+@item
+@ref{❨146❩, , @t{stack-rows*}}@: (function).
+@item
+@ref{❨154❩, , @t{stack-rows-copy}}@: (generic function).
+@end itemize
+@item Internals
+@ref{❨158❩, , @t{stack*0}}@: (function).
+@end table
+
+
+
+@c ====================================================================
+@c Definitions
+@c ====================================================================
+@node Definitions, Indexes, Packages, Top
+@chapter Definitions
+Definitions are sorted by export status, category, package, and then by
+lexicographic order.
+
+@menu
+* Public Interface::
+* Internals::
+@end menu
+
+
+@c ----------------
+@c Public Interface
+@c ----------------
+@node Public Interface, Internals, Definitions, Definitions
+@section Public Interface
+@menu
+* Public macros::
+* Public ordinary functions::
+* Public generic functions::
+* Public conditions::
+* Public types::
+@end menu
+
+@node Public macros, Public ordinary functions, Public Interface, Public Interface
+@subsection Macros
+@deffn {Macro} {@ampchar{}dims} (&rest dimensions)
+@anchor{❨64❩}@c
+@macrosubindex{@ampchar{}dims}@c
+Dimensions of array-like object.
+@table @strong
+@item Package
+@ref{❨24❩, , @t{array-operations/generic}}.
+@item Source
+@ref{❨14❩, , @t{file-type.lisp}}.
+@end table
+@end deffn
+@deffn {Macro} {each-index} (index &body body)
+@anchor{❨36❩}@c
+@macrosubindex{each-index}@c
+Given one or more symbols INDEX@comma{} walks the BODY expression to determine the index ranges by looking for AREF and ROW-MAJOR-AREF calls.
+
+  Transpose of 2D array A@*
+
+    (each-index (i j)@*
+      (aref A j i))@*
+
+  Diagonal of a square 2D array@*
+
+    (each-index i (aref A i i))@*
+
+  Turn a 2D array into an array of arrays@*
+
+    (each-index i@*
+      (each-index j@*
+        (aref A i j)))@*
+
+  Matrix-vector product:@*
+
+    (each-index i@*
+      (sum-index j@*
+        (* (aref A i j) (aref x j))))@*
+
+  
+@table @strong
+@item Package
+@ref{❨23❩, , @t{array-operations/indexing}}.
+@item Source
+@ref{❨19❩, , @t{file-type.lisp}}.
+@end table
+@end deffn
+@deffn {Macro} {each-index!} (array index &body body)
+@anchor{❨33❩}@c
+@macrosubindex{each-index!}@c
+Sets elements of the given ARRAY to values of the BODY@comma{} evaluated at array indices INDEX
+
+  Note: This has the same semantics as each-index and each-index*@comma{}@*
+  but the INDEX ranges are taken from the ARRAY dimensions@comma{} not@*
+  a code walker.@*
+  
+@table @strong
+@item Package
+@ref{❨23❩, , @t{array-operations/indexing}}.
+@item Source
+@ref{❨19❩, , @t{file-type.lisp}}.
+@end table
+@end deffn
+@deffn {Macro} {each-index*} (element-type index &body body)
+@anchor{❨37❩}@c
+@macrosubindex{each-index*}@c
+Given one or more symbols INDEX@comma{} creates an array with ELEMENT-TYPE@comma{} then iterates over the index ranges  with the innermost loop using the last index.
+   Each iteration evaluates BODY@comma{} and sets the array element.@*
+
+   To find the range of the indices@comma{} walks the BODY expression@*
+   to determine the index ranges by looking for@*
+   AREF and ROW-MAJOR-AREF calls.@*
+
+  Transpose of 2D array A@*
+
+    (each-index* t (i j)@*
+      (aref A j i))@*
+
+  Diagonal of a square 2D array@*
+
+    (each-index* t i (aref A i i))@*
+
+  Turn a 2D array into an array of arrays@*
+
+    (each-index* t i@*
+      (each-index* t j@*
+        (aref A i j)))@*
+
+  Outer product of two 1D arrays to create a 2D array@*
+
+    (each-index* t (i j)@*
+      (* (aref x i) (aref y j)))@*
+
+  Matrix-vector product:@*
+
+    (each-index* t i@*
+      (sum-index j@*
+        (* (aref A i j) (aref x j))))@*
+
+  
+@table @strong
+@item Package
+@ref{❨23❩, , @t{array-operations/indexing}}.
+@item Source
+@ref{❨19❩, , @t{file-type.lisp}}.
+@end table
+@end deffn
+@deffn {Macro} {multf} (place &rest values)
+@anchor{❨112❩}@c
+@macrosubindex{multf}@c
+Multiply by the arguments
+@table @strong
+@item Package
+@ref{❨30❩, , @t{array-operations/utilities}}.
+@item Source
+@ref{❨18❩, , @t{file-type.lisp}}.
+@end table
+@end deffn
+@deffn {Macro} {nested-loop} (syms dimensions &body body)
+@anchor{❨117❩}@c
+@macrosubindex{nested-loop}@c
+Iterates over a multidimensional range of indices.@*
+
+   SYMS must be a list of symbols@comma{} with the first symbol
+   corresponding to the outermost loop.@*
+
+   DIMENSIONS will be evaluated@comma{} and must be a list of
+   dimension sizes@comma{} of the same length as SYMS.@*
+
+   Example:@*
+    (nested-loop (i j) '(10 20) (format t '~a ~a~%' i j))
+
+   expands to:@*
+
+    ; Check dimensions@*
+    (destructuring-bind (g1 g2) '(10 20)@*
+        (loop for i from 0 below g1 do@*
+            (loop for j from 0 below g2 do@*
+                (format t '~a ~a~%' i j))))@*
+
+  with some additional type and dimension checks.@*
+  
+@table @strong
+@item Package
+@ref{❨30❩, , @t{array-operations/utilities}}.
+@item Source
+@ref{❨18❩, , @t{file-type.lisp}}.
+@end table
+@end deffn
+@deffn {Macro} {reduce-index} (function index &body body)
+@anchor{❨35❩}@c
+@macrosubindex{reduce-index}@c
+Reduction over one or more INDEX symbols in an array expression.@*
+   The range of these symbols is determined by walking the tree@*
+   for AREF and ROW-MAJOR-AREF calls.@*
+
+  Example:@*
+
+   (defparameter A @hashchar{}2A((1 2) (3 4)))@*
+
+   (reduce-index @hashchar{}'+ i (row-major-aref A i))  ; Sum all elements (sum-index)
+   => 10@*
+
+   (reduce-index @hashchar{}'* (i j) (aref A i j))  ; Multiply all elements@*
+   => 24@*
+
+   (reduce-index @hashchar{}'max i (row-major-aref A i)) ; Maxmum value@*
+   => 4@*
+  
+@table @strong
+@item Package
+@ref{❨23❩, , @t{array-operations/indexing}}.
+@item Source
+@ref{❨19❩, , @t{file-type.lisp}}.
+@end table
+@end deffn
+@deffn {Macro} {sum-index} (index &body body)
+@anchor{❨34❩}@c
+@macrosubindex{sum-index}@c
+Sums over one or more INDEX symbols in an array expression.
+   The range of these symbols is determined by walking the tree
+   for AREF and ROW-MAJOR-AREF calls.@*
+
+  Example:@*
+
+   (defparameter A @hashchar{}2A((1 2) (3 4)))@*
+
+   (sum-index i (row-major-aref A i))  ; Sum all elements
+   => 10@*
+
+   (sum-index (i j) (aref A i j))  ; Sum all elements@*
+   => 10@*
+
+   (sum-index i (aref A i i))  ; Trace of array@*
+   => 5@*
+  
+@table @strong
+@item Package
+@ref{❨23❩, , @t{array-operations/indexing}}.
+@item Source
+@ref{❨19❩, , @t{file-type.lisp}}.
+@end table
+@end deffn
+@deffn {Macro} {vectorize} (variables &body body)
+@anchor{❨123❩}@c
+@macrosubindex{vectorize}@c
+Makes a new array of type ELEMENT-TYPE@comma{} containing the result of an array expression. All input and outputs have the same shape@comma{} and BODY is evaluated for each index
+
+   VARIABLES must be a list of symbols bound to arrays.@*
+   Each array must have the same dimensions. These are@*
+   checked at compile and run-time respectively.@*
+
+       (let ((a @hashchar{}2A((1 2) (3 4))))@*
+           (vectorize (a) (+ a 1)))@*
+       -> @hashchar{}2A((2 3) (4 5))@*
+
+       (let ((a @hashchar{}(1 2 3))@*
+             (b @hashchar{}(4 5 6)))@*
+           (vectorize (a b) (+ a (* b 2))))@*
+       -> @hashchar{}(9 12 15)@*
+   
+@table @strong
+@item Package
+@ref{❨31❩, , @t{array-operations/transforming}}.
+@item Source
+@ref{❨21❩, , @t{file-type.lisp}}.
+@end table
+@end deffn
+@deffn {Macro} {vectorize!} (result variables &body body)
+@anchor{❨137❩}@c
+@macrosubindex{vectorize!}@c
+Fills an array RESULT with the result of an array expression. All input and outputs have the same shape@comma{} and BODY is evaluated for each index@*
+
+   VARIABLES must be a list of symbols bound to arrays.  Each array must have the same dimensions. These are checked at compile and run-time respectively.
+
+       (let ((a @hashchar{}2A((1 2) (3 4)))@*
+             (b (make-array '(2 2))))@*
+           (vectorize! b (a) (+ a 1)))@*
+       -> @hashchar{}2A((2 3) (4 5))@*
+
+       (let ((a @hashchar{}(1 2 3))@*
+             (b @hashchar{}(4 5 6)))@*
+           (vectorize! b (a b) (+ a (* b 2))))@*
+       -> @hashchar{}(9 12 15)@*
+   
+@table @strong
+@item Package
+@ref{❨31❩, , @t{array-operations/transforming}}.
+@item Source
+@ref{❨21❩, , @t{file-type.lisp}}.
+@end table
+@end deffn
+@deffn {Macro} {vectorize*} (element-type variables &body body)
+@anchor{❨140❩}@c
+@macrosubindex{vectorize*}@c
+Makes a new array of type ELEMENT-TYPE@comma{} containing the result of an array expression. All input and outputs have the same shape@comma{} and BODY is evaluated for each index
+
+   VARIABLES must be a list of symbols bound to arrays.@*
+   Each array must have the same dimensions. These are@*
+   checked at compile and run-time respectively.@*
+
+       (let ((a @hashchar{}2A((1 2) (3 4))))@*
+           (vectorize* t (a) (+ a 1)))@*
+       -> @hashchar{}2A((2 3) (4 5))@*
+
+       (let ((a @hashchar{}(1 2 3))@*
+             (b @hashchar{}(4 5 6)))@*
+           (vectorize* t (a b) (+ a (* b 2))))@*
+       -> @hashchar{}(9 12 15)@*
+   
+@table @strong
+@item Package
+@ref{❨31❩, , @t{array-operations/transforming}}.
+@item Source
+@ref{❨21❩, , @t{file-type.lisp}}.
+@end table
+@end deffn
+@deffn {Macro} {vectorize-reduce} (fn variables &body body)
+@anchor{❨102❩}@c
+@macrosubindex{vectorize-reduce}@c
+Performs a reduction using FN over all elements in a vectorized expression
+   on array VARIABLES.@*
+
+   VARIABLES must be a list of symbols bound to arrays.@*
+   Each array must have the same dimensions. These are@*
+   checked at compile and run-time respectively.@*
+
+   Example: Maximum value in an array A@*
+
+   (vectorize-reduce @hashchar{}'max (a) a)@*
+
+   Example: Maximum absolute difference between two arrays A and B@*
+
+   (vectorize-reduce @hashchar{}'max (a b) (abs (- a b)))@*
+  
+@table @strong
+@item Package
+@ref{❨28❩, , @t{array-operations/reducing}}.
+@item Source
+@ref{❨15❩, , @t{file-type.lisp}}.
+@end table
+@end deffn
+@deffn {Macro} {walk-subscripts} ((dimensions subscripts &optional position) &body body)
+@anchor{❨116❩}@c
+@macrosubindex{walk-subscripts}@c
+Iterate over the subscripts of an array with given DIMENSIONS.  SUBSCRIPTS
+contains the current subscripts as a vector of fixnums@comma{} POSITION has the
+row-major index.  Consequences are undefined if either POSITION or SUBSCRIPTS
+is modified.
+@table @strong
+@item Package
+@ref{❨30❩, , @t{array-operations/utilities}}.
+@item Source
+@ref{❨18❩, , @t{file-type.lisp}}.
+@end table
+@end deffn
+@deffn {Macro} {walk-subscripts-list} ((dimensions subscripts &optional position) &body body)
+@anchor{❨113❩}@c
+@macrosubindex{walk-subscripts-list}@c
+Like WALK-SUBSCRIPTS@comma{} but SUBSCRIPTS is a newly created list for each
+position that does not share structure and can be freely used/modified/kept
+etc.
+@table @strong
+@item Package
+@ref{❨30❩, , @t{array-operations/utilities}}.
+@item Source
+@ref{❨18❩, , @t{file-type.lisp}}.
+@end table
+@end deffn
+
+@node Public ordinary functions, Public generic functions, Public macros, Public Interface
+@subsection Ordinary functions
+@deffn {Function} {argmax} (array)
+@anchor{❨105❩}@c
+@functionsubindex{argmax}@c
+Find the row-major-aref in ARRAY with the maximum value
+   Returns both the index and the value of ARRAY at that index
+@table @strong
+@item Package
+@ref{❨28❩, , @t{array-operations/reducing}}.
+@item Source
+@ref{❨15❩, , @t{file-type.lisp}}.
+@end table
+@end deffn
+@deffn {Function} {argmin} (array)
+@anchor{❨101❩}@c
+@functionsubindex{argmin}@c
+Find the row-major-aref in ARRAY with the minimum value
+   Returns both the index and the value of ARRAY at that index
+@table @strong
+@item Package
+@ref{❨28❩, , @t{array-operations/reducing}}.
+@item Source
+@ref{❨15❩, , @t{file-type.lisp}}.
+@end table
+@end deffn
+@deffn {Function} {best} (fn array)
+@anchor{❨104❩}@c
+@functionsubindex{best}@c
+FN must accept two inputs and return true/false. This function is applied@*
+   to elements of ARRAY@comma{} to find the 'best'. The row-major-aref index is returned.
+
+   Example: The index of the maximum is@*
+
+   * (best @hashchar{}'> @hashchar{}(1 2 3 4))@*
+    3   ; row-major index@*
+    4   ; value@*
+
+   This function was adapted from Paul Graham's On Lisp@*
+  
+@table @strong
+@item Package
+@ref{❨28❩, , @t{array-operations/reducing}}.
+@item Source
+@ref{❨15❩, , @t{file-type.lisp}}.
+@end table
+@end deffn
+@deffn {Function} {check-permutation} (permutation &optional rank)
+@anchor{❨134❩}@c
+@functionsubindex{check-permutation}@c
+Check if PERMUTATION is a valid permutation (of the given RANK)@comma{} and signal an error if necessary.
+@table @strong
+@item Package
+@ref{❨31❩, , @t{array-operations/transforming}}.
+@item Source
+@ref{❨21❩, , @t{file-type.lisp}}.
+@end table
+@end deffn
+@deffn {Function} {coercing} (element-type &optional function)
+@anchor{❨141❩}@c
+@functionsubindex{coercing}@c
+Return a function composed of a univariate function that coerces to ELEMENT-TYPE and function.  When FUNCTION is not given@comma{} return a closure that coerces to ELEMENT-TYPE.
+@table @strong
+@item Package
+@ref{❨31❩, , @t{array-operations/transforming}}.
+@item Source
+@ref{❨21❩, , @t{file-type.lisp}}.
+@end table
+@end deffn
+@deffn {Function} {combine} (array &optional element-type)
+@anchor{❨85❩}@c
+@functionsubindex{combine}@c
+The opposite of SUBARRAYS.@*
+If ELEMENT-TYPE is not given@comma{} it is inferred from the first element of array@comma{} which also determines the dimensions.  If that element is not an array@comma{} the original ARRAY is returned as it is.
+@table @strong
+@item Package
+@ref{❨27❩, , @t{array-operations/displacing}}.
+@item Source
+@ref{❨20❩, , @t{file-type.lisp}}.
+@end table
+@end deffn
+@deffn {Function} {complement-permutation} (permutation rank)
+@anchor{❨133❩}@c
+@functionsubindex{complement-permutation}@c
+Return a list of increasing indices that complement PERMUTATION@comma{} i.e. form a permutation when appended.  Atoms are accepted and treated as lists of a single element.
+@table @strong
+@item Package
+@ref{❨31❩, , @t{array-operations/transforming}}.
+@item Source
+@ref{❨21❩, , @t{file-type.lisp}}.
+@end table
+@end deffn
+@deffn {Function} {complete-permutation} (permutation rank)
+@anchor{❨131❩}@c
+@functionsubindex{complete-permutation}@c
+Return a completed version of permutation@comma{} appending it to its complement.
+@table @strong
+@item Package
+@ref{❨31❩, , @t{array-operations/transforming}}.
+@item Source
+@ref{❨21❩, , @t{file-type.lisp}}.
+@end table
+@end deffn
+@deffn {Function} {copy-into} (target source)
+@anchor{❨91❩}@c
+@functionsubindex{copy-into}@c
+Copy SOURCE into TARGET@comma{} for array arguments of compatible dimensions (checked).
+Return TARGET@comma{} making the implementation of the semantics of SETF easy.
+@table @strong
+@item Package
+@ref{❨27❩, , @t{array-operations/displacing}}.
+@item Source
+@ref{❨20❩, , @t{file-type.lisp}}.
+@end table
+@end deffn
+@deffn {Function} {copy-row-major-block} (source-array destination-array element-type &key source-start source-end destination-start)
+@anchor{❨147❩}@c
+@functionsubindex{copy-row-major-block}@c
+Copy elements with row major indexes between the given start and end from SOURCE to DESTINATION@comma{} respectively.  Elements are coerced to ELEMENT-TYPE when necessary.  Return no values.
+
+This function should be used to implement copying of contiguous row-major blocks of elements@comma{} most optimizations should happen here.
+@table @strong
+@item Package
+@ref{❨32❩, , @t{array-operations/stacking}}.
+@item Source
+@ref{❨22❩, , @t{file-type.lisp}}.
+@end table
+@end deffn
+@deffn {Function} {displace} (array dimensions &optional offset)
+@anchor{❨93❩}@c
+@functionsubindex{displace}@c
+Shorthand function for displacing an array.
+@table @strong
+@item Package
+@ref{❨27❩, , @t{array-operations/displacing}}.
+@item Source
+@ref{❨20❩, , @t{file-type.lisp}}.
+@end table
+@end deffn
+@deffn {Function} {each} (function array &rest other-arrays)
+@anchor{❨122❩}@c
+@functionsubindex{each}@c
+Like EACH*@comma{} with ELEMENT-TYPE T.
+@table @strong
+@item Package
+@ref{❨31❩, , @t{array-operations/transforming}}.
+@item Source
+@ref{❨21❩, , @t{file-type.lisp}}.
+@end table
+@end deffn
+@deffn {Function} {each*} (element-type function array &rest other-arrays)
+@anchor{❨121❩}@c
+@functionsubindex{each*}@c
+Apply function to the array arguments elementwise@comma{} and return the result as an array with the given ELEMENT-TYPE.  Arguments are checked for dimension compatibility.
+@table @strong
+@item Package
+@ref{❨31❩, , @t{array-operations/transforming}}.
+@item Source
+@ref{❨21❩, , @t{file-type.lisp}}.
+@end table
+@end deffn
+@deffn {Function} {ensure-dimensions} (object)
+@anchor{❨111❩}@c
+@functionsubindex{ensure-dimensions}@c
+Return a list of dimensions corresponding to OBJECT.  Positive integers are
+treated as dimensions of rank 1@comma{} lists are returned as they are@comma{} and arrays
+are queried for their dimensions.@*
+
+OBJECTS accepted by this function as valid dimensions are called `dimension
+specifications' in this library.
+@table @strong
+@item Package
+@ref{❨30❩, , @t{array-operations/utilities}}.
+@item Source
+@ref{❨18❩, , @t{file-type.lisp}}.
+@end table
+@end deffn
+@deffn {Function} {fill!} (array value)
+@anchor{❨66❩}@c
+@functionsubindex{fill!}@c
+Fills a given ARRAY with VALUE@comma{} coerced to the same element type as ARRAY
+@table @strong
+@item Package
+@ref{❨26❩, , @t{array-operations/creating}}.
+@item Source
+@ref{❨17❩, , @t{file-type.lisp}}.
+@end table
+@end deffn
+@deffn {Function} {fill-in-dimensions} (dimensions size)
+@anchor{❨94❩}@c
+@functionsubindex{fill-in-dimensions}@c
+If one of the dimensions is missing (indicated with T)@comma{} replace it with a dimension so that the total product equals SIZE.  If that's not possible@comma{}
+signal an error.  If there are no missing dimensions@comma{} just check that the product equals size.  Also accepts other dimension specifications (integer@comma{}
+array).
+@table @strong
+@item Package
+@ref{❨27❩, , @t{array-operations/displacing}}.
+@item Source
+@ref{❨20❩, , @t{file-type.lisp}}.
+@end table
+@end deffn
+@deffn {Function} {flatten} (array)
+@anchor{❨87❩}@c
+@functionsubindex{flatten}@c
+Return ARRAY flattened to a vector.  Will share structure.
+@table @strong
+@item Package
+@ref{❨27❩, , @t{array-operations/displacing}}.
+@item Source
+@ref{❨20❩, , @t{file-type.lisp}}.
+@end table
+@end deffn
+@deffn {Function} {generate} (function dimensions &optional arguments)
+@anchor{❨79❩}@c
+@functionsubindex{generate}@c
+Like GENERATE*@comma{} with ELEMENT-TYPE T.
+@table @strong
+@item Package
+@ref{❨26❩, , @t{array-operations/creating}}.
+@item Source
+@ref{❨17❩, , @t{file-type.lisp}}.
+@end table
+@end deffn
+@deffn {Function} {generate*} (element-type function dimensions &optional arguments)
+@anchor{❨73❩}@c
+@functionsubindex{generate*}@c
+Return an array with given DIMENSIONS and ELEMENT-TYPE@comma{} with elements generated by calling FUNCTION.
+
+Function is called with:@*
+
+ - no arguments@comma{} when ARGUMENTS is nil@*
+ - the position (= row major index)@comma{} when ARGUMENTS is :POSITION@*
+ - a list of subscripts@comma{} when ARGUMENTS is :SUBSCRIPTS@*
+ - both when ARGUMENTS is :POSITION-AND-SUBSCRIPTS@*
+
+The traversal order is unspecified and may be nonlinear.
+@table @strong
+@item Package
+@ref{❨26❩, , @t{array-operations/creating}}.
+@item Source
+@ref{❨17❩, , @t{file-type.lisp}}.
+@end table
+@end deffn
+@deffn {Function} {identity-permutation-p} (permutation &optional rank)
+@anchor{❨125❩}@c
+@functionsubindex{identity-permutation-p}@c
+Test if PERMUTATION is the identity permutation@comma{} i.e. a sequence of consecutive integers starting at 0.  Note that permutation is otherwise not checked@comma{} i.e. it may not be a permutation.
+@table @strong
+@item Package
+@ref{❨31❩, , @t{array-operations/transforming}}.
+@item Source
+@ref{❨21❩, , @t{file-type.lisp}}.
+@end table
+@end deffn
+@deffn {Function} {identity-permutation?} (permutation &optional rank)
+@anchor{❨132❩}@c
+@functionsubindex{identity-permutation?}@c
+Test if PERMUTATION is the identity permutation@comma{} i.e. a sequence of consecutive integers starting at 0.  Note that permutation is otherwise not checked@comma{} i.e. it may not be a permutation.
+@table @strong
+@item Package
+@ref{❨31❩, , @t{array-operations/transforming}}.
+@item Alias for
+@ref{❨125❩, , @t{identity-permutation-p}}.
+@end table
+@end deffn
+@deffn {Function} {invert-permutation} (permutation)
+@anchor{❨124❩}@c
+@functionsubindex{invert-permutation}@c
+Invert a permutation.
+@table @strong
+@item Package
+@ref{❨31❩, , @t{array-operations/transforming}}.
+@item Source
+@ref{❨21❩, , @t{file-type.lisp}}.
+@end table
+@end deffn
+@deffn {Function} {linspace} (start stop n)
+@anchor{❨68❩}@c
+@functionsubindex{linspace}@c
+Make a vector of N elements and type T@comma{} containing evenly spaced numbers over an interval.
+   The first element is equal to START and last element STOP@comma{}@*
+   with constant difference between consecutive elements.@*
+
+  (linspace 0 4 5) -> @hashchar{}(0 1 2 3 4)@*
+  (linspace 1 3 5) -> @hashchar{}(0 1/2 1 3/2 2)@*
+  (linspace 0 4d0 3) -> @hashchar{}(0.0d0 2.0d0 4.0d0)@*
+  
+@table @strong
+@item Package
+@ref{❨26❩, , @t{array-operations/creating}}.
+@item Source
+@ref{❨17❩, , @t{file-type.lisp}}.
+@end table
+@end deffn
+@deffn {Function} {linspace!} (array start stop)
+@anchor{❨82❩}@c
+@functionsubindex{linspace!}@c
+Fill an array with evenly spaced numbers over an interval.@*
+   The first element is equal to START and last element STOP@comma{}@*
+   with constant difference between consecutive elements in ROW-MAJOR-INDEX.
+@table @strong
+@item Package
+@ref{❨26❩, , @t{array-operations/creating}}.
+@item Source
+@ref{❨17❩, , @t{file-type.lisp}}.
+@end table
+@end deffn
+@deffn {Function} {linspace*} (element-type start stop n)
+@anchor{❨65❩}@c
+@functionsubindex{linspace*}@c
+Make a vector of N elements and type ELEMENT-TYPE@comma{} containing evenly spaced numbers over an interval.
+   The first element is equal to START and last element STOP@comma{}@*
+   with constant difference between consecutive elements.
+@table @strong
+@item Package
+@ref{❨26❩, , @t{array-operations/creating}}.
+@item Source
+@ref{❨17❩, , @t{file-type.lisp}}.
+@end table
+@end deffn
+@deffn {Function} {make-array-like} (array &key dimensions adjustable element-type initial-element fill-pointer)
+@anchor{❨78❩}@c
+@functionsubindex{make-array-like}@c
+Returns new array with the same properties as ARRAY.@*
+   Keyword arguments will override properties of ARRAY.@*
+   If INITIAL-ELEMENT is specified@comma{} it is coerced to ELEMENT-TYPE.
+@table @strong
+@item Package
+@ref{❨26❩, , @t{array-operations/creating}}.
+@item Alias for
+@ref{❨77❩, , @t{similar-array}}.
+@end table
+@end deffn
+@deffn {Function} {margin} (function array inner &optional outer)
+@anchor{❨126❩}@c
+@functionsubindex{margin}@c
+Like MARGIN*@comma{} with ELEMENT-TYPE T.
+@table @strong
+@item Package
+@ref{❨31❩, , @t{array-operations/transforming}}.
+@item Source
+@ref{❨21❩, , @t{file-type.lisp}}.
+@end table
+@end deffn
+@deffn {Function} {margin*} (element-type function array inner &optional outer)
+@anchor{❨127❩}@c
+@functionsubindex{margin*}@c
+PERMUTE ARRAY with `(@comma{}@atchar{}OUTER @comma{}@atchar{}INNER)@comma{} split the inner subarrays@comma{} apply FUNCTION to each@comma{} return the results in an array of dimensions OUTER@comma{} with the given ELEMENT-TYPE.
+@table @strong
+@item Package
+@ref{❨31❩, , @t{array-operations/transforming}}.
+@item Source
+@ref{❨21❩, , @t{file-type.lisp}}.
+@end table
+@end deffn
+@deffn {Function} {matrix?} (matrix)
+@anchor{❨106❩}@c
+@functionsubindex{matrix?}@c
+Return NIL if MATRIX does not have rank 2.
+@table @strong
+@item Package
+@ref{❨29❩, , @t{array-operations/matrices}}.
+@item Alias for
+@ref{❨108❩, , @t{matrixp}}.
+@end table
+@end deffn
+@deffn {Function} {matrixp} (matrix)
+@anchor{❨108❩}@c
+@functionsubindex{matrixp}@c
+Return NIL if MATRIX does not have rank 2.
+@table @strong
+@item Package
+@ref{❨29❩, , @t{array-operations/matrices}}.
+@item Source
+@ref{❨16❩, , @t{file-type.lisp}}.
+@end table
+@end deffn
+@deffn {Function} {most} (fn array)
+@anchor{❨103❩}@c
+@functionsubindex{most}@c
+Finds the element of ARRAY that returns the value closest to positive infinity when FN is applied to the array value.
+   Returns the row-major-aref index@comma{} and the winning value.@*
+
+   Example: The maximum of an array is@*
+     (most @hashchar{}'identity @hashchar{}(1 2 3))@*
+     -> 2    (row-major index)@*
+        3    (value)@*
+
+   Minimum of an array is@*
+      (most @hashchar{}'- @hashchar{}(1 2 3))@*
+        0@*
+        -1@*
+
+   This function was adapted from Paul Graham's On Lisp@*
+  
+@table @strong
+@item Package
+@ref{❨28❩, , @t{array-operations/reducing}}.
+@item Source
+@ref{❨15❩, , @t{file-type.lisp}}.
+@end table
+@end deffn
+@deffn {Function} {ones} (dimensions)
+@anchor{❨76❩}@c
+@functionsubindex{ones}@c
+Makes an array of shape DIMENSIONS and type T@comma{} filled with ones
+@table @strong
+@item Package
+@ref{❨26❩, , @t{array-operations/creating}}.
+@item Source
+@ref{❨17❩, , @t{file-type.lisp}}.
+@end table
+@end deffn
+@deffn {Function} {ones!} (array)
+@anchor{❨83❩}@c
+@functionsubindex{ones!}@c
+Fills the given ARRAY with 1's@comma{} coerced to the element type.  Returns ARRAY.
+@table @strong
+@item Package
+@ref{❨26❩, , @t{array-operations/creating}}.
+@item Source
+@ref{❨17❩, , @t{file-type.lisp}}.
+@end table
+@end deffn
+@deffn {Function} {ones*} (element-type dimensions)
+@anchor{❨84❩}@c
+@functionsubindex{ones*}@c
+Makes an array of shape DIMENSIONS and type ELEMENT-TYPE@comma{} filled with ones
+   coerced to the specified type ELEMENT-TYPE.
+@table @strong
+@item Package
+@ref{❨26❩, , @t{array-operations/creating}}.
+@item Source
+@ref{❨17❩, , @t{file-type.lisp}}.
+@end table
+@end deffn
+@deffn {Function} {outer} (function &rest arrays)
+@anchor{❨130❩}@c
+@functionsubindex{outer}@c
+Like OUTER@comma{} with ELEMENT-TYPE t.
+@table @strong
+@item Package
+@ref{❨31❩, , @t{array-operations/transforming}}.
+@item Source
+@ref{❨21❩, , @t{file-type.lisp}}.
+@end table
+@end deffn
+@deffn {Function} {outer*} (element-type function &rest arrays)
+@anchor{❨129❩}@c
+@functionsubindex{outer*}@c
+Generalized outer product of ARRAYS with FUNCTION.  The resulting array has the concatenated dimensions of ARRAYS@comma{} and the given ELEMENT-TYPE.
+@table @strong
+@item Package
+@ref{❨31❩, , @t{array-operations/transforming}}.
+@item Source
+@ref{❨21❩, , @t{file-type.lisp}}.
+@end table
+@end deffn
+@deffn {Function} {partition} (array start &optional end)
+@anchor{❨96❩}@c
+@functionsubindex{partition}@c
+Return a subset of the array@comma{} on the first indexes between START and END.
+@table @strong
+@item Package
+@ref{❨27❩, , @t{array-operations/displacing}}.
+@item Source
+@ref{❨20❩, , @t{file-type.lisp}}.
+@end table
+@end deffn
+@deffn {Function} {(setf partition)} (array start &optional end)
+@anchor{❨97❩}@c
+@functionsubindex{(setf partition)}@c
+@table @strong
+@item Package
+@ref{❨27❩, , @t{array-operations/displacing}}.
+@item Source
+@ref{❨20❩, , @t{file-type.lisp}}.
+@end table
+@end deffn
+@deffn {Function} {permute} (permutation array)
+@anchor{❨135❩}@c
+@functionsubindex{permute}@c
+Return ARRAY with the axes permuted by PERMUTATION@comma{} which is a sequence of indexes.  Specifically@comma{} an array A is transformed to B@comma{} where
+
+  B[b_1@comma{}...@comma{}b_n] = A[a_1@comma{}...@comma{}a_n] with b_i=a_@lbracechar{}P[i]@rbracechar{}@*
+
+P is the permutation.@*
+
+Array element type is preserved.
+@table @strong
+@item Package
+@ref{❨31❩, , @t{array-operations/transforming}}.
+@item Source
+@ref{❨21❩, , @t{file-type.lisp}}.
+@end table
+@end deffn
+@deffn {Function} {product} (dimensions)
+@anchor{❨115❩}@c
+@functionsubindex{product}@c
+Product of elements in the argument.  NOT EXPORTED.
+@table @strong
+@item Package
+@ref{❨30❩, , @t{array-operations/utilities}}.
+@item Source
+@ref{❨18❩, , @t{file-type.lisp}}.
+@end table
+@end deffn
+@deffn {Function} {rand} (dimensions)
+@anchor{❨71❩}@c
+@functionsubindex{rand}@c
+Makes an array of shape DIMENSIONS and type T@comma{} filled with random numbers uniformly distributed between 0 and 1.
+
+   Uses the built-in RANDOM function.@*
+
+   (rand 3)  -> @hashchar{}(0.39319038 0.69693553 0.5021677)@*
+   (rand '(2 2)) -> @hashchar{}2A((0.91003513 0.23208928) (0.5577954 0.94657767))@*
+
+   NOTE: If it's important that these numbers are really random@*
+   (e.g. cryptographic applications)@comma{} then you should probably@*
+   not use this function.@*
+   
+@table @strong
+@item Package
+@ref{❨26❩, , @t{array-operations/creating}}.
+@item Source
+@ref{❨17❩, , @t{file-type.lisp}}.
+@end table
+@end deffn
+@deffn {Function} {rand!} (array)
+@anchor{❨81❩}@c
+@functionsubindex{rand!}@c
+Fills a given ARRAY with random numbers@comma{} uniformly distributed between 0 and 1.  Uses the built-in RANDOM function.
+Returns ARRAY.
+@table @strong
+@item Package
+@ref{❨26❩, , @t{array-operations/creating}}.
+@item Source
+@ref{❨17❩, , @t{file-type.lisp}}.
+@end table
+@end deffn
+@deffn {Function} {rand*} (element-type dimensions)
+@anchor{❨80❩}@c
+@functionsubindex{rand*}@c
+Makes an array of shape DIMENSIONS and type ELEMENT-TYPE@comma{} filled with random numbers uniformly distributed between 0 and 1.
+
+   Uses the built-in RANDOM function.@*
+
+   (rand 3)  -> @hashchar{}(0.39319038 0.69693553 0.5021677)@*
+   (rand '(2 2)) -> @hashchar{}2A((0.91003513 0.23208928) (0.5577954 0.94657767))@*
+
+   NOTE: If it's important that these numbers are really random@*
+   (e.g. cryptographic applications)@comma{} then you should probably@*
+   not use this function.@*
+   
+@table @strong
+@item Package
+@ref{❨26❩, , @t{array-operations/creating}}.
+@item Source
+@ref{❨17❩, , @t{file-type.lisp}}.
+@end table
+@end deffn
+@deffn {Function} {randn} (dimensions)
+@anchor{❨75❩}@c
+@functionsubindex{randn}@c
+Creates an array of shape DIMENSIONS and type T@comma{} and fills with normally distributed numbers with a mean of zero and standard deviation of 1
+
+   Uses the Box-Muller algorithm and built-in random number generator.@*
+
+   (rand 3)   -> @hashchar{}(-0.82067037 -0.60068226 -0.21494178)@*
+   (randn '(2 2)) -> @hashchar{}2A((1.6905352 -2.5379088) (0.8461403 -1.505984))@*
+
+   NOTE: If it's important that these numbers are really random@*
+   (e.g. cryptographic applications)@comma{} then you should probably@*
+   not use this function.@*
+   
+@table @strong
+@item Package
+@ref{❨26❩, , @t{array-operations/creating}}.
+@item Source
+@ref{❨17❩, , @t{file-type.lisp}}.
+@end table
+@end deffn
+@deffn {Function} {randn!} (array)
+@anchor{❨74❩}@c
+@functionsubindex{randn!}@c
+Fills ARRAY with normally distributed numbers with a mean of zero and standard deviation of 1
+
+   Uses the Box-Muller algorithm and built-in random number generator.@*
+
+   NOTE: If it's important that these numbers are really random@*
+   (e.g. cryptographic applications)@comma{} then you should probably@*
+   not use this function.@*
+   
+@table @strong
+@item Package
+@ref{❨26❩, , @t{array-operations/creating}}.
+@item Source
+@ref{❨17❩, , @t{file-type.lisp}}.
+@end table
+@end deffn
+@deffn {Function} {randn*} (element-type dimensions)
+@anchor{❨72❩}@c
+@functionsubindex{randn*}@c
+Creates an array of shape DIMENSIONS and type ELEMENT-TYPE@comma{} and fills with normally distributed numbers with a mean of zero and standard deviation of 1
+
+   Uses the Box-Muller algorithm and built-in random number generator.@*
+
+   (rand 3)   -> @hashchar{}(-0.82067037 -0.60068226 -0.21494178)@*
+   (randn '(2 2)) -> @hashchar{}2A((1.6905352 -2.5379088) (0.8461403 -1.505984))@*
+
+   NOTE: If it's important that these numbers are really random@*
+   (e.g. cryptographic applications)@comma{} then you should probably@*
+   not use this function.@*
+   
+@table @strong
+@item Package
+@ref{❨26❩, , @t{array-operations/creating}}.
+@item Source
+@ref{❨17❩, , @t{file-type.lisp}}.
+@end table
+@end deffn
+@deffn {Function} {recycle} (object &key inner outer element-type)
+@anchor{❨136❩}@c
+@functionsubindex{recycle}@c
+Recycle elements of OBJECT@comma{} extending the dimensions by outer (repeating OBJECT) and inner (repeating each element of OBJECT).  When both INNER and OUTER are nil@comma{} the OBJECT is returned as is.  Non-array OBJECTs are interpreted as rank 0 arrays@comma{} following the usual semantics.
+@table @strong
+@item Package
+@ref{❨31❩, , @t{array-operations/transforming}}.
+@item Source
+@ref{❨21❩, , @t{file-type.lisp}}.
+@end table
+@end deffn
+@deffn {Function} {reshape} (array dimensions &optional offset)
+@anchor{❨95❩}@c
+@functionsubindex{reshape}@c
+Reshape ARRAY using DIMENSIONS (which can also be dimension specifications).@*
+If DIMENSIONS is a list@comma{} it may contain a single element T which will be calculated to match the total size of the resulting array.
+@table @strong
+@item Package
+@ref{❨27❩, , @t{array-operations/displacing}}.
+@item Source
+@ref{❨20❩, , @t{file-type.lisp}}.
+@end table
+@end deffn
+@deffn {Function} {reshape-col} (array)
+@anchor{❨88❩}@c
+@functionsubindex{reshape-col}@c
+Array reshaped as an Nx1 matrix.
+@table @strong
+@item Package
+@ref{❨27❩, , @t{array-operations/displacing}}.
+@item Source
+@ref{❨20❩, , @t{file-type.lisp}}.
+@end table
+@end deffn
+@deffn {Function} {reshape-row} (array)
+@anchor{❨86❩}@c
+@functionsubindex{reshape-row}@c
+Array reshaped as an 1xN matrix.
+@table @strong
+@item Package
+@ref{❨27❩, , @t{array-operations/displacing}}.
+@item Source
+@ref{❨20❩, , @t{file-type.lisp}}.
+@end table
+@end deffn
+@deffn {Function} {same-dimensions-p} (array &rest arrays)
+@anchor{❨114❩}@c
+@functionsubindex{same-dimensions-p}@c
+Test if arguments have the same dimensions.  NOT EXPORTED.
+@table @strong
+@item Package
+@ref{❨30❩, , @t{array-operations/utilities}}.
+@item Source
+@ref{❨18❩, , @t{file-type.lisp}}.
+@end table
+@end deffn
+@deffn {Function} {similar-array} (array &key dimensions adjustable element-type initial-element fill-pointer)
+@anchor{❨77❩}@c
+@functionsubindex{similar-array}@c
+Returns new array with the same properties as ARRAY.@*
+   Keyword arguments will override properties of ARRAY.@*
+   If INITIAL-ELEMENT is specified@comma{} it is coerced to ELEMENT-TYPE.
+@table @strong
+@item Package
+@ref{❨26❩, , @t{array-operations/creating}}.
+@item Source
+@ref{❨17❩, , @t{file-type.lisp}}.
+@end table
+@end deffn
+@deffn {Function} {split} (array rank)
+@anchor{❨92❩}@c
+@functionsubindex{split}@c
+Return an array of subarrays@comma{} split off at RANK.  All subarrays are displaced and share structure.
+@table @strong
+@item Package
+@ref{❨27❩, , @t{array-operations/displacing}}.
+@item Source
+@ref{❨20❩, , @t{file-type.lisp}}.
+@end table
+@end deffn
+@deffn {Function} {square-matrix-p} (matrix)
+@anchor{❨109❩}@c
+@functionsubindex{square-matrix-p}@c
+Test if MATRIX has two dimensions and that they are equal.
+@table @strong
+@item Package
+@ref{❨29❩, , @t{array-operations/matrices}}.
+@item Source
+@ref{❨16❩, , @t{file-type.lisp}}.
+@end table
+@end deffn
+@deffn {Function} {square-matrix?} (matrix)
+@anchor{❨107❩}@c
+@functionsubindex{square-matrix?}@c
+Test if MATRIX has two dimensions and that they are equal.
+@table @strong
+@item Package
+@ref{❨29❩, , @t{array-operations/matrices}}.
+@item Alias for
+@ref{❨109❩, , @t{square-matrix-p}}.
+@end table
+@end deffn
+@deffn {Function} {stack} (axis array &rest arrays)
+@anchor{❨145❩}@c
+@functionsubindex{stack}@c
+Like STACK*@comma{} with element-type T.
+@table @strong
+@item Package
+@ref{❨32❩, , @t{array-operations/stacking}}.
+@item Source
+@ref{❨22❩, , @t{file-type.lisp}}.
+@end table
+@end deffn
+@deffn {Function} {stack*} (element-type axis array &rest arrays)
+@anchor{❨150❩}@c
+@functionsubindex{stack*}@c
+Stack array arguments along AXIS.  ELEMENT-TYPE determines the element-type
+of the result.
+@table @strong
+@item Package
+@ref{❨32❩, , @t{array-operations/stacking}}.
+@item Source
+@ref{❨22❩, , @t{file-type.lisp}}.
+@end table
+@end deffn
+@deffn {Function} {stack-cols} (&rest objects)
+@anchor{❨148❩}@c
+@functionsubindex{stack-cols}@c
+Like STACK-COLS*@comma{} with ELEMENT-TYPE T.
+@table @strong
+@item Package
+@ref{❨32❩, , @t{array-operations/stacking}}.
+@item Source
+@ref{❨22❩, , @t{file-type.lisp}}.
+@end table
+@end deffn
+@deffn {Function} {stack-cols*} (element-type &rest objects)
+@anchor{❨149❩}@c
+@functionsubindex{stack-cols*}@c
+Stack OBJECTS column-wise into an array of the given ELEMENT-TYPE@comma{} coercing if necessary.  Always return a simple array of rank 2.@*
+
+How objects are used depends on their dimensions@comma{} queried by DIMS:@*
+
+- when the object has 0 dimensions@comma{} fill a column with the element.@*
+
+- when the object has 1 dimension@comma{} use it as a column.@*
+
+- when the object has 2 dimensions@comma{} use it as a matrix.@*
+
+When applicable@comma{} compatibility of dimensions is checked@comma{} and the result is used to determine the number of rows.  When all objects have 0 dimensions@comma{} the result has one row.
+@table @strong
+@item Package
+@ref{❨32❩, , @t{array-operations/stacking}}.
+@item Source
+@ref{❨22❩, , @t{file-type.lisp}}.
+@end table
+@end deffn
+@deffn {Function} {stack-rows} (&rest objects)
+@anchor{❨157❩}@c
+@functionsubindex{stack-rows}@c
+Like STACK-ROWS*@comma{} with ELEMENT-TYPE T.
+@table @strong
+@item Package
+@ref{❨32❩, , @t{array-operations/stacking}}.
+@item Source
+@ref{❨22❩, , @t{file-type.lisp}}.
+@end table
+@end deffn
+@deffn {Function} {stack-rows*} (element-type &rest objects)
+@anchor{❨146❩}@c
+@functionsubindex{stack-rows*}@c
+Stack OBJECTS row-wise into an array of the given ELEMENT-TYPE@comma{} coercing if necessary.  Always return a simple array of rank 2.@*
+
+How objects are used depends on their dimensions@comma{} queried by DIMS:@*
+
+- when the object has 0 dimensions@comma{} fill a row with the element.@*
+
+- when the object has 1 dimension@comma{} use it as a row.@*
+
+- when the object has 2 dimensions@comma{} use it as a matrix.@*
+
+When applicable@comma{} compatibility of dimensions is checked@comma{} and the result is used to determine the number of columns.  When all objects have 0 dimensions@comma{} the result has one column.
+@table @strong
+@item Package
+@ref{❨32❩, , @t{array-operations/stacking}}.
+@item Source
+@ref{❨22❩, , @t{file-type.lisp}}.
+@end table
+@end deffn
+@deffn {Function} {sub} (array &rest subscripts)
+@anchor{❨98❩}@c
+@functionsubindex{sub}@c
+Given a partial list of subscripts@comma{} return the subarray that starts there@comma{} with all the other subscripts set to 0@comma{} dimensions inferred from the original.
+
+If no subscripts are given@comma{} the original array is returned.  Implemented by displacing@comma{} may share structure.
+@table @strong
+@item Package
+@ref{❨27❩, , @t{array-operations/displacing}}.
+@item Source
+@ref{❨20❩, , @t{file-type.lisp}}.
+@end table
+@end deffn
+@deffn {Function} {(setf sub)} (array &rest subscripts)
+@anchor{❨99❩}@c
+@functionsubindex{(setf sub)}@c
+@table @strong
+@item Package
+@ref{❨27❩, , @t{array-operations/displacing}}.
+@item Source
+@ref{❨20❩, , @t{file-type.lisp}}.
+@end table
+@end deffn
+@deffn {Function} {subvec} (vector start &optional end)
+@anchor{❨89❩}@c
+@functionsubindex{subvec}@c
+Displaced vector between START and END.
+@table @strong
+@item Package
+@ref{❨27❩, , @t{array-operations/displacing}}.
+@item Source
+@ref{❨20❩, , @t{file-type.lisp}}.
+@end table
+@end deffn
+@deffn {Function} {(setf subvec)} (vector start &optional end)
+@anchor{❨90❩}@c
+@functionsubindex{(setf subvec)}@c
+@table @strong
+@item Package
+@ref{❨27❩, , @t{array-operations/displacing}}.
+@item Source
+@ref{❨20❩, , @t{file-type.lisp}}.
+@end table
+@end deffn
+@deffn {Function} {turn} (array nturns &optional rank-1 rank-2)
+@anchor{❨128❩}@c
+@functionsubindex{turn}@c
+Turns an array by a specified number of clockwise 90° rotations. The axis of
+rotation is specified by RANK-1 (defaulting to 0) and RANK-2 (defaulting to 1).
+@table @strong
+@item Package
+@ref{❨31❩, , @t{array-operations/transforming}}.
+@item Source
+@ref{❨21❩, , @t{file-type.lisp}}.
+@end table
+@end deffn
+@deffn {Function} {zeros} (dimensions)
+@anchor{❨70❩}@c
+@functionsubindex{zeros}@c
+Makes an array of shape DIMENSIONS and type T@comma{} filled with zeros
+@table @strong
+@item Package
+@ref{❨26❩, , @t{array-operations/creating}}.
+@item Source
+@ref{❨17❩, , @t{file-type.lisp}}.
+@end table
+@end deffn
+@deffn {Function} {zeros!} (array)
+@anchor{❨69❩}@c
+@functionsubindex{zeros!}@c
+Fills the given ARRAY with zero values@comma{} coerced to the element type.
+Returns ARRAY.
+@table @strong
+@item Package
+@ref{❨26❩, , @t{array-operations/creating}}.
+@item Source
+@ref{❨17❩, , @t{file-type.lisp}}.
+@end table
+@end deffn
+@deffn {Function} {zeros*} (element-type dimensions)
+@anchor{❨67❩}@c
+@functionsubindex{zeros*}@c
+Makes an array of shape DIMENSIONS and type ELEMENT-TYPE@comma{} filled with zeros  coerced to the specified type ELEMENT-TYPE.
+@table @strong
+@item Package
+@ref{❨26❩, , @t{array-operations/creating}}.
+@item Source
+@ref{❨17❩, , @t{file-type.lisp}}.
+@end table
+@end deffn
+
+@node Public generic functions, Public conditions, Public ordinary functions, Public Interface
+@subsection Generic functions
+@deffn {Generic Function} {as-array} (object)
+@anchor{❨43❩}@c
+@genericsubindex{as-array}@c
+Return the contents of OBJECT as an array.  Exact semantics depends on OBJECT@comma{} but generally objects which contain elements in a rectilinear coordinate system should have a natural mapping to arrays.@*
+
+When the second value is T@comma{} the array itself does not share structure with OBJECT@comma{} but its elements may.  Otherwise@comma{} it is indeterminate whether the two objects share structure@comma{} and consequences of modifying the result are not defined.  Methods are encouraged but not required to return a second value.
+@table @strong
+@item Package
+@ref{❨24❩, , @t{array-operations/generic}}.
+@item Source
+@ref{❨14❩, , @t{file-type.lisp}}.
+@item Methods
+@deffn {Method} {as-array} ((array @t{array}))
+@anchor{❨44❩}@c
+@methodsubindex{as-array}@c
+@table @strong
+@end table
+@end deffn
+@deffn {Method} {as-array} (object)
+@anchor{❨45❩}@c
+@methodsubindex{as-array}@c
+@table @strong
+@end table
+@end deffn
+@end table
+@end deffn
+@deffn {Generic Function} {dim} (array axis)
+@anchor{❨55❩}@c
+@genericsubindex{dim}@c
+Return specificed dimension of ARRAY.
+@table @strong
+@item Package
+@ref{❨24❩, , @t{array-operations/generic}}.
+@item Source
+@ref{❨14❩, , @t{file-type.lisp}}.
+@item Methods
+@deffn {Method} {dim} ((array @t{array}) axis)
+@anchor{❨56❩}@c
+@methodsubindex{dim}@c
+@table @strong
+@end table
+@end deffn
+@deffn {Method} {dim} (array axis)
+@anchor{❨57❩}@c
+@methodsubindex{dim}@c
+@table @strong
+@end table
+@end deffn
+@end table
+@end deffn
+@deffn {Generic Function} {dims} (array)
+@anchor{❨52❩}@c
+@genericsubindex{dims}@c
+Return a list of dimensions.@*
+
+For non-array objects@comma{} SIZE@comma{} DIM@comma{} NROW and NCOL use this method by default@comma{} so it is enough to define it (unless efficiency is a concern).@*
+
+When DIMS is not defined for an object@comma{} it falls back to as-array@comma{} which may be very inefficient for objects which need to be consed.  It is always advisable to define DIMS.
+@table @strong
+@item Package
+@ref{❨24❩, , @t{array-operations/generic}}.
+@item Source
+@ref{❨14❩, , @t{file-type.lisp}}.
+@item Methods
+@deffn {Method} {dims} ((array @t{array}))
+@anchor{❨53❩}@c
+@methodsubindex{dims}@c
+@table @strong
+@end table
+@end deffn
+@deffn {Method} {dims} (array)
+@anchor{❨54❩}@c
+@methodsubindex{dims}@c
+@table @strong
+@end table
+@end deffn
+@end table
+@end deffn
+@deffn {Generic Function} {element-type} (array)
+@anchor{❨58❩}@c
+@genericsubindex{element-type}@c
+Return TYPE such that@*
+
+1. all elements of ARRAY are guaranteed to be a subtype of TYPE@comma{}@*
+
+2. if applicable@comma{} elements of ARRAY can be set to values which are of a type that is a subtype of TYPE.
+@table @strong
+@item Package
+@ref{❨24❩, , @t{array-operations/generic}}.
+@item Source
+@ref{❨14❩, , @t{file-type.lisp}}.
+@item Methods
+@deffn {Method} {element-type} ((array @t{array}))
+@anchor{❨59❩}@c
+@methodsubindex{element-type}@c
+@table @strong
+@end table
+@end deffn
+@deffn {Method} {element-type} (array)
+@anchor{❨60❩}@c
+@methodsubindex{element-type}@c
+@table @strong
+@end table
+@end deffn
+@end table
+@end deffn
+@deffn {Generic Function} {ncol} (array)
+@anchor{❨49❩}@c
+@genericsubindex{ncol}@c
+Number of columns.  Will signal an error if ARRAY is not a matrix.
+@table @strong
+@item Package
+@ref{❨24❩, , @t{array-operations/generic}}.
+@item Source
+@ref{❨14❩, , @t{file-type.lisp}}.
+@item Methods
+@deffn {Method} {ncol} ((array @t{array}))
+@anchor{❨50❩}@c
+@methodsubindex{ncol}@c
+@table @strong
+@end table
+@end deffn
+@deffn {Method} {ncol} (array)
+@anchor{❨51❩}@c
+@methodsubindex{ncol}@c
+@table @strong
+@end table
+@end deffn
+@end table
+@end deffn
+@deffn {Generic Function} {nrow} (array)
+@anchor{❨61❩}@c
+@genericsubindex{nrow}@c
+Number of rows.  Will signal an error if ARRAY is not a matrix.
+@table @strong
+@item Package
+@ref{❨24❩, , @t{array-operations/generic}}.
+@item Source
+@ref{❨14❩, , @t{file-type.lisp}}.
+@item Methods
+@deffn {Method} {nrow} ((array @t{array}))
+@anchor{❨62❩}@c
+@methodsubindex{nrow}@c
+@table @strong
+@end table
+@end deffn
+@deffn {Method} {nrow} (array)
+@anchor{❨63❩}@c
+@methodsubindex{nrow}@c
+@table @strong
+@end table
+@end deffn
+@end table
+@end deffn
+@deffn {Generic Function} {rank} (array)
+@anchor{❨46❩}@c
+@genericsubindex{rank}@c
+Return the rank of ARRAY.
+@table @strong
+@item Package
+@ref{❨24❩, , @t{array-operations/generic}}.
+@item Source
+@ref{❨14❩, , @t{file-type.lisp}}.
+@item Methods
+@deffn {Method} {rank} ((array @t{array}))
+@anchor{❨47❩}@c
+@methodsubindex{rank}@c
+@table @strong
+@end table
+@end deffn
+@deffn {Method} {rank} (array)
+@anchor{❨48❩}@c
+@methodsubindex{rank}@c
+@table @strong
+@end table
+@end deffn
+@end table
+@end deffn
+@deffn {Generic Function} {size} (array)
+@anchor{❨40❩}@c
+@genericsubindex{size}@c
+Return the total number of elements in array.
+@table @strong
+@item Package
+@ref{❨24❩, , @t{array-operations/generic}}.
+@item Source
+@ref{❨14❩, , @t{file-type.lisp}}.
+@item Methods
+@deffn {Method} {size} ((array @t{array}))
+@anchor{❨41❩}@c
+@methodsubindex{size}@c
+@table @strong
+@end table
+@end deffn
+@deffn {Method} {size} (array)
+@anchor{❨42❩}@c
+@methodsubindex{size}@c
+@table @strong
+@end table
+@end deffn
+@end table
+@end deffn
+@deffn {Generic Function} {stack-cols-copy} (source destination element-type start-col)
+@anchor{❨151❩}@c
+@genericsubindex{stack-cols-copy}@c
+Method used to implement the copying of objects in STACK-COL*@comma{} by copying the elements of SOURCE to DESTINATION@comma{} starting with the column index START-COL in the latter.  Elements are coerced to ELEMENT-TYPE.@*
+
+This method is only called when (DIMS SOURCE) was non-nil.  It is assumed that it only changes elements in DESTINATION which are supposed to be copies of SOURCE.  DESTINATION is always a matrix with element-type upgraded from ELEMENT-TYPE@comma{} and its NROW should match the relevant dimension of SOURCE.
+
+All objects have a fallback method@comma{} defined using AS-ARRAY.  The only reason for defining a method is efficiency.
+@table @strong
+@item Package
+@ref{❨32❩, , @t{array-operations/stacking}}.
+@item Source
+@ref{❨22❩, , @t{file-type.lisp}}.
+@item Methods
+@deffn {Method} {stack-cols-copy} (source destination element-type start-col)
+@anchor{❨152❩}@c
+@methodsubindex{stack-cols-copy}@c
+@table @strong
+@end table
+@end deffn
+@deffn {Method} {stack-cols-copy} ((source @t{array}) destination element-type start-col)
+@anchor{❨153❩}@c
+@methodsubindex{stack-cols-copy}@c
+@table @strong
+@end table
+@end deffn
+@end table
+@end deffn
+@deffn {Generic Function} {stack-rows-copy} (source destination element-type start-row)
+@anchor{❨154❩}@c
+@genericsubindex{stack-rows-copy}@c
+Method used to implement the copying of objects in STACK-ROW*@comma{} by copying the elements of SOURCE to DESTINATION@comma{} starting with the row index START-ROW in the latter.  Elements are coerced to ELEMENT-TYPE.@*
+
+This method is only called when (DIMS SOURCE) was non-nil.  It is assumed that it only changes elements in DESTINATION which are supposed to be copies of SOURCE.  DESTINATION is always a matrix with element-type upgraded from ELEMENT-TYPE@comma{} and its NCOL should match the relevant dimension of SOURCE.
+
+All objects have a fallback method@comma{} defined using AS-ARRAY.  The only reason for defining a method is efficiency.
+@table @strong
+@item Package
+@ref{❨32❩, , @t{array-operations/stacking}}.
+@item Source
+@ref{❨22❩, , @t{file-type.lisp}}.
+@item Methods
+@deffn {Method} {stack-rows-copy} (source destination element-type start-row)
+@anchor{❨155❩}@c
+@methodsubindex{stack-rows-copy}@c
+@table @strong
+@end table
+@end deffn
+@deffn {Method} {stack-rows-copy} ((source @t{array}) destination element-type start-row)
+@anchor{❨156❩}@c
+@methodsubindex{stack-rows-copy}@c
+@table @strong
+@end table
+@end deffn
+@end table
+@end deffn
+
+@node Public conditions, Public types, Public generic functions, Public Interface
+@subsection Conditions
+@deftp {Condition} {permutation-incompatible-rank}
+@anchor{❨120❩}@c
+@conditionsubindex{permutation-incompatible-rank}@c
+@table @strong
+@item Package
+@ref{❨31❩, , @t{array-operations/transforming}}.
+@item Source
+@ref{❨21❩, , @t{file-type.lisp}}.
+@item Direct superclasses
+@t{error}.
+@end table
+@end deftp
+@deftp {Condition} {permutation-invalid-index}
+@anchor{❨118❩}@c
+@conditionsubindex{permutation-invalid-index}@c
+@table @strong
+@item Package
+@ref{❨31❩, , @t{array-operations/transforming}}.
+@item Source
+@ref{❨21❩, , @t{file-type.lisp}}.
+@item Direct superclasses
+@t{error}.
+@item Direct slots
+@defvr {Slot} {index}
+@anchor{❨119❩}@c
+@slotsubindex{index}@c
+@table @strong
+@item Initargs
+@t{:index}
+@end table
+@end defvr
+@end table
+@end deftp
+@deftp {Condition} {permutation-repeated-index}
+@anchor{❨138❩}@c
+@conditionsubindex{permutation-repeated-index}@c
+@table @strong
+@item Package
+@ref{❨31❩, , @t{array-operations/transforming}}.
+@item Source
+@ref{❨21❩, , @t{file-type.lisp}}.
+@item Direct superclasses
+@t{error}.
+@item Direct slots
+@defvr {Slot} {index}
+@anchor{❨139❩}@c
+@slotsubindex{index}@c
+@table @strong
+@item Initargs
+@t{:index}
+@end table
+@end defvr
+@end table
+@end deftp
+
+@node Public types, , Public conditions, Public Interface
+@subsection Types
+@deftp {Type} {array-matrix} ()
+@anchor{❨110❩}@c
+@typesubindex{array-matrix}@c
+A rank-2 array.
+@table @strong
+@item Package
+@ref{❨29❩, , @t{array-operations/matrices}}.
+@item Source
+@ref{❨16❩, , @t{file-type.lisp}}.
+@end table
+@end deftp
+
+
+@c ---------
+@c Internals
+@c ---------
+@node Internals, , Public Interface, Definitions
+@section Internals
+@menu
+* Private macros::
+* Private ordinary functions::
+* Private types::
+@end menu
+
+@node Private macros, Private ordinary functions, Internals, Internals
+@subsection Macros
+@deffn {Macro} {foreach} (&key index sum value)
+@anchor{❨39❩}@c
+@macrosubindex{foreach}@c
+Examples:@*
+
+   Matrix-matrix multiply@*
+
+    (foreach :index (i j) :sum k@*
+        :value (* (aref A i k) (aref B k j)))
+
+   Sum over vector@*
+
+    (foreach :sum i :value (aref A i))@*
+  
+@table @strong
+@item Package
+@ref{❨23❩, , @t{array-operations/indexing}}.
+@item Source
+@ref{❨19❩, , @t{file-type.lisp}}.
+@end table
+@end deffn
+
+@node Private ordinary functions, Private types, Private macros, Internals
+@subsection Ordinary functions
+@deffn {Function} {array-index-row-major} (array rmi &optional result)
+@anchor{❨142❩}@c
+@functionsubindex{array-index-row-major}@c
+@table @strong
+@item Package
+@ref{❨31❩, , @t{array-operations/transforming}}.
+@item Source
+@ref{❨21❩, , @t{file-type.lisp}}.
+@end table
+@end deffn
+@deffn {Function} {find-array-dimensions} (expr)
+@anchor{❨38❩}@c
+@functionsubindex{find-array-dimensions}@c
+Walks an expression tree EXPR@comma{} finds AREF and ROW-MAJOR-AREF@comma{} SVREF or ELT calls.
+   Returns a list of (symbol@comma{} expr) where EXPR is an expression which
+   evaluates to the array dimension size for SYMBOL.@*
+
+   Example:@*
+     (find-array-dimensions '(+ (aref a i) (* 2 (aref b j k))))@*
+
+   -> ((I ARRAY-DIMENSION A 0) (K ARRAY-DIMENSION B 1) (J ARRAY-DIMENSION B 0))
+@table @strong
+@item Package
+@ref{❨23❩, , @t{array-operations/indexing}}.
+@item Source
+@ref{❨19❩, , @t{file-type.lisp}}.
+@end table
+@end deffn
+@deffn {Function} {permutation-flags} (permutation &optional rank)
+@anchor{❨144❩}@c
+@functionsubindex{permutation-flags}@c
+Make a bit vector of flags with indexes from PERMUTATION@comma{} signaling errors for invalid and repeated indices.  NOT EXPORTED.
+@table @strong
+@item Package
+@ref{❨31❩, , @t{array-operations/transforming}}.
+@item Source
+@ref{❨21❩, , @t{file-type.lisp}}.
+@end table
+@end deffn
+@deffn {Function} {stack*0} (element-type arrays)
+@anchor{❨158❩}@c
+@functionsubindex{stack*0}@c
+Stack arrays along the 0 axis@comma{} returning an array with given ELEMENT-TYPE.
+@table @strong
+@item Package
+@ref{❨32❩, , @t{array-operations/stacking}}.
+@item Source
+@ref{❨22❩, , @t{file-type.lisp}}.
+@end table
+@end deffn
+@deffn {Function} {sub-location%} (dimensions subscripts)
+@anchor{❨100❩}@c
+@functionsubindex{sub-location%}@c
+Return (values OFFSET REMAINING-DIMENSIONS) that can be used to displace a row-major subarray starting at SUBSCRIPTS in an array with the given DIMENSIONS.  NOT EXPORTED.
+@table @strong
+@item Package
+@ref{❨27❩, , @t{array-operations/displacing}}.
+@item Source
+@ref{❨20❩, , @t{file-type.lisp}}.
+@end table
+@end deffn
+
+@node Private types, , Private ordinary functions, Internals
+@subsection Types
+@deftp {Type} {array-rank-element} ()
+@anchor{❨143❩}@c
+@typesubindex{array-rank-element}@c
+@table @strong
+@item Package
+@ref{❨31❩, , @t{array-operations/transforming}}.
+@item Source
+@ref{❨21❩, , @t{file-type.lisp}}.
+@end table
+@end deftp
+
+
+
+@c ====================================================================
+@c Indexes
+@c ====================================================================
+@node Indexes, , Definitions, Top
+@appendix Indexes
+@menu
+* Concept index::
+* Function index::
+* Variable index::
+* Data type index::
+@end menu
+
+
+@c -------------
+@c Concept index
+@c -------------
+@node Concept index, Function index, Indexes, Indexes
+@appendixsec Concepts
+@printindex cp
+
+@page
+
+
+@c --------------
+@c Function index
+@c --------------
+@node Function index, Variable index, Concept index, Indexes
+@appendixsec Functions
+@printindex fn
+
+@page
+
+
+@c --------------
+@c Variable index
+@c --------------
+@node Variable index, Data type index, Function index, Indexes
+@appendixsec Variables
+@printindex vr
+
+@page
+
+
+@c ---------------
+@c Data type index
+@c ---------------
+@node Data type index, , Variable index, Indexes
+@appendixsec Data types
+@printindex tp
+
+@bye
+
+@c array-operations.texi ends here
