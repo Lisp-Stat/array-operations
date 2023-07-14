@@ -1,10 +1,10 @@
 ;;; -*- Mode: LISP; Base: 10; Syntax: ANSI-Common-lisp; Package: ASDF -*-
 ;;; Copyright (c) 2012-2018 by Tamas Papp. All rights reserved.
 ;;; Copyright (c) 2019-2022 by Ben Dudson. All rights reserved.
-;;; Copyright (c) 2021-2022 by Symbolics Pte. Ltd. All rights reserved.
+;;; Copyright (c) 2021-2023 by Symbolics Pte. Ltd. All rights reserved.
 
 (defsystem #:array-operations
-  :version "1.0.0"
+  :version "1.1.0"
   :description "Array operations library for Common Lisp"
   :long-description  #.(uiop:read-file-string
 			(uiop:subpathname *load-pathname* "description.text"))

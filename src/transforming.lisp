@@ -1,7 +1,7 @@
 ;;; -*- Mode: LISP; Base: 10; Syntax: ANSI-Common-lisp; Package: ARRAY-OPERATIONS/TRANSFORMING -*-
 ;;; Copyright (c) 2012-2018 by Tamas Papp. All rights reserved.
 ;;; Copyright (c) 2018-2022 by Ben Dudson. All rights reserved.
-;;; Copyright (c) 2021-2022 by Symbolics Pte. Ltd. All rights reserved.
+;;; Copyright (c) 2021-2023 by Symbolics Pte. Ltd. All rights reserved.
 
 (defpackage :array-operations/transforming
   (:use :cl :array-operations/generic
@@ -27,6 +27,7 @@
            :permutation-incompatible-rank
            :permute
            :recycle
+	   :map-array
            :turn)
   (:documentation "Functions for transforming arrays in various ways."))
 
@@ -344,8 +345,7 @@ Array element type is preserved."
 (deftype array-rank-element () `(integer 0 (,array-rank-limit)))
 
 (defun turn (array nturns &optional (rank-1 0) (rank-2 1))
-  "Turns an array by a specified number of clockwise 90° rotations. The axis of
-rotation is specified by RANK-1 (defaulting to 0) and RANK-2 (defaulting to 1)."
+  "Turns an array by a specified number of clockwise 90° rotations. The axis of rotation is specified by RANK-1 (defaulting to 0) and RANK-2 (defaulting to 1)."
   (declare (optimize speed))
   (check-type array array)
   (check-type nturns integer)
@@ -393,3 +393,11 @@ rotation is specified by RANK-1 (defaulting to 0) and RANK-2 (defaulting to 1)."
               (locally (declare #+sbcl (sb-ext:muffle-conditions
                                         sb-ext:compiler-note))
                 (row-major-aref array i)))))))
+
+(defmethod map-array (array function
+			   &optional (retval (make-array (array-dimensions array))))
+  "Apply FUNCTION to each element of ARRAY
+Return a new array, or write into the optional 3rd argument."
+  (dotimes (i (array-total-size array) retval)
+    (setf (row-major-aref retval i)
+          (funcall function (row-major-aref array i)))))

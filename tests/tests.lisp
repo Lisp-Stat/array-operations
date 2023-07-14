@@ -1,7 +1,7 @@
 ;;; -*- Mode: LISP; Base: 10; Syntax: ANSI-Common-lisp; Package: ASDF -*-
 ;;; Copyright (c) 2012-2018 by Tamas Papp. All rights reserved.
 ;;; Copyright (c) 2018-2022 by Ben Dudson. All rights reserved.
-;;; Copyright (c) 2021-2022 by Symbolics Pte. Ltd. All rights reserved.
+;;; Copyright (c) 2021-2023 by Symbolics Pte. Ltd. All rights reserved.
 
 (defpackage :array-operations/tests
   (:use :cl :alexandria :clunit)
@@ -714,3 +714,8 @@
 		#2A((0 1)
                     (2 3))
 		#2A((5) (9)))))
+
+(deftest map-array (transformations)
+  (let ((a #2A((1 2) (3 4))))
+    (assert-equalp #2A((2 3) (4 5))
+      (aops:map-array a #'1+))))
