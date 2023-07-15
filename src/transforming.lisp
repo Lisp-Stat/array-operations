@@ -2,6 +2,7 @@
 ;;; Copyright (c) 2012-2018 by Tamas Papp. All rights reserved.
 ;;; Copyright (c) 2018-2022 by Ben Dudson. All rights reserved.
 ;;; Copyright (c) 2021-2023 by Symbolics Pte. Ltd. All rights reserved.
+;;; SPDX-License-identifier: MS-PL
 
 (defpackage :array-operations/transforming
   (:use :cl :array-operations/generic
@@ -27,7 +28,8 @@
            :permutation-incompatible-rank
            :permute
            :recycle
-	   :map-array
+           :map-array
+           :array-index-row-major
            :turn)
   (:documentation "Functions for transforming arrays in various ways."))
 
@@ -315,14 +317,14 @@ Array element type is preserved."
 
 ;;; turning
 
-;; https://groups.google.com/g/comp.lang.lisp/c/CM3MQkyOTHk/m/Pl4KPUqfobwJ
-;; Modified into a destructive, non-consing version. RESULT, if provided,
-;; must be a list of length equal to the rank of the array; it is modified to
-;; contain the result of the function. This way, the result list can be
-;; allocated only once and additionally be DX for zero consing. If RESULT is
-;; not provided, then it is consed and then returned.
 (declaim (inline array-index-row-major))
 (defun array-index-row-major (array rmi &optional result)
+  "https://groups.google.com/g/comp.lang.lisp/c/CM3MQkyOTHk/m/Pl4KPUqfobwJ
+Modified into a destructive, non-consing version. RESULT, if provided,
+must be a list of length equal to the rank of the array; it is modified to
+contain the result of the function. This way, the result list can be
+allocated only once and additionally be DX for zero consing. If RESULT is
+not provided, then it is consed and then returned."
   (declare (optimize speed))
   (let* ((rank (array-rank array))
          (dimensions (make-list rank)))

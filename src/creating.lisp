@@ -1,7 +1,8 @@
 ;;; -*- Mode: LISP; Base: 10; Syntax: ANSI-Common-lisp; Package: ARRAY-OPERATIONS/CREATING -*-
 ;;; Copyright (c) 2012-2018 by Tamas Papp. All rights reserved.
 ;;; Copyright (c) 2018-2022 by Ben Dudson. All rights reserved.
-;;; Copyright (c) 2021-2022 by Symbolics Pte. Ltd. All rights reserved.
+;;; Copyright (c) 2021-2023 by Symbolics Pte. Ltd. All rights reserved.
+;;; SPDX-License-identifier: MS-PL
 
 (defpackage :array-operations/creating
   (:use :cl :array-operations/generic
@@ -39,10 +40,14 @@ Returns ARRAY."
               :element-type element-type
               :initial-element (coerce 0 element-type)))
 
-(defun zeros (dimensions)
-  "Makes an array of shape DIMENSIONS and type T, filled with zeros"
-  (make-array (ensure-dimensions dimensions)
-              :initial-element 0))
+(defun zeros (dimensions &optional element-type)
+  "Make an array of shape DIMENSIONS filled with zeros.  Elements are of type T, unless ELEMENT-TYPE is given."
+  (assert (subtypep element-type 'number)
+	  (element-type)
+	  "Cannot create a ZEROS array because ~A is not a numeric type." element-type)
+  (if element-type
+      (zeros* element-type dimensions)
+      (make-array (ensure-dimensions dimensions) :initial-element 0)))
 
 (defun ones! (array)
   "Fills the given ARRAY with 1's, coerced to the element type.  Returns ARRAY."
@@ -55,10 +60,14 @@ Returns ARRAY."
               :element-type element-type
               :initial-element (coerce 1 element-type)))
 
-(defun ones (dimensions)
-  "Makes an array of shape DIMENSIONS and type T, filled with ones"
-  (make-array (ensure-dimensions dimensions)
-              :initial-element 1))
+(defun ones (dimensions &optional element-type)
+  "Makes an array of shape DIMENSIONS filled with ones. Elements are of type T, unless ELEMENT-TYPE is given."
+  (assert (subtypep element-type 'number)
+	  (element-type)
+	  "Cannot create a ONES array because ~A is not a numeric type." element-type)
+  (if element-type
+      (ones* element-type dimensions)
+      (make-array (ensure-dimensions dimensions) :initial-element 1)))
 
 (defun rand! (array)
   "Fills a given ARRAY with random numbers, uniformly distributed between 0 and 1.  Uses the built-in RANDOM function.
@@ -77,36 +86,32 @@ Returns ARRAY."
    (rand 3)  -> #(0.39319038 0.69693553 0.5021677)
    (rand '(2 2)) -> #2A((0.91003513 0.23208928) (0.5577954 0.94657767))
 
-   NOTE: If it's important that these numbers are really random
-   (e.g. cryptographic applications), then you should probably
-   not use this function.
-   "
+   NOTE: If it's important that these numbers are really random (e.g. cryptographic applications), then you should probably not use this function. "
   (rand! (make-array (ensure-dimensions dimensions)
                      :element-type element-type)))
 
-(defun rand (dimensions)
-  "Makes an array of shape DIMENSIONS and type T, filled with random numbers uniformly distributed between 0 and 1.
+(defun rand (dimensions &optional element-type)
+  "Makes an array of shape DIMENSIONS filled with random numbers uniformly distributed between 0 and 1. Elements are of type T, unless ELEMENT-TYPE is given.
 
    Uses the built-in RANDOM function.
 
    (rand 3)  -> #(0.39319038 0.69693553 0.5021677)
    (rand '(2 2)) -> #2A((0.91003513 0.23208928) (0.5577954 0.94657767))
 
-   NOTE: If it's important that these numbers are really random
-   (e.g. cryptographic applications), then you should probably
-   not use this function.
-   "
-  (rand* t dimensions))
+   NOTE: If it's important that these numbers are really random (e.g. cryptographic applications), then you should probably not use this function."
+  (assert (subtypep element-type 'number)
+	  (element-type)
+	  "Cannot create a RAND array because ~A is not a numeric type." element-type)
+  (if element-type
+      (rand* element-type dimensions)
+      (rand* t dimensions)))
 
 (defun randn! (array)
   "Fills ARRAY with normally distributed numbers with a mean of zero and standard deviation of 1
 
    Uses the Box-Muller algorithm and built-in random number generator.
 
-   NOTE: If it's important that these numbers are really random
-   (e.g. cryptographic applications), then you should probably
-   not use this function.
-   "
+   NOTE: If it's important that these numbers are really random (e.g. cryptographic applications), then you should probably not use this function."
   (let ((element-type (array-element-type array))
         (size (array-total-size array)))
     (do ((i 0 (+ 2 i)))
@@ -146,7 +151,7 @@ Returns ARRAY."
   (randn! (make-array (ensure-dimensions dimensions)
                       :element-type element-type)))
 
-(defun randn (dimensions)
+(defun randn (dimensions &optional element-type)
   "Creates an array of shape DIMENSIONS and type T, and fills with normally distributed numbers with a mean of zero and standard deviation of 1
 
    Uses the Box-Muller algorithm and built-in random number generator.
@@ -154,16 +159,17 @@ Returns ARRAY."
    (rand 3)   -> #(-0.82067037 -0.60068226 -0.21494178)
    (randn '(2 2)) -> #2A((1.6905352 -2.5379088) (0.8461403 -1.505984))
 
-   NOTE: If it's important that these numbers are really random
-   (e.g. cryptographic applications), then you should probably
-   not use this function.
-   "
-  (randn* t dimensions))
+   NOTE: If it's important that these numbers are really random (e.g. cryptographic applications), then you should probably not use this function."
+  (assert (subtypep element-type 'number)
+	  (element-type)
+	  "Cannot create a normal random array because ~A is not a numeric type." element-type)
+  (if element-type
+      (randn* element-type dimensions)
+      (randn* t dimensions)))
+
 
 (defun linspace! (array start stop)
-  "Fill an array with evenly spaced numbers over an interval.
-   The first element is equal to START and last element STOP,
-   with constant difference between consecutive elements in ROW-MAJOR-INDEX."
+  "Fill an array with evenly spaced numbers over an interval. The first element is equal to START and last element STOP, with constant difference between consecutive elements in ROW-MAJOR-INDEX."
   (assert (> stop start) (start stop) "Stop must be greater than start.")
   (let* ((size (array-total-size array))
          (element-type (array-element-type array))
@@ -174,21 +180,22 @@ Returns ARRAY."
     array))
 
 (defun linspace* (element-type start stop n)
-  "Make a vector of N elements and type ELEMENT-TYPE, containing evenly spaced numbers over an interval.
-   The first element is equal to START and last element STOP,
-   with constant difference between consecutive elements."
+  "Make a vector of N elements and type ELEMENT-TYPE, containing evenly spaced numbers over an interval. The first element is equal to START and last element STOP, with constant difference between consecutive elements."
   (linspace! (make-array n :element-type element-type) start stop))
 
-(defun linspace (start stop n)
-  "Make a vector of N elements and type T, containing evenly spaced numbers over an interval.
-   The first element is equal to START and last element STOP,
-   with constant difference between consecutive elements.
+(defun linspace (start stop n &optional element-type)
+  "Make a vector of N elements containing evenly spaced numbers over an interval.  The first element is equal to START and last element STOP, with constant difference between consecutive elements.  Elements are of type T, unless ELEMENT-TYPE is given
 
   (linspace 0 4 5) -> #(0 1 2 3 4)
   (linspace 1 3 5) -> #(0 1/2 1 3/2 2)
-  (linspace 0 4d0 3) -> #(0.0d0 2.0d0 4.0d0)
-  "
-  (linspace* t start stop n))
+  (linspace 0 4d0 3) -> #(0.0d0 2.0d0 4.0d0)"
+  (assert (subtypep element-type 'number)
+	  (element-type)
+	  "Cannot create a linear sequence of numbers because ~A is not a numeric type." element-type)
+  (if element-type
+      (linspace* element-type start stop n)
+      (linspace* t start stop n)))
+
 
 (defun similar-array (array &key (dimensions (dims array))
                                  (adjustable (adjustable-array-p array))

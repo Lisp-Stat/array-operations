@@ -158,11 +158,12 @@ Contributions are what make the open source community such an amazing place to b
 <!-- LICENSE -->
 ## License
 
-Distributed under the MS-PL License. See [LICENSE](LICENSE.md) for more information.
+The original code from Tamas Papp and Ben Dudson is licensed under the MIT license.  Modifications by Symbolics are
+distributed under the MS-PL License. See [LICENSE](LICENSE.md) for more information.
 
 ## Notes
 
-Expect spurious warnings from SBCL related to 'deleting unreachable code' when running the tests.  The tests it's warning about _do_ run and we haven't had the time to debug SBCL's warnings.
+Expect spurious warnings from SBCL related to 'deleting unreachable code' when running the tests.  The tests it's warning about _do_ run and we haven't had the time to debug SBCL's warnings.  See issue #4.
 
 <!-- CONTACT -->
 ## Contact
