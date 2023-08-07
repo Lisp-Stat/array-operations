@@ -42,7 +42,8 @@ Returns ARRAY."
 
 (defun zeros (dimensions &optional element-type)
   "Make an array of shape DIMENSIONS filled with zeros.  Elements are of type T, unless ELEMENT-TYPE is given."
-  (assert (subtypep element-type 'number)
+  (assert (or (eq element-type t)
+	      (subtypep element-type 'number))
 	  (element-type)
 	  "Cannot create a ZEROS array because ~A is not a numeric type." element-type)
   (if element-type
@@ -62,7 +63,8 @@ Returns ARRAY."
 
 (defun ones (dimensions &optional element-type)
   "Makes an array of shape DIMENSIONS filled with ones. Elements are of type T, unless ELEMENT-TYPE is given."
-  (assert (subtypep element-type 'number)
+  (assert (or (eq element-type t)
+	      (subtypep element-type 'number))
 	  (element-type)
 	  "Cannot create a ONES array because ~A is not a numeric type." element-type)
   (if element-type

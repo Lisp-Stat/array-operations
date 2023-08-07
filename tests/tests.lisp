@@ -2,12 +2,13 @@
 ;;; Copyright (c) 2012-2018 by Tamas Papp. All rights reserved.
 ;;; Copyright (c) 2018-2022 by Ben Dudson. All rights reserved.
 ;;; Copyright (c) 2021-2023 by Symbolics Pte. Ltd. All rights reserved.
+;;; SPDX-License-identifier: MS-PL
 
-(defpackage :array-operations/tests
+(uiop:define-package #:array-operations/tests
   (:use :cl :alexandria :clunit)
-  (:export :run))
+  (:export #:run))
 
-(cl:in-package :array-operations/tests)
+(in-package #:array-operations/tests)
 
 (defsuite tests ())
 (defsuite creation (tests))
@@ -438,7 +439,6 @@
         (b #(4 5 6)))
     (assert-equalp #(9 12 15)
         (aops:vectorize (a b) (+ a (* b 2))))))
-
 
 (deftest turn (transformations)
   (let ((array-1 #2A((1 0 0)

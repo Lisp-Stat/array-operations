@@ -2,6 +2,7 @@
 ;;; Copyright (c) 2012-2018 by Tamas Papp. All rights reserved.
 ;;; Copyright (c) 2018-2022 by Ben Dudson. All rights reserved.
 ;;; Copyright (c) 2021-2022 by Symbolics Pte. Ltd. All rights reserved.
+;;; SPDX-License-identifier: MS-PL
 
 (uiop:define-package :array-operations/all
   (:nicknames :array-operations :aops)

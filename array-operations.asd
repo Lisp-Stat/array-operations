@@ -5,7 +5,7 @@
 ;;; SPDX-License-identifier: MS-PL
 
 (defsystem "array-operations"
-  :version "1.2.0"
+  :version "1.2.1"
   :description "Array operations library for Common Lisp"
   :long-description  #.(uiop:read-file-string
 			(uiop:subpathname *load-pathname* "description.text"))
